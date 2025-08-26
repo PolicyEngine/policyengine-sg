@@ -1,0 +1,13 @@
+description: Monthly ordinary wage ceiling for CPF contributions
+metadata:
+  unit: currency-SGD
+  period: month
+  reference:
+    - title: CPF Act, Section 7
+      href: https://sso.agc.gov.sg/Act/CPFA1953
+    - title: What is the Ordinary Wage ceiling?
+      href: https://www.cpf.gov.sg/service/article/what-is-the-ordinary-wage-ow-ceiling
+values:
+  2024-01-01: 6800
+  2025-01-01: 7400
+  2026-01-01: 8000

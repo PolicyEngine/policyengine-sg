@@ -1,0 +1,33 @@
+description: Employee CPF contribution rates by age group
+metadata:
+  unit: /1
+  period: year
+  reference:
+    - title: CPF Act, First Schedule
+      href: https://sso.agc.gov.sg/Act/CPFA1953
+    - title: CPF Contribution Rates
+      href: https://www.cpf.gov.sg/employer/employer-obligations/cpf-contributions/cpf-contribution-rates
+children:
+  age_55_and_below:
+    description: Employee contribution rate for age 55 and below
+    values:
+      2025-01-01: 0.20
+      2026-01-01: 0.20
+  age_55_to_60:
+    description: Employee contribution rate for age 55 to 60
+    values:
+      2025-01-01: 0.17
+      2026-01-01: 0.18
+  age_60_to_65:
+    description: Employee contribution rate for age 60 to 65
+    values:
+      2025-01-01: 0.115
+      2026-01-01: 0.125
+  age_65_to_70:
+    description: Employee contribution rate for age 65 to 70
+    values:
+      2025-01-01: 0.075
+  above_age_70:
+    description: Employee contribution rate for above age 70
+    values:
+      2025-01-01: 0.05
