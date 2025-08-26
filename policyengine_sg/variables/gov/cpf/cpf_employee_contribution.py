@@ -78,4 +78,3 @@ class cpf_employee_contribution(Variable):
         )
 
         return employee_contribution
-

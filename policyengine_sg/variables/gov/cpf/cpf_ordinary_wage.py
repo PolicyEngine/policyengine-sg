@@ -44,4 +44,3 @@ class cpf_ordinary_wage(Variable):
         )
 
         return ordinary_wage
-
