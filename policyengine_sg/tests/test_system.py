@@ -23,7 +23,7 @@ def test_entities_are_loaded():
         "household",
     ]
 
-    # Get the keys from entities dictionary
-    entity_keys = list(system.entities.keys())
+    # Get the keys from entities list
+    entity_keys = {entity.key for entity in system.entities}
     for entity_key in expected_entities:
         assert entity_key in entity_keys
