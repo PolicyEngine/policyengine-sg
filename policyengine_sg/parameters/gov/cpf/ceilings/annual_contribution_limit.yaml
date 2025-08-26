@@ -1,0 +1,26 @@
+description: Annual salary ceiling and contribution limits for CPF
+metadata:
+  unit: currency-SGD
+  period: year
+  reference:
+    - title: CPF Act, Section 7
+      href: https://sso.agc.gov.sg/Act/CPFA1953
+    - title: CPF changes in 2025
+      href: https://www.cpf.gov.sg/member/infohub/educational-resources/cpf-changes-in-2025-and-how-they-benefit-you
+children:
+  annual_salary_ceiling:
+    description: Annual salary ceiling for CPF contributions
+    values:
+      2025-01-01: 102000
+  annual_contribution_limit:
+    description: Maximum annual CPF contributions including voluntary top-ups
+    values:
+      2025-01-01: 37740
+  minimum_wage_threshold:
+    description: Minimum monthly wage for CPF contributions
+    values:
+      2025-01-01: 500
+  full_contribution_threshold:
+    description: Monthly wage threshold for full CPF contribution rates
+    values:
+      2025-01-01: 750
