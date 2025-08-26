@@ -1,0 +1,284 @@
+# CPF Contribution Ceiling Tests
+# Tests for Singapore Central Provident Fund salary ceilings and contribution limits
+# Based on 2025 ceiling amounts and calculation rules
+
+# 2025 CPF Ceilings:
+# - Ordinary Wage (OW) Ceiling: S$7,400 per month (S$88,800 annually)
+# - Annual Salary Ceiling: S$102,000 (covers both OW and AW)
+# - Additional Wage (AW) Ceiling: S$102,000 minus total OW subject to CPF
+# - Annual Contribution Limit: S$37,740 (includes mandatory + voluntary)
+
+# Test Ordinary Wage Ceiling Application
+
+- name: Monthly salary below OW ceiling - no cap applied
+  period: 2025
+  input:
+    age: 30
+    monthly_ordinary_wage: 6_000   # Below S$7,400 ceiling
+    annual_employment_income: 72_000
+  output:
+    cpf_ordinary_wage_subject_to_cpf: 72_000   # Full amount
+    cpf_employee_contribution: 14_400          # 20% of full amount
+    cpf_employer_contribution: 12_240          # 17% of full amount
+    cpf_total_contribution: 26_640
+
+- name: Monthly salary at OW ceiling - exact cap
+  period: 2025
+  input:
+    age: 30
+    monthly_ordinary_wage: 7_400   # Exactly at ceiling
+    annual_employment_income: 88_800
+  output:
+    cpf_ordinary_wage_subject_to_cpf: 88_800   # Full amount (at ceiling)
+    cpf_employee_contribution: 17_760          # 20% of S$88,800
+    cpf_employer_contribution: 15_096          # 17% of S$88,800
+    cpf_total_contribution: 32_856
+
+- name: Monthly salary above OW ceiling - cap applied
+  period: 2025
+  input:
+    age: 30
+    monthly_ordinary_wage: 9_000   # Above S$7,400 ceiling
+    annual_employment_income: 108_000
+  output:
+    cpf_ordinary_wage_subject_to_cpf: 88_800   # Capped at OW ceiling
+    cpf_employee_contribution: 17_760          # 20% of capped amount
+    cpf_employer_contribution: 15_096          # 17% of capped amount
+    cpf_total_contribution: 32_856
+
+- name: Very high monthly salary - OW ceiling effect
+  period: 2025
+  input:
+    age: 30
+    monthly_ordinary_wage: 15_000  # Well above ceiling
+    annual_employment_income: 180_000
+  output:
+    cpf_ordinary_wage_subject_to_cpf: 88_800   # Capped at OW ceiling
+    cpf_employee_contribution: 17_760          # 20% of capped amount
+    cpf_employer_contribution: 15_096          # 17% of capped amount
+    cpf_total_contribution: 32_856
+
+# Test Annual Salary Ceiling Application
+
+- name: Annual salary below ceiling - no annual cap
+  period: 2025
+  input:
+    age: 30
+    annual_employment_income: 90_000   # Below S$102,000 ceiling
+    ordinary_wages: 72_000             # S$6,000 monthly
+    additional_wages: 18_000           # Bonus, overtime, etc.
+  output:
+    cpf_total_wage_subject_to_cpf: 90_000      # Full amount
+    cpf_employee_contribution: 18_000          # 20% of full amount
+    cpf_employer_contribution: 15_300          # 17% of full amount
+    cpf_total_contribution: 33_300
+
+- name: Annual salary at ceiling - exact annual cap
+  period: 2025
+  input:
+    age: 30
+    annual_employment_income: 102_000  # Exactly at ceiling
+    ordinary_wages: 88_800            # At OW ceiling
+    additional_wages: 13_200          # Remaining to reach annual ceiling
+  output:
+    cpf_total_wage_subject_to_cpf: 102_000     # Full amount (at ceiling)
+    cpf_employee_contribution: 20_400          # 20% of S$102,000
+    cpf_employer_contribution: 17_340          # 17% of S$102,000
+    cpf_total_contribution: 37_740             # At annual contribution limit
+
+- name: Annual salary above ceiling - annual cap applied
+  period: 2025
+  input:
+    age: 30
+    annual_employment_income: 150_000  # Above S$102,000 ceiling
+    ordinary_wages: 88_800            # At OW ceiling
+    additional_wages: 61_200          # Large bonus/additional wages
+  output:
+    cpf_total_wage_subject_to_cpf: 102_000     # Capped at annual ceiling
+    cpf_employee_contribution: 20_400          # 20% of capped amount
+    cpf_employer_contribution: 17_340          # 17% of capped amount
+    cpf_total_contribution: 37_740             # Annual contribution limit
+
+# Test Additional Wage Ceiling Calculation
+
+- name: Additional wage ceiling - partial OW year
+  period: 2025
+  input:
+    age: 30
+    ordinary_wages_ytd: 36_000         # S$6,000 for 6 months
+    annual_salary_ceiling: 102_000
+    additional_wage_payment: 20_000    # Bonus payment
+  output:
+    additional_wage_ceiling: 66_000            # S$102,000 - S$36,000
+    cpf_additional_wage_subject_to_cpf: 20_000 # Full bonus (under ceiling)
+    cpf_bonus_employee_contribution: 4_000     # 20% of bonus
+    cpf_bonus_employer_contribution: 3_400     # 17% of bonus
+
+- name: Additional wage ceiling - full OW year
+  period: 2025
+  input:
+    age: 30
+    ordinary_wages_ytd: 88_800         # Full year at OW ceiling
+    annual_salary_ceiling: 102_000
+    additional_wage_payment: 25_000    # Large bonus
+  output:
+    additional_wage_ceiling: 13_200            # S$102,000 - S$88,800
+    cpf_additional_wage_subject_to_cpf: 13_200 # Capped bonus amount
+    cpf_bonus_employee_contribution: 2_640     # 20% of capped amount
+    cpf_bonus_employer_contribution: 2_244     # 17% of capped amount
+
+- name: Additional wage ceiling - OW below ceiling
+  period: 2025
+  input:
+    age: 30
+    ordinary_wages_ytd: 60_000         # S$5,000 monthly for 12 months
+    annual_salary_ceiling: 102_000
+    additional_wage_payment: 50_000    # Large bonus
+  output:
+    additional_wage_ceiling: 42_000            # S$102,000 - S$60,000
+    cpf_additional_wage_subject_to_cpf: 42_000 # Capped bonus amount
+    cpf_bonus_employee_contribution: 8_400     # 20% of capped amount
+    cpf_bonus_employer_contribution: 7_140     # 17% of capped amount
+
+# Test Age-Based Ceiling Application
+
+- name: OW ceiling with age 55-60 rates
+  period: 2025
+  input:
+    age: 57
+    monthly_ordinary_wage: 8_000       # Above ceiling
+    annual_employment_income: 96_000
+  output:
+    cpf_ordinary_wage_subject_to_cpf: 88_800   # Capped at OW ceiling
+    cpf_employee_contribution: 15_096          # 17% of capped amount (age 55-60 rate)
+    cpf_employer_contribution: 13_764          # 15.5% of capped amount
+    cpf_total_contribution: 28_860
+
+- name: Annual ceiling with age 60-65 rates
+  period: 2025
+  input:
+    age: 62
+    annual_employment_income: 120_000  # Above annual ceiling
+    ordinary_wages: 88_800
+    additional_wages: 31_200
+  output:
+    cpf_total_wage_subject_to_cpf: 102_000     # Capped at annual ceiling
+    cpf_employee_contribution: 11_730          # 11.5% of capped amount (age 60-65 rate)
+    cpf_employer_contribution: 12_240          # 12% of capped amount
+    cpf_total_contribution: 23_970
+
+- name: OW ceiling with age 65-70 rates
+  period: 2025
+  input:
+    age: 67
+    monthly_ordinary_wage: 10_000      # Well above ceiling
+    annual_employment_income: 120_000
+  output:
+    cpf_ordinary_wage_subject_to_cpf: 88_800   # Capped at OW ceiling
+    cpf_employee_contribution: 6_660           # 7.5% of capped amount (age 65-70 rate)
+    cpf_employer_contribution: 7_992           # 9% of capped amount
+    cpf_total_contribution: 14_652
+
+- name: Annual ceiling with age >70 rates
+  period: 2025
+  input:
+    age: 72
+    annual_employment_income: 150_000  # Above annual ceiling
+    ordinary_wages: 88_800
+    additional_wages: 61_200
+  output:
+    cpf_total_wage_subject_to_cpf: 102_000     # Capped at annual ceiling
+    cpf_employee_contribution: 5_100           # 5% of capped amount (age >70 rate)
+    cpf_employer_contribution: 7_650           # 7.5% of capped amount
+    cpf_total_contribution: 12_750
+
+# Test Combined OW and AW Ceiling Scenarios
+
+- name: Complex ceiling scenario - mixed wages throughout year
+  period: 2025
+  input:
+    age: 30
+    # Scenario: Job change mid-year affecting ceiling calculations
+    job1_ordinary_wages: 30_000       # 5 months at S$6,000
+    job1_additional_wages: 5_000      # Bonus from first job
+    job2_ordinary_wages: 56_000       # 7 months at S$8,000 (above ceiling)
+    job2_additional_wages: 15_000     # Bonus from second job
+  output:
+    # Job 1: Full OW + AW counted
+    job1_cpf_contribution: 6_950       # 37% of S$35,000 total wages
+    # Job 2: OW capped at remaining ceiling, AW calculated separately
+    job2_ow_subject_to_cpf: 51_800     # Remaining OW ceiling space
+    job2_aw_ceiling: 15_200           # Remaining annual ceiling space
+    job2_aw_subject_to_cpf: 15_000    # Under AW ceiling
+    total_wages_subject_to_cpf: 101_800 # Just under annual ceiling
+    total_cpf_contribution: 37_666
+
+- name: Ceiling adjustment for over-contribution
+  period: 2025
+  input:
+    age: 30
+    annual_employment_income: 110_000  # Over ceiling
+    cpf_contributions_paid: 40_700     # Over-contributed (37% of S$110k)
+    annual_contribution_limit: 37_740
+  output:
+    excess_contribution: 2_960              # Over-contribution amount
+    refund_to_employee: 2_200              # Employee's share of excess (20/37 * excess)
+    refund_to_employer: 760                # Employer's share of excess (17/37 * excess)
+    final_cpf_contribution: 37_740         # Capped at limit
+
+# Edge Cases and Boundary Conditions
+
+- name: Exactly at all ceilings - perfect alignment
+  period: 2025
+  input:
+    age: 30
+    monthly_ordinary_wage: 7_400       # Exactly at monthly OW ceiling
+    additional_wages: 13_200          # Exactly fills to annual ceiling
+    annual_employment_income: 102_000  # Exactly at annual ceiling
+  output:
+    cpf_ordinary_wage_subject_to_cpf: 88_800   # Full OW ceiling used
+    cpf_additional_wage_subject_to_cpf: 13_200 # Full AW ceiling used
+    cpf_total_wage_subject_to_cpf: 102_000     # Exactly at annual ceiling
+    cpf_total_contribution: 37_740             # Exactly at contribution limit
+
+- name: Minimum wage threshold with ceiling effects
+  period: 2025
+  input:
+    age: 30
+    monthly_ordinary_wage: 10_000      # High wage but testing minimum threshold
+    # Assuming some months with wages below S$750 threshold
+    months_above_threshold: 10
+    months_below_threshold: 2
+  output:
+    # Only months above threshold subject to full CPF
+    effective_annual_income: 74_000           # 10 months × S$7,400 ceiling
+    cpf_ordinary_wage_subject_to_cpf: 74_000
+    cpf_employee_contribution: 14_800         # 20% of effective income
+    cpf_employer_contribution: 12_580         # 17% of effective income
+
+- name: Leap year effects on annual ceiling
+  period: 2024  # Leap year
+  input:
+    age: 30
+    # Testing if leap year affects daily/monthly calculations
+    daily_wage: 278.85  # Approx S$102,000 ÷ 366 days
+    days_worked: 366
+    annual_employment_income: 102_001  # Just over due to leap year
+  output:
+    cpf_total_wage_subject_to_cpf: 102_000     # Still capped at annual ceiling
+    cpf_total_contribution: 37_740             # Annual contribution limit applies
+
+# Future Ceiling Changes Test (2026 Preview)
+
+- name: Forward compatibility - 2026 OW ceiling increase preview
+  period: 2026
+  input:
+    age: 30
+    monthly_ordinary_wage: 7_800       # Between 2025 and 2026 ceilings
+    annual_employment_income: 93_600
+  output:
+    # Based on planned 2026 OW ceiling of S$8,000 monthly
+    cpf_ordinary_wage_subject_to_cpf: 93_600   # Full amount (under new ceiling)
+    cpf_employee_contribution: 18_720          # 20% of full amount
+    cpf_employer_contribution: 15_912          # 17% of full amount
+    cpf_total_contribution: 34_632
