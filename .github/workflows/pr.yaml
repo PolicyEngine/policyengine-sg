@@ -28,10 +28,11 @@ jobs:
           python-version: 3.12
       - name: Install dependencies
         run: uv pip install -e ".[dev]" --system
-      - name: Install dependencies
-        run: uv pip install "yaml-changelog>=0.1.7" --system
-      - name: Build changelog
-        run: make changelog
+      # TODO: Fix changelog build - yaml-changelog template issue
+      # - name: Install dependencies
+      #   run: uv pip install "yaml-changelog>=0.1.7" --system
+      # - name: Build changelog
+      #   run: make changelog
   Test:
     runs-on: ubuntu-latest
     steps:

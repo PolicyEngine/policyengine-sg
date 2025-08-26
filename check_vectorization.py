@@ -106,7 +106,7 @@ def main():
     if len(sys.argv) > 1:
         search_path = Path(sys.argv[1])
     else:
-        search_path = Path("policyengine_au/variables")
+        search_path = Path("policyengine_sg/variables")
 
     if not search_path.exists():
         print(f"Error: Path {search_path} does not exist")
