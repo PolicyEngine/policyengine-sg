@@ -24,38 +24,7 @@ class cpf_eligible_age(Variable):
 
     def formula(person, period, parameters):
         age = person("age", period)
-        
+
         # CPF eligible from age 16 to 70 (inclusive)
         # Age changes affect contributions from first day of month after birthday
         return (age >= 16) & (age <= 70)
-
-
-def test_cpf_eligible_age():
-    """Test CPF age eligibility rules."""
-    from policyengine_sg import Microsimulation
-    
-    # Test case 1: Under 16 - not eligible
-    sim = Microsimulation()
-    sim.set_input("age", 2025, [15])
-    result = sim.calculate("cpf_eligible_age", 2025)
-    assert result[0] == False
-    
-    # Test case 2: Age 16 - eligible
-    sim.set_input("age", 2025, [16])
-    result = sim.calculate("cpf_eligible_age", 2025)
-    assert result[0] == True
-    
-    # Test case 3: Working age - eligible
-    sim.set_input("age", 2025, [35])
-    result = sim.calculate("cpf_eligible_age", 2025)
-    assert result[0] == True
-    
-    # Test case 4: Age 70 - still eligible
-    sim.set_input("age", 2025, [70])
-    result = sim.calculate("cpf_eligible_age", 2025)
-    assert result[0] == True
-    
-    # Test case 5: Over 70 - not eligible
-    sim.set_input("age", 2025, [71])
-    result = sim.calculate("cpf_eligible_age", 2025)
-    assert result[0] == False

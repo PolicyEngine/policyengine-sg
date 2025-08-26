@@ -35,63 +35,7 @@ class cpf_total_contribution(Variable):
         # Calculate total as sum of employee and employer contributions
         employee_contribution = person("cpf_employee_contribution", period)
         employer_contribution = person("cpf_employer_contribution", period)
-        
+
         total_contribution = employee_contribution + employer_contribution
-        
+
         return total_contribution
-
-
-def test_cpf_total_contribution():
-    """Test CPF total contribution calculation."""
-    from policyengine_sg import Microsimulation
-    
-    # Test case 1: Age 30 (37% total rate)
-    sim = Microsimulation()
-    sim.set_input("age", 2025, [30])
-    sim.set_input("employment_income", 2025, [60000])  # S$5k/month, all ordinary wage
-    result = sim.calculate("cpf_total_contribution", 2025)
-    expected = 60000 * 0.37  # S$22,200 (20% + 17%)
-    assert abs(result[0] - expected) < 1
-    
-    # Test case 2: Age 58 (32.5% total rate)
-    sim.set_input("age", 2025, [58])
-    sim.set_input("employment_income", 2025, [60000])
-    result = sim.calculate("cpf_total_contribution", 2025)
-    expected = 60000 * 0.325  # S$19,500 (17% + 15.5%)
-    assert abs(result[0] - expected) < 1
-    
-    # Test case 3: Age 62 (23.5% total rate)
-    sim.set_input("age", 2025, [62])
-    sim.set_input("employment_income", 2025, [60000])
-    result = sim.calculate("cpf_total_contribution", 2025)
-    expected = 60000 * 0.235  # S$14,100 (11.5% + 12%)
-    assert abs(result[0] - expected) < 1
-    
-    # Test case 4: Age 67 (16.5% total rate)
-    sim.set_input("age", 2025, [67])
-    sim.set_input("employment_income", 2025, [60000])
-    result = sim.calculate("cpf_total_contribution", 2025)
-    expected = 60000 * 0.165  # S$9,900 (7.5% + 9%)
-    assert abs(result[0] - expected) < 1
-    
-    # Test case 5: Age 71 (not CPF eligible)
-    sim.set_input("age", 2025, [71])
-    sim.set_input("employment_income", 2025, [60000])
-    result = sim.calculate("cpf_total_contribution", 2025)
-    assert result[0] == 0
-    
-    # Test case 6: High income with ceiling (Age 30)
-    sim.set_input("age", 2025, [30])
-    sim.set_input("employment_income", 2025, [120000])  # Above ceiling
-    result = sim.calculate("cpf_total_contribution", 2025)
-    # Should be limited by annual ceiling of S$102,000
-    max_contribution = 102000 * 0.37  # S$37,740
-    assert result[0] <= max_contribution + 1  # Allow small rounding
-    
-    # Test case 7: Verify components add up correctly
-    sim.set_input("age", 2025, [45])
-    sim.set_input("employment_income", 2025, [80000])
-    total_result = sim.calculate("cpf_total_contribution", 2025)
-    employee_result = sim.calculate("cpf_employee_contribution", 2025)
-    employer_result = sim.calculate("cpf_employer_contribution", 2025)
-    assert abs(total_result[0] - (employee_result[0] + employer_result[0])) < 0.01

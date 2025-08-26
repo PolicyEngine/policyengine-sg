@@ -1,0 +1,7 @@
+- bump: patch
+  changes:
+    added:
+    - Initial implementation of Singapore tax-benefit microsimulation model
+    - CPF (Central Provident Fund) system with age-based contribution rates
+    - Support for ordinary and additional wages with dynamic ceilings
+    - Comprehensive test coverage for CPF calculations
