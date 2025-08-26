@@ -1,0 +1,62 @@
+description: Singapore personal income tax rates
+metadata:
+  unit: /1
+  period: year
+  reference:
+    - title: Income Tax Act, Section 43
+      href: https://sso.agc.gov.sg/Act/ITA1947
+    - title: IRAS Tax Rates for Individuals (Residents)
+      href: https://www.iras.gov.sg/taxes/individual-income-tax/basics-of-individual-income-tax/tax-rates
+brackets:
+  - rate:
+      2024-01-01: 0.00
+    threshold:
+      2024-01-01: 0
+  - rate:
+      2024-01-01: 0.02
+    threshold:
+      2024-01-01: 20_000
+  - rate:
+      2024-01-01: 0.035
+    threshold:
+      2024-01-01: 30_000
+  - rate:
+      2024-01-01: 0.07
+    threshold:
+      2024-01-01: 40_000
+  - rate:
+      2024-01-01: 0.115
+    threshold:
+      2024-01-01: 80_000
+  - rate:
+      2024-01-01: 0.15
+    threshold:
+      2024-01-01: 120_000
+  - rate:
+      2024-01-01: 0.18
+    threshold:
+      2024-01-01: 160_000
+  - rate:
+      2024-01-01: 0.19
+    threshold:
+      2024-01-01: 200_000
+  - rate:
+      2024-01-01: 0.195
+    threshold:
+      2024-01-01: 240_000
+  - rate:
+      2024-01-01: 0.20
+    threshold:
+      2024-01-01: 280_000
+  - rate:
+      2024-01-01: 0.22
+    threshold:
+      2024-01-01: 320_000
+  - rate:
+      2024-01-01: 0.24
+    threshold:
+      2024-01-01: 500_000
+  - rate:
+      2024-01-01: 0.245
+    threshold:
+      2024-01-01: 1_000_000
