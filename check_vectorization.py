@@ -7,7 +7,7 @@ which violate PolicyEngine's mandatory vectorization requirements.
 
 Usage:
     python check_vectorization.py [path_to_check]
-    
+
 Exit codes:
     0: All files pass vectorization check
     1: Vectorization violations found
