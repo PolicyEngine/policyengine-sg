@@ -1,0 +1,301 @@
+# CPF Contribution Tests
+# Tests for Singapore Central Provident Fund contribution calculations
+# Based on 2025 rates and rules
+
+# Test cases covering all age groups and various income levels
+# Rates as per CPF documentation:
+# Age ≤55: Employee 20%, Employer 17%, Total 37%
+# Age 55-60: Employee 17%, Employer 15.5%, Total 32.5%
+# Age 60-65: Employee 11.5%, Employer 12%, Total 23.5%
+# Age 65-70: Employee 7.5%, Employer 9%, Total 16.5%
+# Age >70: Employee 5%, Employer 7.5%, Total 12.5%
+
+# Ordinary Wage Ceiling: S$7,400 per month (S$88,800 annually)
+# Annual Contribution Limit: S$37,740
+
+# Age Group ≤55 Years
+- name: CPF contributions for age 25 with $3000 monthly salary
+  period: 2025
+  input:
+    age: 25
+    employment_income: 36_000  # S$3,000 monthly
+  output:
+    cpf_employee_contribution: 7_200  # 20% of $36,000
+    cpf_employer_contribution: 6_120  # 17% of $36,000
+    cpf_total_contribution: 13_320
+
+- name: CPF contributions for age 35 with $5000 monthly salary
+  period: 2025
+  input:
+    age: 35
+    employment_income: 60_000  # S$5,000 monthly
+  output:
+    cpf_employee_contribution: 12_000  # 20% of $60,000
+    cpf_employer_contribution: 10_200  # 17% of $60,000
+    cpf_total_contribution: 22_200
+
+- name: CPF contributions for age 45 with $6000 monthly salary
+  period: 2025
+  input:
+    age: 45
+    employment_income: 72_000  # S$6,000 monthly
+  output:
+    cpf_employee_contribution: 14_400  # 20% of $72,000
+    cpf_employer_contribution: 12_240  # 17% of $72,000
+    cpf_total_contribution: 26_640
+
+- name: CPF contributions for age 30 at ordinary wage ceiling
+  period: 2025
+  input:
+    age: 30
+    employment_income: 88_800  # S$7,400 monthly = S$88,800 annually (at ceiling)
+  output:
+    cpf_employee_contribution: 17_760  # 20% of $88,800
+    cpf_employer_contribution: 15_096  # 17% of $88,800
+    cpf_total_contribution: 32_856
+
+- name: CPF contributions for age 25 above ordinary wage ceiling
+  period: 2025
+  input:
+    age: 25
+    employment_income: 120_000  # Above annual ceiling
+  output:
+    cpf_employee_contribution: 20_400  # 20% of $102,000 (annual ceiling)
+    cpf_employer_contribution: 17_340  # 17% of $102,000 (annual ceiling)
+    cpf_total_contribution: 37_740    # Annual contribution limit
+
+# Age Group 55-60 Years
+- name: CPF contributions for age 55 with $4000 monthly salary
+  period: 2025
+  input:
+    age: 55
+    employment_income: 48_000  # S$4,000 monthly
+  output:
+    cpf_employee_contribution: 8_160   # 17% of $48,000
+    cpf_employer_contribution: 7_440   # 15.5% of $48,000
+    cpf_total_contribution: 15_600
+
+- name: CPF contributions for age 58 with $6000 monthly salary
+  period: 2025
+  input:
+    age: 58
+    employment_income: 72_000  # S$6,000 monthly
+  output:
+    cpf_employee_contribution: 12_240  # 17% of $72,000
+    cpf_employer_contribution: 11_160  # 15.5% of $72,000
+    cpf_total_contribution: 23_400
+
+- name: CPF contributions for age 57 at ordinary wage ceiling
+  period: 2025
+  input:
+    age: 57
+    employment_income: 88_800  # At OW ceiling
+  output:
+    cpf_employee_contribution: 15_096  # 17% of $88,800
+    cpf_employer_contribution: 13_764  # 15.5% of $88,800
+    cpf_total_contribution: 28_860
+
+- name: CPF contributions for age 56 above ordinary wage ceiling
+  period: 2025
+  input:
+    age: 56
+    employment_income: 150_000  # Above annual ceiling
+  output:
+    cpf_employee_contribution: 17_340  # 17% of $102,000 (annual ceiling)
+    cpf_employer_contribution: 15_810  # 15.5% of $102,000 (annual ceiling)
+    cpf_total_contribution: 33_150
+
+# Age Group 60-65 Years
+- name: CPF contributions for age 60 with $3500 monthly salary
+  period: 2025
+  input:
+    age: 60
+    employment_income: 42_000  # S$3,500 monthly
+  output:
+    cpf_employee_contribution: 4_830   # 11.5% of $42,000
+    cpf_employer_contribution: 5_040   # 12% of $42,000
+    cpf_total_contribution: 9_870
+
+- name: CPF contributions for age 63 with $5000 monthly salary
+  period: 2025
+  input:
+    age: 63
+    employment_income: 60_000  # S$5,000 monthly
+  output:
+    cpf_employee_contribution: 6_900   # 11.5% of $60,000
+    cpf_employer_contribution: 7_200   # 12% of $60,000
+    cpf_total_contribution: 14_100
+
+- name: CPF contributions for age 62 at ordinary wage ceiling
+  period: 2025
+  input:
+    age: 62
+    employment_income: 88_800  # At OW ceiling
+  output:
+    cpf_employee_contribution: 10_212  # 11.5% of $88,800
+    cpf_employer_contribution: 10_656  # 12% of $88,800
+    cpf_total_contribution: 20_868
+
+- name: CPF contributions for age 64 above ordinary wage ceiling
+  period: 2025
+  input:
+    age: 64
+    employment_income: 110_000  # Above annual ceiling
+  output:
+    cpf_employee_contribution: 11_730  # 11.5% of $102,000 (annual ceiling)
+    cpf_employer_contribution: 12_240  # 12% of $102,000 (annual ceiling)
+    cpf_total_contribution: 23_970
+
+# Age Group 65-70 Years
+- name: CPF contributions for age 65 with $3000 monthly salary
+  period: 2025
+  input:
+    age: 65
+    employment_income: 36_000  # S$3,000 monthly
+  output:
+    cpf_employee_contribution: 2_700   # 7.5% of $36,000
+    cpf_employer_contribution: 3_240   # 9% of $36,000
+    cpf_total_contribution: 5_940
+
+- name: CPF contributions for age 68 with $4500 monthly salary
+  period: 2025
+  input:
+    age: 68
+    employment_income: 54_000  # S$4,500 monthly
+  output:
+    cpf_employee_contribution: 4_050   # 7.5% of $54,000
+    cpf_employer_contribution: 4_860   # 9% of $54,000
+    cpf_total_contribution: 8_910
+
+- name: CPF contributions for age 67 at ordinary wage ceiling
+  period: 2025
+  input:
+    age: 67
+    employment_income: 88_800  # At OW ceiling
+  output:
+    cpf_employee_contribution: 6_660   # 7.5% of $88,800
+    cpf_employer_contribution: 7_992   # 9% of $88,800
+    cpf_total_contribution: 14_652
+
+- name: CPF contributions for age 69 above ordinary wage ceiling
+  period: 2025
+  input:
+    age: 69
+    employment_income: 130_000  # Above annual ceiling
+  output:
+    cpf_employee_contribution: 7_650   # 7.5% of $102,000 (annual ceiling)
+    cpf_employer_contribution: 9_180   # 9% of $102,000 (annual ceiling)
+    cpf_total_contribution: 16_830
+
+# Age Group >70 Years
+- name: CPF contributions for age 71 with $2500 monthly salary
+  period: 2025
+  input:
+    age: 71
+    employment_income: 30_000  # S$2,500 monthly
+  output:
+    cpf_employee_contribution: 1_500   # 5% of $30,000
+    cpf_employer_contribution: 2_250   # 7.5% of $30,000
+    cpf_total_contribution: 3_750
+
+- name: CPF contributions for age 75 with $4000 monthly salary
+  period: 2025
+  input:
+    age: 75
+    employment_income: 48_000  # S$4,000 monthly
+  output:
+    cpf_employee_contribution: 2_400   # 5% of $48,000
+    cpf_employer_contribution: 3_600   # 7.5% of $48,000
+    cpf_total_contribution: 6_000
+
+- name: CPF contributions for age 72 at ordinary wage ceiling
+  period: 2025
+  input:
+    age: 72
+    employment_income: 88_800  # At OW ceiling
+  output:
+    cpf_employee_contribution: 4_440   # 5% of $88,800
+    cpf_employer_contribution: 6_660   # 7.5% of $88,800
+    cpf_total_contribution: 11_100
+
+- name: CPF contributions for age 73 above ordinary wage ceiling
+  period: 2025
+  input:
+    age: 73
+    employment_income: 200_000  # Well above annual ceiling
+  output:
+    cpf_employee_contribution: 5_100   # 5% of $102,000 (annual ceiling)
+    cpf_employer_contribution: 7_650   # 7.5% of $102,000 (annual ceiling)
+    cpf_total_contribution: 12_750
+
+# Edge Cases and Boundary Conditions
+
+- name: CPF contributions at minimum wage threshold ($750 monthly)
+  period: 2025
+  input:
+    age: 30
+    employment_income: 9_000   # S$750 monthly
+  output:
+    cpf_employee_contribution: 1_800   # 20% of $9,000
+    cpf_employer_contribution: 1_530   # 17% of $9,000
+    cpf_total_contribution: 3_330
+
+- name: CPF contributions just below minimum threshold ($500 monthly)
+  period: 2025
+  input:
+    age: 30
+    employment_income: 6_000   # S$500 monthly - should have reduced rates
+  output:
+    cpf_employee_contribution: 0       # Below threshold for full rates
+    cpf_employer_contribution: 1_020   # 17% still applies to employer
+    cpf_total_contribution: 1_020
+
+- name: CPF contributions at exact annual contribution limit
+  period: 2025
+  input:
+    age: 30
+    employment_income: 102_000  # Exactly at annual ceiling
+  output:
+    cpf_employee_contribution: 20_400  # 20% of $102,000
+    cpf_employer_contribution: 17_340  # 17% of $102,000
+    cpf_total_contribution: 37_740    # Exactly at annual limit
+
+- name: Age milestone boundary - turning 55
+  period: 2025
+  input:
+    age: 55  # First month after turning 55
+    employment_income: 60_000
+  output:
+    cpf_employee_contribution: 10_200  # 17% (new rate applies)
+    cpf_employer_contribution: 9_300   # 15.5% (new rate applies)
+    cpf_total_contribution: 19_500
+
+- name: Age milestone boundary - turning 60
+  period: 2025
+  input:
+    age: 60  # First month after turning 60
+    employment_income: 60_000
+  output:
+    cpf_employee_contribution: 6_900   # 11.5% (new rate applies)
+    cpf_employer_contribution: 7_200   # 12% (new rate applies)
+    cpf_total_contribution: 14_100
+
+- name: Age milestone boundary - turning 65
+  period: 2025
+  input:
+    age: 65  # First month after turning 65
+    employment_income: 60_000
+  output:
+    cpf_employee_contribution: 4_500   # 7.5% (new rate applies)
+    cpf_employer_contribution: 5_400   # 9% (new rate applies)
+    cpf_total_contribution: 9_900
+
+- name: Age milestone boundary - turning 70
+  period: 2025
+  input:
+    age: 70  # First month after turning 70
+    employment_income: 60_000
+  output:
+    cpf_employee_contribution: 3_000   # 5% (new rate applies)
+    cpf_employer_contribution: 4_500   # 7.5% (new rate applies)
+    cpf_total_contribution: 7_500

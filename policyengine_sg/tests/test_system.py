@@ -15,7 +15,15 @@ def test_system_can_be_instantiated():
 def test_entities_are_loaded():
     """Test that all expected entities are loaded."""
     system = SingaporeTaxBenefitSystem()
-    expected_entities = ["person", "tax_unit", "cpf_unit", "benefit_unit", "household"]
-    
+    expected_entities = [
+        "person",
+        "tax_unit",
+        "cpf_unit",
+        "benefit_unit",
+        "household",
+    ]
+
+    # Get the keys from entities list
+    entity_keys = {entity.key for entity in system.entities}
     for entity_key in expected_entities:
-        assert entity_key in system.entities
+        assert entity_key in entity_keys

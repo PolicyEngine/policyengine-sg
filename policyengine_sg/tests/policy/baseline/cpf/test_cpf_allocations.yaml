@@ -1,0 +1,260 @@
+# CPF Account Allocation Tests
+# Tests for Singapore Central Provident Fund account allocation rules
+# Based on 2025 CPF structure and Special Account closure changes
+
+# Account Types:
+# - Ordinary Account (OA): Housing, insurance, investment, education
+# - Special Account (SA): For members below 55 (closing Jan 2025 for 55+)
+# - Retirement Account (RA): Created at age 55, replaces SA
+# - MediSave Account (MA): Healthcare expenses and insurance
+
+# Interest Rates (2025):
+# - OA: 2.5% per annum (floor rate)
+# - SA/RA/MA: 4% per annum (floor rate extended until 31 Dec 2025)
+
+# Enhanced Interest:
+# - Below 55: Up to 5% on first S$20,000 combined OA+SA
+# - Age 55+: Up to 6% on first S$30,000 combined OA+RA
+
+# NOTE: Specific allocation percentages require official CPF documentation
+# These tests assume typical allocation patterns based on CPF structure
+
+# Members Below Age 55 - Special Account Active
+- name: CPF allocation for age 30 with $5000 monthly salary
+  period: 2025
+  input:
+    age: 30
+    employment_income: 60_000  # S$5,000 monthly
+    cpf_total_contribution: 22_200  # From contribution calculation
+  output:
+    cpf_ordinary_account_allocation: 15_540   # ~70% to OA (typical)
+    cpf_special_account_allocation: 4_440     # ~20% to SA (typical)
+    cpf_medisave_account_allocation: 2_220    # ~10% to MA (typical)
+    # Enhanced interest eligibility
+    cpf_enhanced_interest_eligible_balance: 20_000  # First S$20k combined OA+SA
+
+- name: CPF allocation for age 25 with $3000 monthly salary
+  period: 2025
+  input:
+    age: 25
+    employment_income: 36_000  # S$3,000 monthly
+    cpf_total_contribution: 13_320
+  output:
+    cpf_ordinary_account_allocation: 9_324    # ~70% to OA
+    cpf_special_account_allocation: 2_664     # ~20% to SA
+    cpf_medisave_account_allocation: 1_332    # ~10% to MA
+    cpf_enhanced_interest_eligible_balance: 20_000
+
+- name: CPF allocation for age 45 high earner at ceiling
+  period: 2025
+  input:
+    age: 45
+    employment_income: 102_000  # At annual ceiling
+    cpf_total_contribution: 37_740
+  output:
+    cpf_ordinary_account_allocation: 26_418   # ~70% to OA
+    cpf_special_account_allocation: 7_548     # ~20% to SA
+    cpf_medisave_account_allocation: 3_774    # ~10% to MA
+    cpf_enhanced_interest_eligible_balance: 20_000
+
+# Members Age 55+ - Retirement Account Active (SA Closed from Jan 2025)
+- name: CPF allocation for age 55 with $4000 monthly salary
+  period: 2025
+  input:
+    age: 55
+    employment_income: 48_000  # S$4,000 monthly
+    cpf_total_contribution: 15_600  # 32.5% total rate
+  output:
+    cpf_ordinary_account_allocation: 10_920   # ~70% to OA
+    cpf_retirement_account_allocation: 3_120  # ~20% to RA (replaces SA)
+    cpf_medisave_account_allocation: 1_560    # ~10% to MA
+    # Enhanced interest threshold increases at 55
+    cpf_enhanced_interest_eligible_balance: 30_000  # First S$30k combined OA+RA
+
+- name: CPF allocation for age 58 with $6000 monthly salary
+  period: 2025
+  input:
+    age: 58
+    employment_income: 72_000  # S$6,000 monthly
+    cpf_total_contribution: 23_400  # 32.5% total rate
+  output:
+    cpf_ordinary_account_allocation: 16_380   # ~70% to OA
+    cpf_retirement_account_allocation: 4_680  # ~20% to RA
+    cpf_medisave_account_allocation: 2_340    # ~10% to MA
+    cpf_enhanced_interest_eligible_balance: 30_000
+
+- name: CPF allocation for age 62 with $5000 monthly salary
+  period: 2025
+  input:
+    age: 62
+    employment_income: 60_000  # S$5,000 monthly
+    cpf_total_contribution: 14_100  # 23.5% total rate
+  output:
+    cpf_ordinary_account_allocation: 9_870    # ~70% to OA
+    cpf_retirement_account_allocation: 2_820  # ~20% to RA
+    cpf_medisave_account_allocation: 1_410    # ~10% to MA
+    cpf_enhanced_interest_eligible_balance: 30_000
+
+- name: CPF allocation for age 67 with $4000 monthly salary
+  period: 2025
+  input:
+    age: 67
+    employment_income: 48_000  # S$4,000 monthly
+    cpf_total_contribution: 7_920   # 16.5% total rate
+  output:
+    cpf_ordinary_account_allocation: 5_544    # ~70% to OA
+    cpf_retirement_account_allocation: 1_584  # ~20% to RA
+    cpf_medisave_account_allocation: 792      # ~10% to MA
+    cpf_enhanced_interest_eligible_balance: 30_000
+
+- name: CPF allocation for age 72 with $3000 monthly salary
+  period: 2025
+  input:
+    age: 72
+    employment_income: 36_000  # S$3,000 monthly
+    cpf_total_contribution: 4_500   # 12.5% total rate
+  output:
+    cpf_ordinary_account_allocation: 3_150    # ~70% to OA
+    cpf_retirement_account_allocation: 900    # ~20% to RA
+    cpf_medisave_account_allocation: 450      # ~10% to MA
+    cpf_enhanced_interest_eligible_balance: 30_000
+
+# Account Transitions and Special Scenarios
+
+- name: Age 55 account transition - SA to RA conversion
+  period: 2025
+  input:
+    age: 55
+    # Simulating member turning 55 with existing SA balance
+    cpf_special_account_balance: 80_000  # Existing SA balance
+    cpf_ordinary_account_balance: 150_000 # Existing OA balance
+    full_retirement_sum: 213_000         # FRS for 2025
+  output:
+    # SA closes, RA created
+    cpf_special_account_balance: 0              # SA closed
+    cpf_retirement_account_balance: 80_000      # SA transfers to RA
+    cpf_ordinary_account_balance: 150_000       # OA remains unchanged
+    # Enhanced interest threshold changes
+    cpf_enhanced_interest_eligible_balance: 30_000
+
+- name: Age 55 account transition - excess above FRS
+  period: 2025
+  input:
+    age: 55
+    cpf_special_account_balance: 150_000  # Large SA balance
+    cpf_ordinary_account_balance: 100_000 # OA balance
+    full_retirement_sum: 213_000         # FRS for 2025
+  output:
+    # SA closes, but only FRS amount goes to RA
+    cpf_special_account_balance: 0              # SA closed
+    cpf_retirement_account_balance: 150_000     # All SA goes to RA (under FRS)
+    cpf_ordinary_account_balance: 100_000       # OA unchanged
+    cpf_enhanced_interest_eligible_balance: 30_000
+
+- name: Age 55 account transition - combined SA+OA above FRS
+  period: 2025
+  input:
+    age: 55
+    cpf_special_account_balance: 120_000  # SA balance
+    cpf_ordinary_account_balance: 150_000 # Large OA balance
+    full_retirement_sum: 213_000         # FRS for 2025
+  output:
+    # Total SA+OA > FRS, so FRS amount goes to RA
+    cpf_special_account_balance: 0              # SA closed
+    cpf_retirement_account_balance: 213_000     # FRS amount in RA
+    cpf_ordinary_account_balance: 57_000        # Remaining OA after RA top-up
+    cpf_enhanced_interest_eligible_balance: 30_000
+
+# MediSave Account Specific Tests
+
+- name: MediSave allocation with Basic Healthcare Sum limit
+  period: 2025
+  input:
+    age: 40
+    employment_income: 120_000  # High earner
+    cpf_total_contribution: 37_740
+    basic_healthcare_sum: 71_500  # BHS for 2025 (estimated)
+    existing_medisave_balance: 65_000
+  output:
+    # MediSave allocation limited by BHS
+    cpf_medisave_account_allocation: 6_500  # Limited to reach BHS only
+    cpf_ordinary_account_allocation: 27_918  # Increased OA due to MA limit
+    cpf_special_account_allocation: 3_322    # Remaining to SA
+
+- name: MediSave allocation for member with full BHS
+  period: 2025
+  input:
+    age: 35
+    employment_income: 60_000
+    cpf_total_contribution: 22_200
+    basic_healthcare_sum: 71_500
+    existing_medisave_balance: 71_500  # Already at BHS
+  output:
+    # No MediSave allocation needed
+    cpf_medisave_account_allocation: 0
+    cpf_ordinary_account_allocation: 15_540   # More to OA
+    cpf_special_account_allocation: 6_660     # More to SA
+
+# Interest Rate Application Tests
+
+- name: Enhanced interest calculation for member below 55
+  period: 2025
+  input:
+    age: 35
+    cpf_ordinary_account_balance: 15_000
+    cpf_special_account_balance: 8_000
+    # Combined balance = S$23,000, first S$20k gets enhanced interest
+  output:
+    cpf_enhanced_interest_eligible_balance: 20_000  # First S$20k
+    cpf_enhanced_interest_oa_portion: 13_043        # Proportional allocation
+    cpf_enhanced_interest_sa_portion: 6_957         # Proportional allocation
+    cpf_standard_interest_balance: 3_000            # Remaining S$3k
+
+- name: Enhanced interest calculation for member 55 and above
+  period: 2025
+  input:
+    age: 60
+    cpf_ordinary_account_balance: 25_000
+    cpf_retirement_account_balance: 10_000
+    # Combined balance = S$35,000, first S$30k gets enhanced interest
+  output:
+    cpf_enhanced_interest_eligible_balance: 30_000  # First S$30k
+    cpf_enhanced_interest_oa_portion: 21_429        # Proportional allocation
+    cpf_enhanced_interest_ra_portion: 8_571         # Proportional allocation
+    cpf_standard_interest_balance: 5_000            # Remaining S$5k
+
+# Contribution Allocation Edge Cases
+
+- name: Minimum contribution allocation
+  period: 2025
+  input:
+    age: 30
+    employment_income: 9_000   # S$750 monthly (minimum threshold)
+    cpf_total_contribution: 3_330
+  output:
+    cpf_ordinary_account_allocation: 2_331    # ~70% to OA
+    cpf_special_account_allocation: 666       # ~20% to SA
+    cpf_medisave_account_allocation: 333      # ~10% to MA
+
+- name: Maximum contribution allocation at annual limit
+  period: 2025
+  input:
+    age: 30
+    employment_income: 102_000  # Annual ceiling
+    cpf_total_contribution: 37_740  # Annual limit
+  output:
+    cpf_ordinary_account_allocation: 26_418   # ~70% to OA
+    cpf_special_account_allocation: 7_548     # ~20% to SA
+    cpf_medisave_account_allocation: 3_774    # ~10% to MA
+
+- name: Allocation for senior worker above 70
+  period: 2025
+  input:
+    age: 75
+    employment_income: 48_000  # S$4,000 monthly
+    cpf_total_contribution: 6_000   # 12.5% total rate
+  output:
+    cpf_ordinary_account_allocation: 4_200    # ~70% to OA
+    cpf_retirement_account_allocation: 1_200  # ~20% to RA
+    cpf_medisave_account_allocation: 600      # ~10% to MA
+    cpf_enhanced_interest_eligible_balance: 30_000
