@@ -1,0 +1,10 @@
+description: Singapore provides this share of the mother's earned income as working mother's child relief for the third and subsequent children born before 1 January 2024.
+values:
+  2024-01-01: 0.25
+metadata:
+  unit: /1
+  period: year
+  label: WMCR third and subsequent child percentage rate
+  reference:
+    - title: IRAS Working Mother's Child Relief
+      href: https://www.iras.gov.sg/taxes/individual-income-tax/basics-of-individual-income-tax/tax-reliefs-rebates-and-deductions/tax-reliefs/working-mother's-child-relief-(wmcr)

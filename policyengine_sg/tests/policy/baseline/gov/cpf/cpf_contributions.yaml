@@ -1,0 +1,96 @@
+- name: Case 1, young employee below 55.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 30
+        employment_income: 60_000
+        is_citizen: true
+  output:
+    # Employee: 60,000 * 20% = 12,000
+    # Employer: 60,000 * 17% = 10,200
+    # Total: 22,200
+    cpf_employee_contribution: 12_000
+    cpf_employer_contribution: 10_200
+    cpf_total_contribution: 22_200
+
+- name: Case 2, employee age 57.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 57
+        employment_income: 48_000
+        is_citizen: true
+  output:
+    # 2025 rates for above 55 to 60:
+    # Employee: 48,000 * 15.5% = 7,440
+    # Employer: 48,000 * 17% = 8,160
+    cpf_employee_contribution: 7_440
+    cpf_employer_contribution: 8_160
+
+- name: Case 3, employee age 63.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 63
+        employment_income: 36_000
+        is_citizen: true
+  output:
+    # 2025 rates for above 60 to 65:
+    # Employee: 36,000 * 11% = 3,960
+    # Employer: 36,000 * 12.5% = 4,500
+    cpf_employee_contribution: 3_960
+    cpf_employer_contribution: 4_500
+
+- name: Case 4, employee age 68.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 68
+        employment_income: 30_000
+        is_citizen: true
+  output:
+    # Above 65 to 70:
+    # Employee: 30,000 * 7.5% = 2,250
+    # Employer: 30,000 * 9% = 2,700
+    cpf_employee_contribution: 2_250
+    cpf_employer_contribution: 2_700
+
+- name: Case 5, employee age 75.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 75
+        employment_income: 24_000
+        is_citizen: true
+  output:
+    # Above 70:
+    # Employee: 24,000 * 5% = 1,200
+    # Employer: 24,000 * 7.5% = 1,800
+    cpf_employee_contribution: 1_200
+    cpf_employer_contribution: 1_800
+
+- name: Case 6, high earner capped at annual wage ceiling.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 40
+        employment_income: 200_000
+        is_citizen: true
+  output:
+    # Capped at annual wage ceiling of 102,000
+    # Employee: 102,000 * 20% = 20,400
+    # Employer: 102,000 * 17% = 17,340
+    cpf_employee_contribution: 20_400
+    cpf_employer_contribution: 17_340

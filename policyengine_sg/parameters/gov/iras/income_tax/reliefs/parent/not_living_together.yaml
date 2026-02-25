@@ -1,0 +1,10 @@
+description: Singapore provides this parent relief amount when the dependant does not live with the taxpayer.
+values:
+  2024-01-01: 5_500
+metadata:
+  unit: currency-SGD
+  period: year
+  label: Parent relief not living together
+  reference:
+    - title: IRAS Parent Relief
+      href: https://www.iras.gov.sg/taxes/individual-income-tax/basics-of-individual-income-tax/tax-reliefs-rebates-and-deductions/tax-reliefs/parent-relief-parent-relief-(disability)

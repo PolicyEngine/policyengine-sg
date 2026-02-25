@@ -1,0 +1,10 @@
+description: Singapore levies this additional buyer's stamp duty rate on a citizen's third and subsequent residential property.
+values:
+  2023-04-27: 0.30
+metadata:
+  unit: /1
+  period: year
+  label: ABSD citizen third and subsequent property
+  reference:
+    - title: IRAS Additional Buyer's Stamp Duty
+      href: https://www.iras.gov.sg/taxes/stamp-duty/for-property/buying-or-acquiring-property/additional-buyer's-stamp-duty-(absd)

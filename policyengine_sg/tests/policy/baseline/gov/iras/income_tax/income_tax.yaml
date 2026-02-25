@@ -1,0 +1,134 @@
+- name: Case 1, low income resident with earned income and CPF reliefs.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 30
+        employment_income: 30_000
+        is_resident: true
+        is_citizen: true
+  output:
+    # Total income: 30,000
+    # CPF employee: 30,000 * 20% = 6,000
+    # Reliefs: earned income 1,000 + CPF 6,000 = 7,000
+    # Chargeable: 30,000 - 7,000 = 23,000
+    # Tax: 20,000 * 0% + 3,000 * 2% = 60
+    # PIT rebate: min(60 * 60%, 200) = 36
+    # Income tax: 60 - 36 = 24
+    total_income: 30_000
+    cpf_employee_contribution: 6_000
+    earned_income_relief: 1_000
+    cpf_relief: 6_000
+    total_personal_reliefs: 7_000
+    chargeable_income: 23_000
+    income_tax_before_rebate: 60
+    income_tax: 24
+
+- name: Case 2, mid income married resident with spouse and child.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 35
+        employment_income: 80_000
+        is_resident: true
+        is_citizen: true
+        is_married: true
+        number_of_children: 1
+  output:
+    # Total income: 80,000
+    # Reliefs: earned 1,000 + spouse 2,000 + child 4,000 = 7,000
+    # CPF relief: 80,000 * 20% = 16,000
+    # Total reliefs: 7,000 + 16,000 = 23,000
+    # Chargeable: 80,000 - 23,000 = 57,000
+    # Tax: 20k*0% + 10k*2% + 10k*3.5% + 17k*7% = 0+200+350+1190 = 1,740
+    # PIT rebate: min(1,740 * 60%, 200) = 200
+    # Income tax: 1,740 - 200 = 1,540
+    total_personal_reliefs: 23_000
+    chargeable_income: 57_000
+    income_tax_before_rebate: 1_740
+    pit_rebate: 200
+    income_tax: 1_540
+
+- name: Case 3, high income resident maxing relief cap.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 50
+        employment_income: 300_000
+        is_resident: true
+        is_citizen: true
+        is_married: true
+        spouse_is_disabled: true
+        number_of_children: 3
+        number_of_children_with_disability: 1
+        number_of_dependant_parents: 2
+        srs_contribution: 15_300
+        cpf_cash_top_up: 16_000
+        donation_amount: 5_000
+  output:
+    # CPF: min(300,000, 102,000) * 20% = 20,400
+    # But annual wage ceiling = 102,000, so CPF = 102,000 * 20% = 20,400
+    # Earned income: 1,000
+    # Spouse (disabled): 5,500
+    # Children: (3-1)*4,000 + 1*7,500 = 15,500
+    # Parents: 2 * 9,000 = 18,000
+    # SRS: 15,300
+    # CPF top-up: min(16,000, 16,000) = 16,000
+    # Total before cap: 20,400+1,000+5,500+15,500+18,000+15,300+16,000 = 91,700
+    # Capped at 80,000
+    # Donation deduction: 5,000 * 2.5 = 12,500
+    # Chargeable: 300,000 - 80,000 - 12,500 = 207,500
+    total_personal_reliefs: 80_000
+    donation_deduction: 12_500
+    chargeable_income: 207_500
+
+- name: Case 4, zero income.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 25
+        employment_income: 0
+        is_resident: true
+  output:
+    total_income: 0
+    chargeable_income: 0
+    income_tax_before_rebate: 0
+    income_tax: 0
+
+- name: Case 5, elderly resident with disability.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 65
+        employment_income: 40_000
+        self_employment_income: 10_000
+        is_resident: true
+        is_citizen: true
+        is_disabled: true
+  output:
+    # Earned income relief (disabled, 60+): 12,000
+    # CPF: 40,000 * 7.5% (emp only, age 65-70) = 3,000
+    #   + but total earned is 50,000, capped at 102,000
+    #   CPF on employment_income only: 40,000 * 7.5% = 3,000
+    #   actually need to check: above_60_to_65 for age 63
+    #   age 65 => above_65_to_70 bracket: 7.5%
+    #   CPF = min(40,000, 102,000) * 7.5% = 3,000
+    # Wait - let me recalculate. CPF rates:
+    #   above_60_to_65: age > 60 AND <= 65. Age=65 is <=65 so this bracket
+    #   Employee: 11% for 2025
+    #   CPF = 40,000 * 11% = 4,400
+    earned_income_relief: 12_000
+    total_income: 50_000
+    cpf_employee_contribution: 4_400
+    cpf_relief: 4_400
+    total_personal_reliefs: 16_400
+    chargeable_income: 33_600

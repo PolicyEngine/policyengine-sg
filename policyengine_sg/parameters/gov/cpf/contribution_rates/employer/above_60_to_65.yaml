@@ -1,0 +1,13 @@
+description: Singapore requires employers to contribute this share of wages to CPF for employees aged above 60 to 65.
+values:
+  2024-01-01: 0.125
+  2025-01-01: 0.125
+metadata:
+  unit: /1
+  period: month
+  label: CPF employer rate above 60 to 65
+  reference:
+    - title: CPF Act 1953, First Schedule
+      href: https://sso.agc.gov.sg/Act/CPFA1953
+    - title: CPF Contribution Rates from 1 January 2025
+      href: https://www.cpf.gov.sg/content/dam/web/employer/employer-obligations/documents/CPF_contribution_rates_from_1_Jan_2025.pdf

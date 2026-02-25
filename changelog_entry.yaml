@@ -1,0 +1,13 @@
+- bump: minor
+  changes:
+    added:
+    - Implement Singapore personal income tax with 13 progressive brackets (0-24%) and 10+ relief types
+    - Add CPF contribution calculations with 5 age bands and 2024-2025 rate updates
+    - Add Workfare Income Supplement (WIS) eligibility and benefit calculations
+    - Add Silver Support Scheme eligibility and payment calculations
+    - Add GST Voucher cash benefit calculations
+    - Add CDC vouchers benefit calculation
+    - Add owner-occupied and non-owner-occupied property tax calculations
+    - Add Skills Development Levy (SDL) calculation
+    - Add 59 variables and ~100 parameter files with primary .gov.sg sources
+    - Add 29 YAML tests covering all calculation chains

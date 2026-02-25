@@ -1,0 +1,12 @@
+description: Singapore provides this quarterly Silver Support payment to higher-tier recipients living in three-room HDB flats.
+values:
+  2024-01-01: 860
+metadata:
+  unit: currency-SGD
+  period: quarter
+  label: Silver Support quarterly 3-room higher tier
+  reference:
+    - title: Silver Support Scheme Act 2015
+      href: https://sso.agc.gov.sg/Act/SSSA2015
+    - title: CPF Board - Silver Support
+      href: https://www.cpf.gov.sg/member/retirement-income/government-support/silver-support-scheme

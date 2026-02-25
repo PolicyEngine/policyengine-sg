@@ -1,0 +1,10 @@
+description: Singapore requires GST Voucher cash recipients to be at least this age.
+values:
+  2024-01-01: 21
+metadata:
+  unit: year
+  period: year
+  label: GSTV cash minimum age
+  reference:
+    - title: GSTV Cash Eligibility
+      href: https://www.govbenefits.gov.sg/about-us/gst-voucher/

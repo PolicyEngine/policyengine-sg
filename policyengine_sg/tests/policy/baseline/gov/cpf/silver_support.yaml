@@ -1,0 +1,39 @@
+- name: Case 1, eligible elderly citizen.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 70
+        employment_income: 0
+        is_citizen: true
+        number_of_properties: 1
+    households:
+      hh:
+        members:
+          - person1
+        property_annual_value: 8_000
+  output:
+    # Age >= 65, citizen, low AV
+    # Quarterly: 860 (3-room and higher tier)
+    # Annual: 860 * 4 = 3,440
+    silver_support_eligible: true
+    silver_support_amount: 3_440
+
+- name: Case 2, ineligible due to age below 65.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 60
+        employment_income: 0
+        is_citizen: true
+    households:
+      hh:
+        members:
+          - person1
+        property_annual_value: 8_000
+  output:
+    silver_support_eligible: false
+    silver_support_amount: 0

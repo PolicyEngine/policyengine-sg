@@ -1,0 +1,10 @@
+description: Singapore caps the combined qualifying child relief and working mother's child relief at this amount per child.
+values:
+  2024-01-01: 50_000
+metadata:
+  unit: currency-SGD
+  period: year
+  label: Combined QCR and WMCR cap per child
+  reference:
+    - title: IRAS Qualifying Child Relief
+      href: https://www.iras.gov.sg/taxes/individual-income-tax/basics-of-individual-income-tax/tax-reliefs-rebates-and-deductions/tax-reliefs/qualifying-child-relief-(qcr)-child-relief-(disability)

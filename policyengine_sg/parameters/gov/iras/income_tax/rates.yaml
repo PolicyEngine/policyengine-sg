@@ -1,62 +1,69 @@
-description: Singapore personal income tax rates
+description: >-
+  Singapore taxes resident individuals at these
+  progressive marginal rates.
+
 metadata:
-  unit: /1
+  type: marginal_rate
+  threshold_unit: currency-SGD
+  rate_unit: /1
   period: year
+  label: Singapore personal income tax rates
   reference:
-    - title: Income Tax Act, Section 43
+    - title: Income Tax Act 1947, Section 43
       href: https://sso.agc.gov.sg/Act/ITA1947
-    - title: IRAS Tax Rates for Individuals (Residents)
-      href: https://www.iras.gov.sg/taxes/individual-income-tax/basics-of-individual-income-tax/tax-rates
+    - title: IRAS Individual Income Tax Rates
+      href: https://www.iras.gov.sg/taxes/individual-income-tax/basics-of-individual-income-tax/tax-residency-and-tax-rates/individual-income-tax-rates
+
 brackets:
-  - rate:
-      2024-01-01: 0.00
-    threshold:
+  - threshold:
       2024-01-01: 0
-  - rate:
-      2024-01-01: 0.02
-    threshold:
+    rate:
+      2024-01-01: 0
+  - threshold:
       2024-01-01: 20_000
-  - rate:
-      2024-01-01: 0.035
-    threshold:
+    rate:
+      2024-01-01: 0.02
+  - threshold:
       2024-01-01: 30_000
-  - rate:
-      2024-01-01: 0.07
-    threshold:
+    rate:
+      2024-01-01: 0.035
+  - threshold:
       2024-01-01: 40_000
-  - rate:
-      2024-01-01: 0.115
-    threshold:
+    rate:
+      2024-01-01: 0.07
+  - threshold:
       2024-01-01: 80_000
-  - rate:
-      2024-01-01: 0.15
-    threshold:
+    rate:
+      2024-01-01: 0.115
+  - threshold:
       2024-01-01: 120_000
-  - rate:
-      2024-01-01: 0.18
-    threshold:
+    rate:
+      2024-01-01: 0.15
+  - threshold:
       2024-01-01: 160_000
-  - rate:
-      2024-01-01: 0.19
-    threshold:
+    rate:
+      2024-01-01: 0.18
+  - threshold:
       2024-01-01: 200_000
-  - rate:
-      2024-01-01: 0.195
-    threshold:
+    rate:
+      2024-01-01: 0.19
+  - threshold:
       2024-01-01: 240_000
-  - rate:
-      2024-01-01: 0.20
-    threshold:
+    rate:
+      2024-01-01: 0.195
+  - threshold:
       2024-01-01: 280_000
-  - rate:
-      2024-01-01: 0.22
-    threshold:
+    rate:
+      2024-01-01: 0.20
+  - threshold:
       2024-01-01: 320_000
-  - rate:
-      2024-01-01: 0.24
-    threshold:
+    rate:
+      2024-01-01: 0.22
+  - threshold:
       2024-01-01: 500_000
-  - rate:
-      2024-01-01: 0.245
-    threshold:
+    rate:
+      2024-01-01: 0.23
+  - threshold:
       2024-01-01: 1_000_000
+    rate:
+      2024-01-01: 0.24

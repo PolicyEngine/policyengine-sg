@@ -1,0 +1,10 @@
+description: Singapore provides this quarterly GST Voucher U-Save rebate to three-room HDB households.
+values:
+  2025-01-01: 170
+metadata:
+  unit: currency-SGD
+  period: quarter
+  label: GSTV U-Save quarterly 3-room
+  reference:
+    - title: GST Voucher
+      href: https://www.govbenefits.gov.sg/about-us/gst-voucher/

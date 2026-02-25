@@ -1,0 +1,10 @@
+description: Singapore provides this CPF cash top-up relief amount for top-ups to family members' CPF accounts.
+values:
+  2024-01-01: 8_000
+metadata:
+  unit: currency-SGD
+  period: year
+  label: CPF cash top-up relief family amount
+  reference:
+    - title: IRAS CPF Cash Top-Up Relief
+      href: https://www.iras.gov.sg/taxes/individual-income-tax/basics-of-individual-income-tax/tax-reliefs-rebates-and-deductions/tax-reliefs/central-provident-fund-(cpf)-cash-top-up-relief

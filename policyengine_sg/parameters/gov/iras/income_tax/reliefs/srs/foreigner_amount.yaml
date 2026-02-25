@@ -1,0 +1,10 @@
+description: Singapore provides this SRS contribution relief amount for foreigners.
+values:
+  2024-01-01: 35_700
+metadata:
+  unit: currency-SGD
+  period: year
+  label: SRS relief foreigner amount
+  reference:
+    - title: IRAS SRS Contributions
+      href: https://www.iras.gov.sg/taxes/individual-income-tax/basics-of-individual-income-tax/special-tax-schemes/srs-contributions

@@ -1,0 +1,10 @@
+description: Singapore provides up to this annual Workfare Income Supplement amount for employees aged 30 to 34.
+values:
+  2025-01-01: 2_450
+metadata:
+  unit: currency-SGD
+  period: year
+  label: WIS maximum annual age 30-34
+  reference:
+    - title: CPF Board - Workfare Income Supplement
+      href: https://www.cpf.gov.sg/member/growing-your-savings/government-support/workfare-income-supplement

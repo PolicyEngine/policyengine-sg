@@ -1,0 +1,55 @@
+- name: Case 1, owner-occupied below first threshold.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 35
+    households:
+      hh:
+        members:
+          - person1
+        property_annual_value: 10_000
+        is_owner_occupied: true
+  output:
+    # AV 10,000 < 12,000 threshold => 0% bracket
+    property_tax: 0
+
+- name: Case 2, owner-occupied mid range.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 35
+    households:
+      hh:
+        members:
+          - person1
+        property_annual_value: 30_000
+        is_owner_occupied: true
+  output:
+    # 0-12,000 @ 0% = 0
+    # 12,000-30,000 @ 4% = 18,000 * 4% = 720
+    property_tax: 720
+
+- name: Case 3, non-owner-occupied.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 35
+    households:
+      hh:
+        members:
+          - person1
+        property_annual_value: 50_000
+        is_owner_occupied: false
+  output:
+    # Non-owner-occupied rates:
+    # 0-30,000 @ 12% = 3,600
+    # 30,000-45,000 @ 20% = 3,000
+    # 45,000-50,000 @ 28% = 1,400
+    # Total = 8,000
+    property_tax: 8_000

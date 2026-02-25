@@ -1,0 +1,10 @@
+description: Singapore requires Workfare Income Supplement applicants to earn at least this monthly amount.
+values:
+  2024-01-01: 500
+metadata:
+  unit: currency-SGD
+  period: month
+  label: WIS minimum income
+  reference:
+    - title: CPF Board - Workfare Income Supplement
+      href: https://www.cpf.gov.sg/member/growing-your-savings/government-support/workfare-income-supplement

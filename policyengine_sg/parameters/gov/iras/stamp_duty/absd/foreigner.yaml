@@ -1,0 +1,10 @@
+description: Singapore levies this additional buyer's stamp duty rate on a foreigner's residential property purchase.
+values:
+  2023-04-27: 0.60
+metadata:
+  unit: /1
+  period: year
+  label: ABSD foreigner
+  reference:
+    - title: IRAS Additional Buyer's Stamp Duty
+      href: https://www.iras.gov.sg/taxes/stamp-duty/for-property/buying-or-acquiring-property/additional-buyer's-stamp-duty-(absd)
