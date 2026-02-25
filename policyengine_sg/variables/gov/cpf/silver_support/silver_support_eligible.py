@@ -17,4 +17,7 @@ class silver_support_eligible(Variable):
         p = parameters(period).gov.cpf.silver_support
         age = person("age", period)
         citizen = person("is_citizen", period)
-        return citizen & (age >= p.age_minimum)
+        income_pc = person("household_income_per_capita", period)
+        monthly_pc = income_pc / 12
+        income_ok = monthly_pc <= p.income_per_capita_ceiling
+        return citizen & (age >= p.age_minimum) & income_ok

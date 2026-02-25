@@ -1,7 +1,7 @@
 description: Singapore requires employers to contribute this share of wages to CPF for employees aged above 60 to 65.
 values:
   2024-01-01: 0.125
-  2025-01-01: 0.125
+  2025-01-01: 0.12
 metadata:
   unit: /1
   period: month

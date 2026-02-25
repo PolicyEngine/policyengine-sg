@@ -1,10 +1,10 @@
 - bump: minor
   changes:
     added:
-    - Implement Singapore personal income tax with 13 progressive brackets (0-24%) and 10+ relief types
+    - Implement Singapore personal income tax with 13 progressive brackets (0-24%) and 13 relief types
     - Add CPF contribution calculations with 5 age bands and 2024-2025 rate updates
-    - Add Workfare Income Supplement (WIS) eligibility and benefit calculations
-    - Add Silver Support Scheme with HDB flat-type tiering and income-based higher/lower tiers
+    - Add Workfare Income Supplement (WIS) eligibility with disability age exemption
+    - Add Silver Support Scheme with HDB flat-type tiering, income tiers, and income ceiling eligibility
     - Add GST Voucher cash benefit calculations
     - Add GST Voucher U-Save rebates with HDB flat-type tiering
     - Add CDC vouchers benefit calculation
@@ -15,5 +15,10 @@
     - Add GST calculation on taxable consumption
     - Add ComCare Long-Term Assistance with household-size-based amounts
     - Add immigration status and buyer profile enums
-    - Add 71 variables and ~110 parameter files with primary .gov.sg sources
-    - Add 50 YAML tests covering all calculation chains and edge cases
+    - Add working mother's child relief (WMCR) with fixed amounts
+    - Add grandparent caregiver relief and sibling disability relief
+    - Add 76 variables and ~110 parameter files with primary .gov.sg sources
+    - Add 57 YAML tests covering all calculation chains and edge cases
+    fixed:
+    - Fix CPF above-55-to-60 employee/employer rate values for 2024-2025
+    - Fix CPF above-60-to-65 employee/employer rate values for 2025

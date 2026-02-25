@@ -115,8 +115,8 @@
     cpf_employee_contribution: 20_400
     # Reliefs sum: earned 1,000 + CPF 20,400 + spouse 2,000
     #   + child 12,000 + parent 18,000 + SRS 15,300
-    #   + CPF top-up 16,000 + course 5,500 + life ins 5,000
-    #   = 95,200 => capped at 80,000
+    #   + CPF top-up 8,000 + course 5,500 + life ins 0 (CPF>cap)
+    #   = 82,200 => capped at 80,000
     total_personal_reliefs: 80_000
     # Donation: 20,000 * 2.5 = 50,000
     donation_deduction: 50_000

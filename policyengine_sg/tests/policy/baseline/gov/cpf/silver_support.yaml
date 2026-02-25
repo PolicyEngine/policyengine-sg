@@ -72,7 +72,28 @@
     silver_support_eligible: true
     silver_support_amount: 1_720
 
-- name: Case 4, ineligible due to age below 65.
+- name: Case 4, ineligible due to income above ceiling.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 70
+        employment_income: 0
+        is_citizen: true
+        household_income_per_capita: 36_000
+    households:
+      hh:
+        members:
+          - person1
+        hdb_flat_type: THREE_ROOM
+        property_annual_value: 8_000
+  output:
+    # Monthly per capita: 36,000/12 = 3,000 > 2,300 ceiling
+    silver_support_eligible: false
+    silver_support_amount: 0
+
+- name: Case 5, ineligible due to age below 65.
   absolute_error_margin: 0.1
   period: 2025
   input:

@@ -1,0 +1,107 @@
+- name: Case 1, working mother with two children gets WMCR.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 35
+        employment_income: 80_000
+        is_resident: true
+        is_citizen: true
+        is_female: true
+        is_married: true
+        number_of_children: 2
+  output:
+    # WMCR: first child 8,000 + second child 10,000 = 18,000
+    wmcr: 18_000
+    # QCR: 2 * 4,000 = 8,000
+    child_relief: 8_000
+    # CPF: 80,000 * 20% = 16,000
+    # Earned: 1,000
+    # Spouse: 2,000
+    # Total: 1,000+16,000+2,000+8,000+18,000 = 45,000
+    total_personal_reliefs: 45_000
+
+- name: Case 2, grandparent caregiver relief.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 35
+        employment_income: 50_000
+        is_resident: true
+        is_citizen: true
+        is_female: true
+        is_married: true
+        is_grandparent_caregiver: true
+  output:
+    grandparent_caregiver_relief: 3_000
+
+- name: Case 3, sibling disability relief.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 30
+        employment_income: 50_000
+        is_resident: true
+        is_citizen: true
+        number_of_disabled_siblings: 2
+  output:
+    # 2 disabled siblings * 5,500 = 11,000
+    sibling_disability_relief: 11_000
+
+- name: Case 4, non-working mother gets no WMCR.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 35
+        employment_income: 0
+        is_resident: true
+        is_citizen: true
+        is_female: true
+        is_married: true
+        number_of_children: 2
+  output:
+    wmcr: 0
+
+- name: Case 5, male parent gets no WMCR.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 35
+        employment_income: 80_000
+        is_resident: true
+        is_citizen: true
+        is_female: false
+        is_married: true
+        number_of_children: 2
+  output:
+    wmcr: 0
+
+- name: Case 6, disabled person eligible for WIS at age 25.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 25
+        employment_income: 18_000
+        is_citizen: true
+        is_disabled: true
+    households:
+      hh:
+        members:
+          - person1
+        property_annual_value: 10_000
+  output:
+    # Disabled exempted from age-30 minimum
+    # Monthly income: 18,000/12 = 1,500
+    # Income between 500 and 3,000: eligible
+    wis_eligible: true

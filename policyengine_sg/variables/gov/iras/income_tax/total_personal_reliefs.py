@@ -30,6 +30,9 @@ class total_personal_reliefs(Variable):
                 "cpf_top_up_relief",
                 "course_fees_relief",
                 "life_insurance_relief",
+                "wmcr",
+                "grandparent_caregiver_relief",
+                "sibling_disability_relief",
             ],
         )
         return min_(reliefs, p.cap)

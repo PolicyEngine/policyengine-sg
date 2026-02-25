@@ -26,10 +26,10 @@
         is_citizen: true
   output:
     # 2025 rates for above 55 to 60:
-    # Employee: 48,000 * 15.5% = 7,440
-    # Employer: 48,000 * 17% = 8,160
-    cpf_employee_contribution: 7_440
-    cpf_employer_contribution: 8_160
+    # Employee: 48,000 * 17% = 8,160
+    # Employer: 48,000 * 15.5% = 7,440
+    cpf_employee_contribution: 8_160
+    cpf_employer_contribution: 7_440
 
 - name: Case 3, employee age 63.
   absolute_error_margin: 0.1
@@ -42,10 +42,10 @@
         is_citizen: true
   output:
     # 2025 rates for above 60 to 65:
-    # Employee: 36,000 * 11% = 3,960
-    # Employer: 36,000 * 12.5% = 4,500
-    cpf_employee_contribution: 3_960
-    cpf_employer_contribution: 4_500
+    # Employee: 36,000 * 11.5% = 4,140
+    # Employer: 36,000 * 12% = 4,320
+    cpf_employee_contribution: 4_140
+    cpf_employer_contribution: 4_320
 
 - name: Case 4, employee age 68.
   absolute_error_margin: 0.1

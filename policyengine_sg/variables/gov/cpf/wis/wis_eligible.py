@@ -17,13 +17,15 @@ class wis_eligible(Variable):
         p = parameters(period).gov.cpf.wis
         age = person("age", period)
         citizen = person("is_citizen", period)
+        is_disabled = person("is_disabled", period)
         income = person("employment_income", period)
         monthly = income / 12
         av = person.household("property_annual_value", period)
         n_prop = person("number_of_properties", period)
+        age_ok = (age >= p.age_minimum) | is_disabled
         return (
             citizen
-            & (age >= p.age_minimum)
+            & age_ok
             & (monthly >= p.income_floor)
             & (monthly <= p.income_ceiling)
             & (av <= p.property_av_ceiling)
