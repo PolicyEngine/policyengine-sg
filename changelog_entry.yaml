@@ -4,10 +4,16 @@
     - Implement Singapore personal income tax with 13 progressive brackets (0-24%) and 10+ relief types
     - Add CPF contribution calculations with 5 age bands and 2024-2025 rate updates
     - Add Workfare Income Supplement (WIS) eligibility and benefit calculations
-    - Add Silver Support Scheme eligibility and payment calculations
+    - Add Silver Support Scheme with HDB flat-type tiering and income-based higher/lower tiers
     - Add GST Voucher cash benefit calculations
+    - Add GST Voucher U-Save rebates with HDB flat-type tiering
     - Add CDC vouchers benefit calculation
     - Add owner-occupied and non-owner-occupied property tax calculations
     - Add Skills Development Levy (SDL) calculation
-    - Add 59 variables and ~100 parameter files with primary .gov.sg sources
-    - Add 29 YAML tests covering all calculation chains
+    - Add buyer's stamp duty (BSD) with 6 progressive brackets
+    - Add additional buyer's stamp duty (ABSD) with 7 buyer profile categories
+    - Add GST calculation on taxable consumption
+    - Add ComCare Long-Term Assistance with household-size-based amounts
+    - Add immigration status and buyer profile enums
+    - Add 71 variables and ~110 parameter files with primary .gov.sg sources
+    - Add 50 YAML tests covering all calculation chains and edge cases

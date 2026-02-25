@@ -1,0 +1,66 @@
+- name: Case 1, one-room HDB flat.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 30
+    households:
+      hh:
+        members:
+          - person1
+        hdb_flat_type: ONE_ROOM
+  output:
+    # 1-2 room quarterly = 190
+    # Annual = 190 * 4 = 760
+    gstv_u_save: 760
+
+- name: Case 2, three-room HDB flat.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 30
+    households:
+      hh:
+        members:
+          - person1
+        hdb_flat_type: THREE_ROOM
+  output:
+    # 3-room quarterly = 170
+    # Annual = 170 * 4 = 680
+    gstv_u_save: 680
+
+- name: Case 3, executive HDB flat.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 30
+    households:
+      hh:
+        members:
+          - person1
+        hdb_flat_type: EXECUTIVE
+  output:
+    # Executive quarterly = 110
+    # Annual = 110 * 4 = 440
+    gstv_u_save: 440
+
+- name: Case 4, non-HDB property gets zero.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 30
+    households:
+      hh:
+        members:
+          - person1
+        hdb_flat_type: NON_HDB
+  output:
+    # Non-HDB = default 0
+    gstv_u_save: 0

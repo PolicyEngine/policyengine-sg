@@ -1,0 +1,10 @@
+description: Singapore distributes GST Voucher U-Save rebates this many times per year.
+values:
+  2025-01-01: 4
+metadata:
+  unit: /1
+  period: year
+  label: GSTV U-Save quarters per year
+  reference:
+    - title: GST Voucher
+      href: https://www.govbenefits.gov.sg/about-us/gst-voucher/
