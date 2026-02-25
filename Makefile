@@ -26,7 +26,8 @@ build:
 	python -m build
 
 changelog:
-	build-changelog changelog.yaml --output CHANGELOG.md --start-from 0.1.0
+	python .github/bump_version.py
+	towncrier build --yes --version $$(python -c "import re; print(re.search(r'version = \"(.+?)\"', open('pyproject.toml').read()).group(1))")
 
 clean:
 	find . -type f -name "*.pyc" -delete
