@@ -6,6 +6,8 @@ metadata:
   type: single_amount
   label: WIS monthly schedule age 45-59
   reference:
+    - title: CPF (Revised Workfare Income Supplement Scheme) Regulations (S46/2025)
+      href: https://sso.agc.gov.sg/SL-Supp/S46-2025/Published/20250117
     - title: CPF WIS Employee Calculator Work Year 2025
       href: https://www.cpf.gov.sg/member/tools-and-services/calculators/workfare-income-supplement-employee-work-year-2025-calculator
 brackets:

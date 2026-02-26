@@ -1,6 +1,7 @@
 description: Singapore uses this assessable income threshold to determine the Assurance Package cash tier.
 values:
   2025-01-01: 34_000
+  2026-01-01: 39_000
 metadata:
   unit: currency-SGD
   period: year

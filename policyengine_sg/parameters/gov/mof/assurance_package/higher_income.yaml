@@ -1,6 +1,7 @@
 description: Singapore provides this Assurance Package cash amount to higher-income citizens or those with multiple properties.
 values:
   2025-01-01: 200
+  2026-01-01: 100
 metadata:
   unit: currency-SGD
   period: year
