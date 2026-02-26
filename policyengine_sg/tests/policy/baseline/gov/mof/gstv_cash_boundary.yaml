@@ -1,0 +1,56 @@
+- name: GSTV Cash at exactly income ceiling.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 35
+        employment_income: 39_000
+        is_citizen: true
+        number_of_properties: 1
+    households:
+      hh:
+        members:
+          - person1
+        property_annual_value: 15_000
+  output:
+    # Income $39,000 = ceiling => eligible
+    gstv_cash: 850
+
+- name: GSTV Cash one dollar above income ceiling.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 35
+        employment_income: 39_001
+        is_citizen: true
+        number_of_properties: 1
+    households:
+      hh:
+        members:
+          - person1
+        property_annual_value: 15_000
+  output:
+    # Income $39,001 > ceiling => ineligible
+    gstv_cash: 0
+
+- name: GSTV Cash at exactly AV lower threshold.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 35
+        employment_income: 30_000
+        is_citizen: true
+        number_of_properties: 1
+    households:
+      hh:
+        members:
+          - person1
+        property_annual_value: 21_000
+  output:
+    # AV $21,000 = lower threshold => lower AV tier
+    gstv_cash: 850

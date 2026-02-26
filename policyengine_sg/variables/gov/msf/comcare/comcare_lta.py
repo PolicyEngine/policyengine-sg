@@ -4,7 +4,7 @@ from policyengine_sg.model_api import *
 class comcare_lta(Variable):
     value_type = float
     entity = BenefitUnit
-    label = "ComCare Long-Term Assistance" " annual payment"
+    label = "ComCare Long-Term Assistance annual payment"
     unit = SGD
     definition_period = YEAR
     reference = "https://www.msf.gov.sg/what-we-do/comcare"

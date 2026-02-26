@@ -1,0 +1,51 @@
+- name: CHAS at exact Blue threshold.
+  absolute_error_margin: 0.1
+  period: 2024
+  input:
+    people:
+      person1:
+        age: 35
+        is_citizen: true
+        household_income_per_capita: 1_500
+  output:
+    # PCI $1,500 = Blue threshold
+    chas_tier: BLUE
+
+- name: CHAS one dollar above Blue threshold.
+  absolute_error_margin: 0.1
+  period: 2024
+  input:
+    people:
+      person1:
+        age: 35
+        is_citizen: true
+        household_income_per_capita: 1_501
+  output:
+    # PCI $1,501 > Blue but <= Orange
+    chas_tier: ORANGE
+
+- name: CHAS at exact Orange threshold.
+  absolute_error_margin: 0.1
+  period: 2024
+  input:
+    people:
+      person1:
+        age: 35
+        is_citizen: true
+        household_income_per_capita: 2_300
+  output:
+    # PCI $2,300 = Orange threshold
+    chas_tier: ORANGE
+
+- name: CHAS one dollar above Orange threshold.
+  absolute_error_margin: 0.1
+  period: 2024
+  input:
+    people:
+      person1:
+        age: 35
+        is_citizen: true
+        household_income_per_capita: 2_301
+  output:
+    # PCI $2,301 > Orange => Green
+    chas_tier: GREEN

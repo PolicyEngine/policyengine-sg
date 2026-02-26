@@ -1,6 +1,6 @@
 description: >-
   Singapore taxes non-owner-occupied residential properties
-  at these progressive rates based on annual value.
+  at the following progressive rates based on annual value.
 
 metadata:
   type: marginal_rate
@@ -9,7 +9,7 @@ metadata:
   period: year
   label: Non-owner-occupied property tax rates
   reference:
-    - title: Property Tax Act 1960
+    - title: Property Tax Act 1960, Section 6
       href: https://sso.agc.gov.sg/Act/PTA1960
     - title: IRAS Property Tax Rates
       href: https://www.iras.gov.sg/taxes/property-tax/property-owners/property-tax-rates

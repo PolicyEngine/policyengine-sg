@@ -6,7 +6,7 @@ metadata:
   period: year
   label: Singapore personal relief cap
   reference:
-    - title: Income Tax Act 1947
+    - title: Income Tax Act 1947, Section 39A
       href: https://sso.agc.gov.sg/Act/ITA1947
     - title: IRAS Tax Reliefs
       href: https://www.iras.gov.sg/taxes/individual-income-tax/basics-of-individual-income-tax/tax-reliefs-rebates-and-deductions/tax-reliefs

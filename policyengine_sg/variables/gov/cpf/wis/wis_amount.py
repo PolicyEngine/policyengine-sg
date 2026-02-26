@@ -50,7 +50,12 @@ class wis_amount(Variable):
 
 
 def _interp(gmi, scale):
-    """Piecewise linear interpolation from a bracket schedule."""
+    """Piecewise linear interpolation from a bracket schedule.
+
+    Uses np.interp instead of scale.calc() because WIS payouts
+    are linearly interpolated between breakpoints, whereas
+    SingleAmountTaxScale.calc() applies a step function.
+    """
     thresholds = np.array(scale.thresholds)
     amounts = np.array(scale.amounts)
     return np.interp(gmi, thresholds, amounts)

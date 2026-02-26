@@ -1,5 +1,4 @@
 from policyengine_sg.model_api import *
-import numpy as np
 
 
 class skills_development_levy(Variable):
@@ -19,5 +18,5 @@ class skills_development_levy(Variable):
         income = person("employment_income", period)
         monthly = income / 12
         levy = monthly * p.rate
-        capped = np.clip(levy, p.minimum, p.maximum)
+        capped = max_(min_(levy, p.maximum), p.minimum)
         return capped * 12

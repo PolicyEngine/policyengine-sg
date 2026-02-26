@@ -6,7 +6,7 @@ metadata:
   period: year
   label: Earned income relief 55 to 59
   reference:
-    - title: Income Tax Act 1947
+    - title: Income Tax Act 1947, Section 39
       href: https://sso.agc.gov.sg/Act/ITA1947
     - title: IRAS Earned Income Relief
       href: https://www.iras.gov.sg/taxes/individual-income-tax/basics-of-individual-income-tax/tax-reliefs-rebates-and-deductions/tax-reliefs/earned-income-relief

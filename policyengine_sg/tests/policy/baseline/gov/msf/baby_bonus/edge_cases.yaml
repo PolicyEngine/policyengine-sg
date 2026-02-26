@@ -1,0 +1,39 @@
+- name: Zero children gives zero baby bonus.
+  absolute_error_margin: 0.1
+  period: 2024
+  input:
+    people:
+      person1:
+        age: 30
+        is_married: true
+        is_citizen: true
+        number_of_children: 0
+  output:
+    baby_bonus_cash_gift: 0
+    cda_first_step_grant: 0
+
+- name: CDA post-Feb 2025 with 3rd child gets $10,000.
+  absolute_error_margin: 0.1
+  period: 2026
+  input:
+    people:
+      person1:
+        age: 35
+        is_citizen: true
+        number_of_children: 3
+  output:
+    # From 2025-02-18: 2 * $5,000 + 1 * $10,000 = $20,000
+    cda_first_step_grant: 20_000
+
+- name: Single child gets standard CDA amount.
+  absolute_error_margin: 0.1
+  period: 2024
+  input:
+    people:
+      person1:
+        age: 35
+        is_citizen: true
+        number_of_children: 1
+  output:
+    # 1 * $5,000 = $5,000
+    cda_first_step_grant: 5_000

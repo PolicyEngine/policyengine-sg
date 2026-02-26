@@ -14,15 +14,7 @@ class comcare_smta_eligible(Variable):
     )
 
     def formula(person, period, parameters):
-        # NOTE: SMTA benefit amounts are determined by
-        # caseworker assessment (shortfall between income
-        # and basic living expenses), not a fixed formula.
-        # This variable models eligibility only.
-        # The $800 PCI benchmark is not a hard threshold
-        # in practice but is used here as a proxy.
-        p = parameters(period).gov.msf.comcare
-        citizen = person("is_citizen", period)
-        pr = person("is_pr", period)
-        income_pc = person("household_income_per_capita", period)
-        monthly_pc = income_pc / 12
-        return (citizen | pr) & (monthly_pc <= p.income_per_capita_ceiling)
+        # SMTA uses the same eligibility criteria as
+        # general ComCare. Benefit amounts are determined
+        # by caseworker assessment, not a fixed formula.
+        return person("comcare_eligible", period)

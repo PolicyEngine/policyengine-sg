@@ -1,6 +1,6 @@
 description: >-
   Singapore levies buyer's stamp duty on residential
-  property purchases at these progressive marginal rates.
+  property purchases at the following progressive marginal rates.
 
 metadata:
   type: marginal_rate
@@ -9,7 +9,7 @@ metadata:
   period: year
   label: Buyer's stamp duty rates
   reference:
-    - title: Stamp Duties Act 1929
+    - title: Stamp Duties Act 1929, First Schedule
       href: https://sso.agc.gov.sg/Act/SDA1929
     - title: IRAS Buyer's Stamp Duty
       href: https://www.iras.gov.sg/taxes/stamp-duty/for-property/buying-or-acquiring-property/buyer's-stamp-duty-(bsd)

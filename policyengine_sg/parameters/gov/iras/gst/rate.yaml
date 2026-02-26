@@ -7,7 +7,7 @@ metadata:
   period: year
   label: GST rate
   reference:
-    - title: Goods and Services Tax Act 1993
+    - title: Goods and Services Tax Act 1993, Section 16
       href: https://sso.agc.gov.sg/Act/GSTA1993
     - title: IRAS GST Rate Change
       href: https://www.iras.gov.sg/taxes/goods-services-tax-(gst)/gst-rate-change/gst-rate-change-for-business/overview-of-gst-rate-change
