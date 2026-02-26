@@ -1,0 +1,10 @@
+description: Singapore sets this concessionary monthly levy for a foreign domestic worker in eligible households.
+values:
+  2024-01-01: 60
+metadata:
+  unit: currency-SGD
+  period: month
+  label: FDW concessionary levy
+  reference:
+    - title: MOM - FDW Levy Concession
+      href: https://www.mom.gov.sg/passes-and-permits/work-permit-for-foreign-domestic-worker/foreign-domestic-worker-levy/levy-concession

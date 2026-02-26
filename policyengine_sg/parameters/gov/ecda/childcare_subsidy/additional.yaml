@@ -1,0 +1,43 @@
+description: Singapore provides this additional childcare subsidy based on gross monthly household income.
+brackets:
+  - threshold:
+      2024-01-01: 0
+    amount:
+      2024-01-01: 467
+  - threshold:
+      2024-01-01: 3_001
+    amount:
+      2024-01-01: 440
+  - threshold:
+      2024-01-01: 4_501
+    amount:
+      2024-01-01: 340
+  - threshold:
+      2024-01-01: 6_001
+    amount:
+      2024-01-01: 260
+  - threshold:
+      2024-01-01: 7_501
+    amount:
+      2024-01-01: 190
+  - threshold:
+      2024-01-01: 9_001
+    amount:
+      2024-01-01: 130
+  - threshold:
+      2024-01-01: 10_501
+    amount:
+      2024-01-01: 80
+  - threshold:
+      2024-01-01: 12_001
+    amount:
+      2024-01-01: 0
+metadata:
+  type: single_amount
+  threshold_unit: currency-SGD
+  amount_unit: currency-SGD
+  period: month
+  label: Additional childcare subsidy
+  reference:
+    - title: ECDA - Childcare Subsidy
+      href: https://www.ecda.gov.sg/parents/preschool-subsidies/infant-and-childcare-subsidy-scheme/overview

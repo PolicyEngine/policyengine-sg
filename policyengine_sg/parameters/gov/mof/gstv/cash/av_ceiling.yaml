@@ -1,0 +1,10 @@
+description: Singapore limits GST Voucher cash eligibility to those with property annual value up to this amount.
+values:
+  2025-01-01: 31_000
+metadata:
+  unit: currency-SGD
+  period: year
+  label: GSTV cash AV ceiling
+  reference:
+    - title: GST Voucher - Eligibility and Amounts
+      href: https://www.govbenefits.gov.sg/about-us/gst-voucher/am-i-eligible/

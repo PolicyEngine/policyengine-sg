@@ -1,0 +1,67 @@
+- name: Case 1, low-income citizen.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 35
+        employment_income: 30_000
+        is_citizen: true
+        number_of_properties: 1
+  output:
+    # Income $30,000 <= $34,000 => low-income tier = $600
+    assurance_package_cash: 600
+
+- name: Case 2, middle-income citizen.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 35
+        employment_income: 50_000
+        is_citizen: true
+        number_of_properties: 1
+  output:
+    # Income $50,000 > $34,000 but <= $100,000 => middle = $350
+    assurance_package_cash: 350
+
+- name: Case 3, higher-income citizen.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 35
+        employment_income: 120_000
+        is_citizen: true
+        number_of_properties: 1
+  output:
+    # Income $120,000 > $100,000 => higher = $200
+    assurance_package_cash: 200
+
+- name: Case 4, multi-property owner gets minimum.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 35
+        employment_income: 20_000
+        is_citizen: true
+        number_of_properties: 2
+  output:
+    # Multiple properties => $200 regardless of income
+    assurance_package_cash: 200
+
+- name: Case 5, non-citizen gets nothing.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 35
+        employment_income: 30_000
+        is_citizen: false
+  output:
+    assurance_package_cash: 0

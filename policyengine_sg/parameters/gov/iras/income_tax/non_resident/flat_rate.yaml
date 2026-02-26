@@ -1,0 +1,10 @@
+description: Singapore taxes non-resident employment income at this flat rate or progressive rates, whichever is higher.
+values:
+  2024-01-01: 0.15
+metadata:
+  unit: /1
+  period: year
+  label: Non-resident flat tax rate
+  reference:
+    - title: IRAS Non-Resident Tax Rates
+      href: https://www.iras.gov.sg/taxes/individual-income-tax/basics-of-individual-income-tax/tax-residency-and-tax-rates/individual-income-tax-rates

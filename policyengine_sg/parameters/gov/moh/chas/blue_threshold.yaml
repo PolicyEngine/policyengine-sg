@@ -1,0 +1,10 @@
+description: Singapore assigns CHAS Blue cards to households with per capita monthly income at or below this amount.
+values:
+  2024-01-01: 1_500
+metadata:
+  unit: currency-SGD
+  period: month
+  label: CHAS Blue income threshold
+  reference:
+    - title: CHAS - Eligibility and Application
+      href: https://www.chas.sg/eligibility-and-application

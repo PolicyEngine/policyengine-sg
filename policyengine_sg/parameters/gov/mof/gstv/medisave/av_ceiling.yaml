@@ -1,0 +1,10 @@
+description: Singapore limits GSTV MediSave eligibility to homes with annual value at most this amount.
+values:
+  2025-01-01: 31_000
+metadata:
+  unit: currency-SGD
+  period: year
+  label: GSTV MediSave AV ceiling
+  reference:
+    - title: GSTV MediSave Eligibility
+      href: https://www.govbenefits.gov.sg/about-us/gst-voucher/am-i-eligible/

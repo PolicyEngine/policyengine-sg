@@ -1,0 +1,10 @@
+description: IRAS applies the first SSD rate tier to properties held for at most this many years.
+values:
+  2024-01-01: 1
+metadata:
+  unit: year
+  period: year
+  label: SSD first holding period threshold
+  reference:
+    - title: IRAS Seller's Stamp Duty
+      href: https://www.iras.gov.sg/taxes/stamp-duty/for-property/selling-or-disposing-property/seller's-stamp-duty-(ssd)-for-residential-property

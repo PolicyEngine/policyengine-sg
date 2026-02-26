@@ -1,0 +1,54 @@
+- name: Case 1, lowest income band gets max grant.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 30
+        is_citizen: true
+        is_first_time_homebuyer: true
+        gross_monthly_household_income: 1_000
+  output:
+    # GHI $1,000 <= $1,500 => $120,000
+    ehg: 120_000
+
+- name: Case 2, mid-range income.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 30
+        is_citizen: true
+        is_first_time_homebuyer: true
+        gross_monthly_household_income: 5_500
+  output:
+    # GHI $5,500 in $5,001-$5,500 band => $55,000
+    ehg: 55_000
+
+- name: Case 3, income above ceiling.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 30
+        is_citizen: true
+        is_first_time_homebuyer: true
+        gross_monthly_household_income: 10_000
+  output:
+    # GHI > $9,000 => $0
+    ehg: 0
+
+- name: Case 4, not first-time buyer gets nothing.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 30
+        is_citizen: true
+        is_first_time_homebuyer: false
+        gross_monthly_household_income: 1_000
+  output:
+    ehg: 0

@@ -1,0 +1,10 @@
+description: Singapore provides this Baby Bonus Cash Gift amount for each third and subsequent child.
+values:
+  2023-02-14: 13_000
+metadata:
+  unit: currency-SGD
+  period: year
+  label: Baby Bonus cash gift 3rd+ child
+  reference:
+    - title: Baby Bonus Scheme - LifeSG
+      href: https://www.life.gov.sg/family-parenting/benefits-support/baby-bonus-scheme

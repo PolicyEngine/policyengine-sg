@@ -1,0 +1,10 @@
+description: Singapore provides this relief amount for a qualifying spouse.
+values:
+  2024-01-01: 2_000
+metadata:
+  unit: currency-SGD
+  period: year
+  label: Spouse relief amount
+  reference:
+    - title: IRAS Spouse Relief
+      href: https://www.iras.gov.sg/taxes/individual-income-tax/basics-of-individual-income-tax/tax-reliefs-rebates-and-deductions/tax-reliefs/spouse-relief-spouse-relief-(disability)

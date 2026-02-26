@@ -1,0 +1,12 @@
+description: Singapore caps the Skills Development Levy at this amount per employee per month.
+values:
+  2024-01-01: 11.25
+metadata:
+  unit: currency-SGD
+  period: month
+  label: Skills Development Levy maximum
+  reference:
+    - title: Skills Development Levy Act 1979
+      href: https://sso.agc.gov.sg/Act/SDLA1979
+    - title: CPF Board - Skills Development Levy
+      href: https://www.cpf.gov.sg/employer/employer-obligations/skills-development-levy

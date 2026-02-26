@@ -1,0 +1,12 @@
+description: Singapore limits Silver Support Scheme eligibility to those with monthly household income per capita up to this amount.
+values:
+  2024-01-01: 2_300
+metadata:
+  unit: currency-SGD
+  period: month
+  label: Silver Support income per capita ceiling
+  reference:
+    - title: Silver Support Scheme Act 2015
+      href: https://sso.agc.gov.sg/Act/SSSA2015
+    - title: CPF Board - Silver Support
+      href: https://www.cpf.gov.sg/member/retirement-income/government-support/silver-support-scheme

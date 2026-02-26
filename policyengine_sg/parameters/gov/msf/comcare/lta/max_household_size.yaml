@@ -1,0 +1,10 @@
+description: Singapore caps ComCare Long-Term Assistance benefit lookup at this household size.
+values:
+  2023-07-01: 4
+metadata:
+  unit: person
+  period: year
+  label: ComCare LTA maximum household size for lookup
+  reference:
+    - title: MSF ComCare
+      href: https://www.msf.gov.sg/what-we-do/comcare

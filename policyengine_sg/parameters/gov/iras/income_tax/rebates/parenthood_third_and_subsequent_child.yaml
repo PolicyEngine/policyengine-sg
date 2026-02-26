@@ -1,0 +1,10 @@
+description: Singapore provides this parenthood tax rebate for the third and subsequent children.
+values:
+  2024-01-01: 20_000
+metadata:
+  unit: currency-SGD
+  period: year
+  label: Parenthood tax rebate third and subsequent child
+  reference:
+    - title: IRAS Parenthood Tax Rebate
+      href: https://www.iras.gov.sg/taxes/individual-income-tax/basics-of-individual-income-tax/tax-reliefs-rebates-and-deductions/tax-reliefs/parenthood-tax-rebate-(ptr)

@@ -1,0 +1,10 @@
+description: Singapore limits GST Voucher cash to recipients owning no more than this many properties.
+values:
+  2024-01-01: 1
+metadata:
+  unit: /1
+  period: year
+  label: GSTV cash maximum properties
+  reference:
+    - title: GSTV Cash Eligibility
+      href: https://www.govbenefits.gov.sg/about-us/gst-voucher/am-i-eligible/

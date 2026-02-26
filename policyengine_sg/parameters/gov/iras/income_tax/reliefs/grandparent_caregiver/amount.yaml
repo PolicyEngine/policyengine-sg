@@ -1,0 +1,10 @@
+description: Singapore provides this grandparent caregiver relief amount to qualifying working mothers.
+values:
+  2024-01-01: 3_000
+metadata:
+  unit: currency-SGD
+  period: year
+  label: Grandparent caregiver relief
+  reference:
+    - title: IRAS Grandparent Caregiver Relief
+      href: https://www.iras.gov.sg/taxes/individual-income-tax/basics-of-individual-income-tax/tax-reliefs-rebates-and-deductions/tax-reliefs/grandparent-caregiver-relief

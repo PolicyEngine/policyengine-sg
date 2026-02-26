@@ -1,0 +1,27 @@
+description: Singapore matches parental CDA deposits up to this cap by child birth order.
+brackets:
+  - threshold:
+      2023-02-14: 1
+    amount:
+      2023-02-14: 4_000
+  - threshold:
+      2023-02-14: 2
+    amount:
+      2023-02-14: 7_000
+  - threshold:
+      2023-02-14: 3
+    amount:
+      2023-02-14: 9_000
+  - threshold:
+      2023-02-14: 5
+    amount:
+      2023-02-14: 15_000
+metadata:
+  type: single_amount
+  threshold_unit: child
+  amount_unit: currency-SGD
+  period: year
+  label: CDA government co-matching cap
+  reference:
+    - title: CDA - LifeSG
+      href: https://www.life.gov.sg/family-parenting/benefits-support/baby-bonus-scheme/cda

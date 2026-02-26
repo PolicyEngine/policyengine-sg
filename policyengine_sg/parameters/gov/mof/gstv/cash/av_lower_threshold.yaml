@@ -1,0 +1,10 @@
+description: Singapore provides a higher GST Voucher cash amount for homes with annual value at or below this threshold.
+values:
+  2024-01-01: 21_000
+metadata:
+  unit: currency-SGD
+  period: year
+  label: GSTV cash lower AV threshold
+  reference:
+    - title: GSTV Cash Eligibility
+      href: https://www.govbenefits.gov.sg/about-us/gst-voucher/am-i-eligible/

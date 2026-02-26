@@ -1,0 +1,10 @@
+description: Singapore provides this relief amount for a sibling with disability.
+values:
+  2024-01-01: 5_500
+metadata:
+  unit: currency-SGD
+  period: year
+  label: Sibling disability relief amount
+  reference:
+    - title: IRAS Sibling Relief (Disability)
+      href: https://www.iras.gov.sg/taxes/individual-income-tax/basics-of-individual-income-tax/tax-reliefs-rebates-and-deductions/tax-reliefs/sibling-relief-(disability)

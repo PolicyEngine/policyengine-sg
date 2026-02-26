@@ -1,0 +1,112 @@
+- name: Case 1, eligible elderly citizen in 1-2 room flat higher tier.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 70
+        employment_income: 0
+        is_citizen: true
+        number_of_properties: 1
+        household_income_per_capita: 12_000
+    households:
+      hh:
+        members:
+          - person1
+        hdb_flat_type: ONE_ROOM
+        property_annual_value: 8_000
+  output:
+    # Age >= 65, citizen
+    # HDB 1-2 room, income per capita $1,000/month <= $1,500 => higher tier
+    # Quarterly: 1,080
+    # Annual: 1,080 * 4 = 4,320
+    silver_support_eligible: true
+    silver_support_amount: 4_320
+
+- name: Case 2, eligible elderly citizen in 3-room flat lower tier.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 68
+        employment_income: 0
+        is_citizen: true
+        number_of_properties: 1
+        household_income_per_capita: 24_000
+    households:
+      hh:
+        members:
+          - person1
+        hdb_flat_type: THREE_ROOM
+        property_annual_value: 8_000
+  output:
+    # Age >= 65, citizen
+    # HDB 3-room, income per capita $2,000/month > $1,500 => lower tier
+    # Quarterly: 430 (three_room_lower)
+    silver_support_eligible: true
+    silver_support_amount: 1_720
+
+- name: Case 3, eligible elderly in 5-room flat higher tier.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 75
+        employment_income: 0
+        is_citizen: true
+        number_of_properties: 1
+        household_income_per_capita: 6_000
+    households:
+      hh:
+        members:
+          - person1
+        hdb_flat_type: FIVE_ROOM
+        property_annual_value: 8_000
+  output:
+    # Age >= 65, citizen
+    # HDB 5-room, income per capita $500/month <= $1,500 => higher tier
+    # Quarterly: 430 (five_room_higher)
+    # Annual: 430 * 4 = 1,720
+    silver_support_eligible: true
+    silver_support_amount: 1_720
+
+- name: Case 4, ineligible due to income above ceiling.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 70
+        employment_income: 0
+        is_citizen: true
+        household_income_per_capita: 36_000
+    households:
+      hh:
+        members:
+          - person1
+        hdb_flat_type: THREE_ROOM
+        property_annual_value: 8_000
+  output:
+    # Monthly per capita: 36,000/12 = 3,000 > 2,300 ceiling
+    silver_support_eligible: false
+    silver_support_amount: 0
+
+- name: Case 5, ineligible due to age below 65.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 60
+        employment_income: 0
+        is_citizen: true
+    households:
+      hh:
+        members:
+          - person1
+        property_annual_value: 8_000
+  output:
+    silver_support_eligible: false
+    silver_support_amount: 0

@@ -1,0 +1,33 @@
+description: >-
+  Singapore taxes non-owner-occupied residential properties
+  at these progressive rates based on annual value.
+
+metadata:
+  type: marginal_rate
+  threshold_unit: currency-SGD
+  rate_unit: /1
+  period: year
+  label: Non-owner-occupied property tax rates
+  reference:
+    - title: Property Tax Act 1960
+      href: https://sso.agc.gov.sg/Act/PTA1960
+    - title: IRAS Property Tax Rates
+      href: https://www.iras.gov.sg/taxes/property-tax/property-owners/property-tax-rates
+
+brackets:
+  - threshold:
+      2024-01-01: 0
+    rate:
+      2024-01-01: 0.12
+  - threshold:
+      2024-01-01: 30_000
+    rate:
+      2024-01-01: 0.20
+  - threshold:
+      2024-01-01: 45_000
+    rate:
+      2024-01-01: 0.28
+  - threshold:
+      2024-01-01: 60_000
+    rate:
+      2024-01-01: 0.36

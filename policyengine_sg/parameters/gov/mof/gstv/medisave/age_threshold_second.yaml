@@ -1,0 +1,10 @@
+description: Singapore sets this age as the second GSTV MediSave tier threshold.
+values:
+  2024-01-01: 75
+metadata:
+  unit: year
+  period: year
+  label: GSTV MediSave second age threshold
+  reference:
+    - title: GovBenefits GSTV MediSave
+      href: https://www.govbenefits.gov.sg/about-us/gst-voucher/am-i-eligible/

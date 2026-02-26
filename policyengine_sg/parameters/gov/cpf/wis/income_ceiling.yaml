@@ -1,0 +1,13 @@
+description: Singapore limits Workfare Income Supplement eligibility to employees earning up to this monthly amount.
+values:
+  2024-01-01: 2_500
+  2025-01-01: 3_000
+metadata:
+  unit: currency-SGD
+  period: month
+  label: WIS income ceiling
+  reference:
+    - title: CPF (Revised Workfare Income Supplement Scheme) Regulations (S46/2025)
+      href: https://sso.agc.gov.sg/SL-Supp/S46-2025/Published/20250117
+    - title: CPF Board - Workfare Income Supplement
+      href: https://www.cpf.gov.sg/member/growing-your-savings/government-support/workfare-income-supplement

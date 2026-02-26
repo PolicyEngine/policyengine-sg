@@ -1,0 +1,10 @@
+description: Singapore provides this amount in CDC Vouchers per household.
+values:
+  2025-01-01: 500
+metadata:
+  unit: currency-SGD
+  period: year
+  label: CDC Vouchers amount
+  reference:
+    - title: CDC Vouchers Portal
+      href: https://vouchers.cdc.gov.sg/about/

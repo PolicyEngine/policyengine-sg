@@ -1,0 +1,12 @@
+description: Singapore provides this earned income relief amount to taxpayers below age 55.
+values:
+  2024-01-01: 1_000
+metadata:
+  unit: currency-SGD
+  period: year
+  label: Earned income relief below 55
+  reference:
+    - title: Income Tax Act 1947
+      href: https://sso.agc.gov.sg/Act/ITA1947
+    - title: IRAS Earned Income Relief
+      href: https://www.iras.gov.sg/taxes/individual-income-tax/basics-of-individual-income-tax/tax-reliefs-rebates-and-deductions/tax-reliefs/earned-income-relief

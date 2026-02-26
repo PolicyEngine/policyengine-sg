@@ -1,0 +1,10 @@
+description: Singapore sets this minimum age for Assurance Package cash eligibility.
+values:
+  2024-01-01: 21
+metadata:
+  unit: year
+  period: year
+  label: Assurance Package minimum age
+  reference:
+    - title: GovBenefits Assurance Package
+      href: https://www.govbenefits.gov.sg/about-us/assurance-package/am-i-eligible/

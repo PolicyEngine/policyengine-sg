@@ -1,0 +1,10 @@
+description: Singapore provides this GSTV MediSave amount to citizens aged 75 to 84 with lower-value homes.
+values:
+  2025-01-01: 350
+metadata:
+  unit: currency-SGD
+  period: year
+  label: GSTV MediSave lower AV age 75-84
+  reference:
+    - title: MOF GSTV MediSave August 2025
+      href: https://www.mof.gov.sg/news-resources/newsroom/over-1-5-million-adult-singaporeans-to-receive-up-to-850-in-gstv-cash-and-690-000-singaporean-seniors-to-receive-up-to-450-medisave-top-up-in-august-2025/

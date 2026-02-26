@@ -1,0 +1,10 @@
+description: Singapore caps the life insurance relief at this amount.
+values:
+  2024-01-01: 5_000
+metadata:
+  unit: currency-SGD
+  period: year
+  label: Life insurance relief cap
+  reference:
+    - title: IRAS Life Insurance Relief
+      href: https://www.iras.gov.sg/taxes/individual-income-tax/basics-of-individual-income-tax/tax-reliefs-rebates-and-deductions/tax-reliefs/life-insurance-relief

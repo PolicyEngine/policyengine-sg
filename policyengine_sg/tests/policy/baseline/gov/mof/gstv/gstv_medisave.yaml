@@ -1,0 +1,106 @@
+- name: Case 1, citizen aged 70 with low AV home.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 70
+        is_citizen: true
+        number_of_properties: 1
+    households:
+      hh:
+        members:
+          - person1
+        property_annual_value: 15_000
+  output:
+    # Age 70 (65-74 band), AV 15,000 <= 21,000 => lower tier = 250
+    gstv_medisave: 250
+
+- name: Case 2, citizen aged 80 with higher AV home.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 80
+        is_citizen: true
+        number_of_properties: 1
+    households:
+      hh:
+        members:
+          - person1
+        property_annual_value: 25_000
+  output:
+    # Age 80 (75-84 band), AV 25,000 > 21,000 => higher tier = 250
+    gstv_medisave: 250
+
+- name: Case 3, citizen aged 90 with low AV home.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 90
+        is_citizen: true
+        number_of_properties: 1
+    households:
+      hh:
+        members:
+          - person1
+        property_annual_value: 18_000
+  output:
+    # Age 90 (85+ band), AV 18,000 <= 21,000 => lower tier = 450
+    gstv_medisave: 450
+
+- name: Case 4, citizen aged 75 with low AV home.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 75
+        is_citizen: true
+        number_of_properties: 1
+    households:
+      hh:
+        members:
+          - person1
+        property_annual_value: 20_000
+  output:
+    # Age 75 (75-84 band), AV 20,000 <= 21,000 => lower tier = 350
+    gstv_medisave: 350
+
+- name: Case 5, ineligible due to age below 65.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 60
+        is_citizen: true
+        number_of_properties: 1
+    households:
+      hh:
+        members:
+          - person1
+        property_annual_value: 15_000
+  output:
+    gstv_medisave: 0
+
+- name: Case 6, ineligible due to AV above ceiling.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 70
+        is_citizen: true
+        number_of_properties: 1
+    households:
+      hh:
+        members:
+          - person1
+        property_annual_value: 35_000
+  output:
+    # AV 35,000 > 31,000 ceiling
+    gstv_medisave: 0
