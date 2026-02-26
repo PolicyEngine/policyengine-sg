@@ -1,0 +1,10 @@
+description: CPF Board sets this age as the threshold between the first and second WIS age bands.
+values:
+  2024-01-01: 35
+metadata:
+  unit: year
+  period: year
+  label: WIS age band 35 threshold
+  reference:
+    - title: CPF WIS Employee Calculator Work Year 2025
+      href: https://www.cpf.gov.sg/member/tools-and-services/calculators/workfare-income-supplement-employee-work-year-2025-calculator

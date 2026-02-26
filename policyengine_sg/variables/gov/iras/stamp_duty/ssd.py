@@ -19,7 +19,11 @@ class sellers_stamp_duty(Variable):
         price = person("property_sale_price", period)
         years = person("property_holding_years", period)
         rate = select(
-            [years <= 1, years <= 2, years <= 3],
+            [
+                years <= p.holding_period_1,
+                years <= p.holding_period_2,
+                years <= p.holding_period_3,
+            ],
             [p.rate_1yr, p.rate_2yr, p.rate_3yr],
             default=0,
         )

@@ -1,0 +1,12 @@
+description: Singapore sets this age as the third CPF contribution rate threshold.
+values:
+  2024-01-01: 65
+metadata:
+  unit: year
+  period: year
+  label: CPF third age threshold
+  reference:
+    - title: CPF Act 1953, First Schedule
+      href: https://sso.agc.gov.sg/Act/CPFA1953
+    - title: CPF Contribution Rates from 1 January 2025
+      href: https://www.cpf.gov.sg/content/dam/web/employer/employer-obligations/documents/CPF_contribution_rates_from_1_Jan_2025.pdf

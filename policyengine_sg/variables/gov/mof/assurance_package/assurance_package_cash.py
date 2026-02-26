@@ -20,7 +20,7 @@ class assurance_package_cash(Variable):
             "self_employment_income", period
         )
         n_prop = person("number_of_properties", period)
-        multi_prop = n_prop >= 2
+        multi_prop = n_prop >= p.max_properties_for_lower_tier
         amount = where(
             multi_prop,
             p.higher_income,
@@ -33,4 +33,4 @@ class assurance_package_cash(Variable):
                 default=p.higher_income,
             ),
         )
-        return where(citizen & (age >= 21), amount, 0)
+        return where(citizen & (age >= p.age_minimum), amount, 0)

@@ -17,8 +17,9 @@ class baby_bonus_cash_gift(Variable):
         n = person("number_of_children", period)
         married = person("is_married", period)
         citizen = person("is_citizen", period)
-        first_second = min_(n, 2) * p.first_second_child
-        third_plus = max_(n - 2, 0) * p.third_and_subsequent_child
+        boundary = p.child_tier_boundary
+        first_second = min_(n, boundary) * p.first_second_child
+        third_plus = max_(n - boundary, 0) * p.third_and_subsequent_child
         return where(
             married & citizen,
             first_second + third_plus,

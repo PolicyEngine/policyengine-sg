@@ -21,7 +21,7 @@ class gstv_cash(Variable):
             & (age >= p.age_minimum)
             & (income <= p.income_ceiling)
             & (av <= p.av_ceiling)
-            & (n_prop <= 1)
+            & (n_prop <= p.max_properties)
         )
         amount = where(
             av <= p.av_lower_threshold,

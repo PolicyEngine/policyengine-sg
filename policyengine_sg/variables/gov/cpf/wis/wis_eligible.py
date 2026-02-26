@@ -29,5 +29,5 @@ class wis_eligible(Variable):
             & (monthly >= p.income_floor)
             & (monthly <= p.income_ceiling)
             & (av <= p.property_av_ceiling)
-            & (n_prop <= 1)
+            & (n_prop <= p.max_properties)
         )

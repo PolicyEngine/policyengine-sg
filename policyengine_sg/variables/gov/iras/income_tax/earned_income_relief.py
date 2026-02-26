@@ -23,12 +23,12 @@ class earned_income_relief(Variable):
         total_earned = earned + se
 
         normal_relief = select(
-            [age < 55, age < 60],
+            [age < p.age_threshold_first, age < p.age_threshold_second],
             [p.below_55, p.age_55_to_59],
             default=p.age_60_and_above,
         )
         disability_relief = select(
-            [age < 55, age < 60],
+            [age < p.age_threshold_first, age < p.age_threshold_second],
             [
                 p.disability_below_55,
                 p.disability_55_to_59,

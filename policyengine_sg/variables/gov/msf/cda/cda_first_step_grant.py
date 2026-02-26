@@ -16,6 +16,7 @@ class cda_first_step_grant(Variable):
         p = parameters(period).gov.msf.cda
         n = person("number_of_children", period)
         citizen = person("is_citizen", period)
-        first_second = min_(n, 2) * p.first_step_first_second
-        third_plus = max_(n - 2, 0) * p.first_step_third_plus
+        boundary = p.child_tier_boundary
+        first_second = min_(n, boundary) * p.first_step_first_second
+        third_plus = max_(n - boundary, 0) * p.first_step_third_plus
         return where(citizen, first_second + third_plus, 0)

@@ -15,16 +15,17 @@ class cpf_employee_contribution(Variable):
 
     def formula(person, period, parameters):
         p = parameters(period).gov.cpf.contribution_rates.employee
+        a = parameters(period).gov.cpf.contribution_rates.age_thresholds
         wc = parameters(period).gov.cpf.wage_ceiling
         age = person("age", period)
         income = person("employment_income", period)
         capped = min_(income, wc.annual_wage_ceiling)
         rate = select(
             [
-                age <= 55,
-                age <= 60,
-                age <= 65,
-                age <= 70,
+                age <= a.first,
+                age <= a.second,
+                age <= a.third,
+                age <= a.fourth,
             ],
             [
                 p.age_55_and_below,

@@ -1,0 +1,35 @@
+description: CPF Board sets this piecewise linear schedule for monthly WIS amounts for workers aged 35-44.
+metadata:
+  threshold_unit: currency-SGD
+  amount_unit: currency-SGD
+  period: month
+  type: single_amount
+  label: WIS monthly schedule age 35-44
+  reference:
+    - title: CPF WIS Employee Calculator Work Year 2025
+      href: https://www.cpf.gov.sg/member/tools-and-services/calculators/workfare-income-supplement-employee-work-year-2025-calculator
+brackets:
+  - threshold:
+      2025-01-01: 0
+    amount:
+      2025-01-01: 0
+  - threshold:
+      2025-01-01: 500
+    amount:
+      2025-01-01: 93.75
+  - threshold:
+      2025-01-01: 1_400
+    amount:
+      2025-01-01: 254.5
+  - threshold:
+      2025-01-01: 1_700
+    amount:
+      2025-01-01: 291.666667
+  - threshold:
+      2025-01-01: 2_300
+    amount:
+      2025-01-01: 291.666667
+  - threshold:
+      2025-01-01: 3_000
+    amount:
+      2025-01-01: 64.833333

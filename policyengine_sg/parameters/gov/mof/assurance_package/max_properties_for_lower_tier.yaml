@@ -1,0 +1,10 @@
+description: Singapore limits Assurance Package lower-tier cash to recipients owning fewer than this many properties.
+values:
+  2024-01-01: 2
+metadata:
+  unit: /1
+  period: year
+  label: Assurance Package multiple property threshold
+  reference:
+    - title: GovBenefits Assurance Package
+      href: https://www.govbenefits.gov.sg/about-us/assurance-package/am-i-eligible/

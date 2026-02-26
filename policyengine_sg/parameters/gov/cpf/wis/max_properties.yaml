@@ -1,0 +1,10 @@
+description: Singapore limits WIS eligibility to persons owning at most this many properties.
+values:
+  2024-01-01: 1
+metadata:
+  unit: person
+  period: year
+  label: WIS maximum properties owned
+  reference:
+    - title: CPF WIS Eligibility
+      href: https://www.cpf.gov.sg/member/growing-your-savings/government-support/workfare-income-supplement

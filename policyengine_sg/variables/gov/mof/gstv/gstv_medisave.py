@@ -21,11 +21,11 @@ class gstv_medisave(Variable):
             citizen
             & (age >= p.age_minimum)
             & (av <= p.av_ceiling)
-            & (n_prop <= 1)
+            & (n_prop <= p.max_properties)
         )
         lower_av = av <= p.av_lower_threshold
         amount_lower = select(
-            [age < 75, age < 85],
+            [age < p.age_threshold_second, age < p.age_threshold_third],
             [
                 p.lower_av.age_65_to_74,
                 p.lower_av.age_75_to_84,
@@ -33,7 +33,7 @@ class gstv_medisave(Variable):
             default=p.lower_av.age_85_plus,
         )
         amount_higher = select(
-            [age < 75, age < 85],
+            [age < p.age_threshold_second, age < p.age_threshold_third],
             [
                 p.higher_av.age_65_to_74,
                 p.higher_av.age_75_to_84,
