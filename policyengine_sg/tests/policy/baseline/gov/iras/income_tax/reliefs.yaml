@@ -85,7 +85,70 @@
   output:
     wmcr: 0
 
-- name: Case 6, disabled person eligible for WIS at age 25.
+- name: Case 6, CPF top-up relief with self and family amounts.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 40
+        employment_income: 80_000
+        is_resident: true
+        is_citizen: true
+        cpf_cash_top_up: 10_000
+        cpf_cash_top_up_family: 6_000
+  output:
+    # Self: min(10,000, 8,000) = 8,000
+    # Family: min(6,000, 8,000) = 6,000
+    # Total CPF top-up relief: 14,000
+    cpf_top_up_relief: 14_000
+
+- name: Case 7, parenthood tax rebate reduces tax to zero.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 35
+        employment_income: 80_000
+        is_resident: true
+        is_citizen: true
+        is_married: true
+        ptr_balance: 3_000
+  output:
+    # Reliefs: earned 1,000 + CPF 16,000 + spouse 2,000 = 19,000
+    # Chargeable: 80,000 - 19,000 = 61,000
+    # Tax: 20k*0 + 10k*2% + 10k*3.5% + 21k*7% = 2,020
+    # PIT rebate: min(2,020*60%, 200) = 200
+    # Tax after PIT: 1,820
+    # PTR: min(3,000, 1,820) = 1,820
+    # Income tax: max(2,020 - 200 - 1,820, 0) = 0
+    income_tax_before_rebate: 2_020
+    parenthood_tax_rebate: 1_820
+    income_tax: 0
+
+- name: Case 8, PTR partial use when balance < tax.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 35
+        employment_income: 80_000
+        is_resident: true
+        is_citizen: true
+        is_married: true
+        ptr_balance: 500
+  output:
+    # Same as Case 7: tax before rebate = 2,020
+    # PIT rebate: 200
+    # Tax after PIT: 1,820
+    # PTR: min(500, 1,820) = 500
+    # Income tax: max(2,020 - 200 - 500, 0) = 1,320
+    parenthood_tax_rebate: 500
+    income_tax: 1_320
+
+- name: Case 9, disabled person eligible for WIS at age 25.
   absolute_error_margin: 0.1
   period: 2025
   input:

@@ -1,0 +1,83 @@
+- name: Case 1, 2-room flat with S&CC charge.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 40
+    households:
+      hh:
+        members:
+          - person1
+        hdb_flat_type: TWO_ROOM
+        monthly_scc_charge: 50
+  output:
+    # 2-room => 3.5 months, 3.5 * 50 = 175
+    gstv_scc_rebate: 175
+
+- name: Case 2, 4-room flat with S&CC charge.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 40
+    households:
+      hh:
+        members:
+          - person1
+        hdb_flat_type: FOUR_ROOM
+        monthly_scc_charge: 80
+  output:
+    # 4-room => 2.5 months, 2.5 * 80 = 200
+    gstv_scc_rebate: 200
+
+- name: Case 3, 5-room flat with S&CC charge.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 40
+    households:
+      hh:
+        members:
+          - person1
+        hdb_flat_type: FIVE_ROOM
+        monthly_scc_charge: 90
+  output:
+    # 5-room => 2.0 months, 2.0 * 90 = 180
+    gstv_scc_rebate: 180
+
+- name: Case 4, executive flat with S&CC charge.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 40
+    households:
+      hh:
+        members:
+          - person1
+        hdb_flat_type: EXECUTIVE
+        monthly_scc_charge: 100
+  output:
+    # Executive => 1.5 months, 1.5 * 100 = 150
+    gstv_scc_rebate: 150
+
+- name: Case 5, non-HDB flat gets no rebate.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 40
+    households:
+      hh:
+        members:
+          - person1
+        hdb_flat_type: NON_HDB
+        monthly_scc_charge: 100
+  output:
+    gstv_scc_rebate: 0

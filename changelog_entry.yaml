@@ -7,6 +7,8 @@
     - Add Silver Support Scheme with HDB flat-type tiering, income tiers, and income ceiling eligibility
     - Add GST Voucher cash benefit calculations
     - Add GST Voucher U-Save rebates with HDB flat-type tiering
+    - Add GST Voucher MediSave top-up with age bands and AV tiering
+    - Add GST Voucher S&CC rebate with HDB flat-type-based months
     - Add CDC vouchers benefit calculation
     - Add owner-occupied and non-owner-occupied property tax calculations
     - Add Skills Development Levy (SDL) calculation
@@ -17,8 +19,10 @@
     - Add immigration status and buyer profile enums
     - Add working mother's child relief (WMCR) with fixed amounts
     - Add grandparent caregiver relief and sibling disability relief
-    - Add 76 variables and ~110 parameter files with primary .gov.sg sources
-    - Add 57 YAML tests covering all calculation chains and edge cases
+    - Add parenthood tax rebate (PTR) with carry-forward balance
+    - Add CPF cash top-up relief for family members
+    - Add 82 variables and ~123 parameter files with primary .gov.sg sources
+    - Add 71 YAML tests covering all calculation chains and edge cases
     fixed:
     - Fix CPF above-55-to-60 employee/employer rate values for 2024-2025
     - Fix CPF above-60-to-65 employee/employer rate values for 2025

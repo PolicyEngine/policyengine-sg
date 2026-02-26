@@ -11,5 +11,6 @@ class income_tax(Variable):
 
     def formula(person, period, parameters):
         before_rebate = person("income_tax_before_rebate", period)
-        rebate = person("pit_rebate", period)
-        return max_(before_rebate - rebate, 0)
+        pit = person("pit_rebate", period)
+        ptr = person("parenthood_tax_rebate", period)
+        return max_(before_rebate - pit - ptr, 0)
