@@ -1,0 +1,76 @@
+- name: Case 1, two parents living together.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        number_of_dependant_parents: 2
+    benefit_units:
+      bu:
+        adults:
+          - person1
+    households:
+      hh:
+        members:
+          - person1
+  output:
+    # 2 * $9,000 = $18,000
+    parent_relief: 18_000
+
+- name: Case 2, one parent not living together.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        number_of_dependant_parents_not_living: 1
+    benefit_units:
+      bu:
+        adults:
+          - person1
+    households:
+      hh:
+        members:
+          - person1
+  output:
+    # 1 * $5,500 = $5,500
+    parent_relief: 5_500
+
+- name: Case 3, one disabled parent living together.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        number_of_disabled_parents: 1
+    benefit_units:
+      bu:
+        adults:
+          - person1
+    households:
+      hh:
+        members:
+          - person1
+  output:
+    # 1 * $14,000 = $14,000
+    parent_relief: 14_000
+
+- name: Case 4, mixed parents.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        number_of_dependant_parents: 1
+        number_of_disabled_parents_not_living: 1
+    benefit_units:
+      bu:
+        adults:
+          - person1
+    households:
+      hh:
+        members:
+          - person1
+  output:
+    # 1 * $9,000 + 1 * $10,000 = $19,000
+    parent_relief: 19_000

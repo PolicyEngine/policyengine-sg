@@ -1,0 +1,95 @@
+- name: Case 1, active NSman.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        nsman_status: ACTIVE
+    benefit_units:
+      bu:
+        adults:
+          - person1
+    households:
+      hh:
+        members:
+          - person1
+  output:
+    nsman_relief: 3_000
+
+- name: Case 2, key appointment non-active NSman.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        nsman_status: KEY_APPOINTMENT_NON_ACTIVE
+    benefit_units:
+      bu:
+        adults:
+          - person1
+    households:
+      hh:
+        members:
+          - person1
+  output:
+    nsman_relief: 3_500
+
+- name: Case 3, wife of NSman gets wife relief.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        is_wife_of_nsman: true
+    benefit_units:
+      bu:
+        adults:
+          - person1
+    households:
+      hh:
+        members:
+          - person1
+  output:
+    # Not NSman self (0), but wife of NSman (750)
+    # max(0, 750) = 750
+    nsman_relief: 750
+
+- name: Case 4, NSman self amount beats family amount.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        nsman_status: ACTIVE
+        is_wife_of_nsman: true
+    benefit_units:
+      bu:
+        adults:
+          - person1
+    households:
+      hh:
+        members:
+          - person1
+  output:
+    # Self: 3,000 (active)
+    # Wife: 750
+    # max(3,000, 750) = 3,000
+    nsman_relief: 3_000
+
+- name: Case 5, not NSman.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        nsman_status: NOT_NSMAN
+    benefit_units:
+      bu:
+        adults:
+          - person1
+    households:
+      hh:
+        members:
+          - person1
+  output:
+    nsman_relief: 0
