@@ -6,5 +6,5 @@ metadata:
   period: month
   label: CHAS Orange income threshold
   reference:
-    - title: CHAS - Eligibility
-      href: https://www.chas.sg
+    - title: CHAS - Eligibility and Application
+      href: https://www.chas.sg/eligibility-and-application

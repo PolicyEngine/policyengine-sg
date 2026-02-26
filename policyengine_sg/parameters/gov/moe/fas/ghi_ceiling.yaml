@@ -1,10 +1,13 @@
 description: Singapore provides MOE Financial Assistance to families with gross monthly household income at or below this amount.
 values:
   2024-01-01: 3_000
+  2025-01-01: 4_000
 metadata:
   unit: currency-SGD
   period: month
   label: MOE FAS gross household income ceiling
   reference:
+    - title: MOE Financial Assistance Schemes Press Release (Oct 2025)
+      href: https://www.moe.gov.sg/news/press-releases/20251016-moe-financial-assistance-schemes-to-benefit-an-additional-31000-students
     - title: MOE Financial Assistance
       href: https://www.moe.gov.sg/financial-matters/financial-assistance

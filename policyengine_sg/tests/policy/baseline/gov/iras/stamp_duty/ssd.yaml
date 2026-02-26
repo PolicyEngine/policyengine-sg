@@ -4,6 +4,11 @@
   input:
     people:
       person1:
+        age: 35
+    households:
+      hh:
+        members:
+          - person1
         property_sale_price: 1_000_000
         property_holding_years: 0.5
   output:
@@ -16,6 +21,11 @@
   input:
     people:
       person1:
+        age: 35
+    households:
+      hh:
+        members:
+          - person1
         property_sale_price: 1_000_000
         property_holding_years: 1.5
   output:
@@ -28,6 +38,11 @@
   input:
     people:
       person1:
+        age: 35
+    households:
+      hh:
+        members:
+          - person1
         property_sale_price: 1_000_000
         property_holding_years: 2.5
   output:
@@ -40,6 +55,11 @@
   input:
     people:
       person1:
+        age: 35
+    households:
+      hh:
+        members:
+          - person1
         property_sale_price: 1_000_000
         property_holding_years: 4
   output:

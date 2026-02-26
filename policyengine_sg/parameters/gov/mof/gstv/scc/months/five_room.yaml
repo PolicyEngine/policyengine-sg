@@ -1,6 +1,6 @@
 description: Singapore provides this many months of S&CC rebate to 5-room HDB households.
 values:
-  2025-01-01: 2.0
+  2025-01-01: 2
 metadata:
   unit: month
   period: year

@@ -3,7 +3,7 @@ from policyengine_sg.model_api import *
 
 class sellers_stamp_duty(Variable):
     value_type = float
-    entity = Person
+    entity = Household
     label = "Seller's Stamp Duty"
     unit = SGD
     definition_period = YEAR
@@ -14,10 +14,10 @@ class sellers_stamp_duty(Variable):
         "-property"
     )
 
-    def formula(person, period, parameters):
+    def formula(household, period, parameters):
         p = parameters(period).gov.iras.stamp_duty.ssd
-        price = person("property_sale_price", period)
-        years = person("property_holding_years", period)
+        price = household("property_sale_price", period)
+        years = household("property_holding_years", period)
         rate = select(
             [
                 years <= p.holding_period_1,

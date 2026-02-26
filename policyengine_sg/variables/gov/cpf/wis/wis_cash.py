@@ -7,6 +7,7 @@ class wis_cash(Variable):
     label = "WIS cash component"
     unit = SGD
     definition_period = YEAR
+    reference = "https://www.cpf.gov.sg/member/growing-your-savings/government-support/workfare-income-supplement"
 
     def formula(person, period, parameters):
         p = parameters(period).gov.cpf.wis

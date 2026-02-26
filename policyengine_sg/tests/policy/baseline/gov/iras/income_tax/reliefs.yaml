@@ -85,7 +85,46 @@
   output:
     wmcr: 0
 
-- name: Case 6, CPF top-up relief with self and family amounts.
+- name: Case 6, WMCR pre-2024 rate-based path with 3 children.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 40
+        employment_income: 100_000
+        is_resident: true
+        is_citizen: true
+        is_female: true
+        is_married: true
+        number_of_children: 3
+        number_of_children_born_before_2024: 3
+  output:
+    # Pre-2024: 15% + 20% + 25% = 60% of earned income
+    # WMCR: 100,000 * 0.60 = 60,000
+    wmcr: 60_000
+
+- name: Case 7, WMCR mixed pre and post-2024 children.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 35
+        employment_income: 80_000
+        is_resident: true
+        is_citizen: true
+        is_female: true
+        is_married: true
+        number_of_children: 3
+        number_of_children_born_before_2024: 1
+  output:
+    # Pre-2024: 1 child at 15% = 80,000 * 0.15 = 12,000
+    # Post-2024: 2 children (first 8,000 + second 10,000) = 18,000
+    # Total WMCR: 12,000 + 18,000 = 30,000
+    wmcr: 30_000
+
+- name: Case 8, CPF top-up relief with self and family amounts.
   absolute_error_margin: 0.1
   period: 2025
   input:

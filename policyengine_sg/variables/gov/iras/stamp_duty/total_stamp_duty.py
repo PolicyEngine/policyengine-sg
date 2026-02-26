@@ -7,6 +7,7 @@ class total_stamp_duty(Variable):
     label = "Total stamp duty on property purchase"
     unit = SGD
     definition_period = YEAR
+    reference = "https://www.iras.gov.sg/taxes/stamp-duty/for-property/buying-or-acquiring-property"
     adds = [
         "buyers_stamp_duty",
         "additional_buyers_stamp_duty",
