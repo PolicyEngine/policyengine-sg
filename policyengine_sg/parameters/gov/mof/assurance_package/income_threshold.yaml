@@ -1,0 +1,10 @@
+description: Singapore uses this assessable income threshold to determine the Assurance Package cash tier.
+values:
+  2025-01-01: 34_000
+metadata:
+  unit: currency-SGD
+  period: year
+  label: Assurance Package income threshold
+  reference:
+    - title: Assurance Package - GovBenefits
+      href: https://www.govbenefits.gov.sg/about-us/assurance-package/am-i-eligible/

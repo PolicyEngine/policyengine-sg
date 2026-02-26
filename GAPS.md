@@ -1,55 +1,35 @@
 # PolicyEngine Singapore - Gaps & Adjustments Tracker
 
-Status: 82 variables, ~123 parameter files, 71 tests (all passing)
+Status: ~105 variables, ~155 parameter files, 122 tests (all passing)
 Branch: `implement-sg-tax-benefit-system` (PR #5)
 
 ---
 
 ## 1. Adjustments Needed to Existing Implementations
 
-### 1.1 WIS Income-Based Tapering (HIGH)
-**File:** `variables/gov/cpf/wis/wis_amount.py`
-**Issue:** Currently awards full maximum annual amount by age band.
-Real WIS tapers linearly: full amount up to $500/mo income, then
-linearly decreasing to $0 at $2,500/mo income ceiling.
-**Fix:** Replace flat `select()` with linear taper formula:
-`amount * max(0, (ceiling - monthly_income) / (ceiling - floor))`.
-Need to add income_floor parameter ($500/mo) to the taper calc.
+### 1.1 ~~WIS Income-Based Tapering~~ RESOLVED
+Implemented exact piecewise linear formulas from CPF Board's
+official WIS calculator for all 4 age bands (30-34, 35-44,
+45-59, 60+). Each band has multi-segment ramp-up, plateau
+($1,700-$2,300), and ramp-down. 7 tests covering plateau,
+ramp-up, ramp-down, and boundary cases.
 
-### 1.2 NSman Relief Categories (MEDIUM)
-**File:** `variables/gov/iras/income_tax/nsman_relief.py`
-**Issue:** Only uses `p.active` ($3,000). Parameters exist for all
-five categories (active=$3,000, non_active=$1,500,
-key_appointment=$3,500, parent=$750, wife=$750) but the formula
-only ever returns the active amount.
-**Fix:** Add input variables for NSman category (active/non-active/
-key-appointment) and separate parent/wife NSman relief inputs.
-Use `select()` over categories + add parent/wife amounts.
+### 1.2 ~~NSman Relief Categories~~ RESOLVED
+Added NsmanStatus enum (5 categories), is_wife_of_nsman and
+is_parent_of_nsman inputs. Formula uses select() over enum +
+max_() for mutual exclusivity (cannot combine self + wife/parent).
+Fixed key_appointment_non_active parameter: $3,000 -> $3,500.
 
-### 1.3 Dependant Income Threshold Not Enforced (MEDIUM)
-**File:** `parameters/gov/iras/income_tax/reliefs/dependant_income_threshold.yaml`
-**Issue:** Parameter exists ($4,000 for 2024, $8,000 for 2025) but
-is NEVER referenced by any relief formula. Spouse relief, child
-relief, and parent relief should all check that the dependant's
-income is below this threshold before granting the relief.
-**Current impact:** Spouse, child, and parent reliefs are granted
-unconditionally (no dependant income check).
-**Fix:** Add a `spouse_income` input variable and check
-`spouse_income <= p.dependant_income_threshold` in `spouse_relief.py`.
-For child/parent reliefs this is harder to model without individual
-dependant data - may need to accept as a simplification.
+### 1.3 ~~Dependant Income Threshold Not Enforced~~ RESOLVED
+Added spouse_income input variable. spouse_relief.py now checks
+spouse_income <= dependant_income_threshold ($4k for 2024,
+$8k for 2025). Child/parent reliefs remain simplified (no
+individual dependant income tracking).
 
-### 1.4 WMCR Uses Fixed Amounts Only (MEDIUM)
-**File:** `variables/gov/iras/income_tax/wmcr.py`
-**Issue:** Uses fixed amounts ($8k/$10k/$12k per child). This is
-correct for children born/adopted on or after 1 Jan 2024. For
-children born BEFORE 2024, WMCR is percentage-of-income
-(15%/20%/25%). Parameters for both exist (first_child.yaml +
-first_child_rate.yaml) but only fixed amounts are used.
-**Fix:** Add input `number_of_children_born_before_2024` or a
-boolean toggle, then use `where()` to apply rate-based WMCR for
-pre-2024 children vs fixed amounts for post-2024 children.
-Low priority since fixed amounts apply to YA 2025+.
+### 1.4 ~~WMCR Uses Fixed Amounts Only~~ RESOLVED
+Added number_of_children_born_before_2024 input. Formula now
+splits: pre-2024 children use rate-based (15%/20%/25% of earned
+income), post-2024 children use fixed ($8k/$10k/$12k).
 
 ### 1.5 GSTV MediSave Missing Income Ceiling Check (LOW)
 **File:** `variables/gov/mof/gstv/gstv_medisave.py`
@@ -93,112 +73,68 @@ CPF balance data.
 
 ## 2. Missing Programs - High Priority
 
-### 2.1 Baby Bonus Cash Gift
-**Agency:** MSF
-**Amount:** $11,000 (1st-2nd child), $13,000 (3rd+ child)
-**Eligibility:** All Singapore citizen children
-**Modelability:** HIGH - straightforward calculation from
-number_of_children
-**Reference:** https://www.babybonus.msf.gov.sg
+### 2.1 ~~Baby Bonus Cash Gift~~ IMPLEMENTED
+$11,000 (1st-2nd child), $13,000 (3rd+). Requires married & citizen.
+4 tests.
 
-### 2.2 Child Development Account (CDA) First Step Grant
-**Agency:** MSF
-**Amount:** $5,000 (1st-2nd child), $8,000 (3rd-4th),
-$10,000 (5th+)
-**Eligibility:** Singapore citizen children
-**Modelability:** HIGH - lookup by birth order
+### 2.2 ~~CDA First Step Grant~~ IMPLEMENTED
+$5,000 (1st-2nd), $5,000/$10,000 (3rd+ pre/post Feb 2025).
+Requires citizen. 3 tests.
 
-### 2.3 Childcare / Infant Care Subsidies
-**Agency:** ECDA
-**Basic subsidy:** Up to $600/mo (childcare), $600/mo (infant)
-**Additional subsidy:** Up to $467/mo (means-tested by income)
-**Modelability:** MEDIUM - needs working_mother flag, child age,
-gross household income tiers
-**Reference:** https://www.ecda.gov.sg/parents/subsidies-financial-assistance
+### 2.3 ~~Childcare / Infant Care Subsidies~~ IMPLEMENTED
+Basic: $300/mo childcare, $600/mo infant care (working mothers).
+Additional: $467-$0/mo by GHI bracket. 4 tests.
 
-### 2.4 KiFAS (Kindergarten Fee Assistance Scheme)
-**Agency:** MOE
-**Subsidy:** Up to $170/mo for gross HH income <= $3,000/mo
-**Modelability:** MEDIUM - income-tiered subsidies
-**Reference:** https://www.moe.gov.sg/preschool/kifas
+### 2.4 ~~KiFAS~~ IMPLEMENTED
+$163-$0/mo by GHI bracket. Requires citizen. 4 tests.
 
-### 2.5 MOE Financial Assistance Scheme
-**Agency:** MOE
-**Benefits:** Free textbooks, school meals, transport, uniform
-**Eligibility:** Gross HH income <= $3,000/mo or per capita
-<= $750/mo
-**Modelability:** MEDIUM - could model monetary value of benefits
+### 2.5 ~~MOE Financial Assistance Scheme~~ IMPLEMENTED
+Eligibility variable: GHI <= $3,000 or PCI <= $750. 4 tests.
 
-### 2.6 CHAS (Community Health Assist Scheme)
-**Agency:** MOH
-**Tiers:** Blue (income <= $900 per capita), Orange (<=1,200),
-Green (all citizens)
-**Benefits:** Subsidised GP/dental/specialist visits
-**Modelability:** MEDIUM-LOW - could model subsidy tier assignment
-but not actual subsidy amounts (depend on visit type)
-**Reference:** https://www.chas.sg
+### 2.6 ~~CHAS Tier~~ IMPLEMENTED
+Enum tiers: Blue (PCI <= $1,500), Orange (PCI <= $2,300),
+Green (all other citizens). 4 tests.
 
-### 2.7 MediShield Life Premium Subsidies
+### 2.7 MediShield Life Premium Subsidies (LOW)
 **Agency:** MOH / CPF
 **Subsidies:** Up to 50% premium subsidy (means-tested)
 **Modelability:** LOW - complex premium schedule by age + subsidy
-tiers by income
-**Reference:** https://www.cpf.gov.sg/member/healthcare-financing/medishield-life
+tiers by income. Skipped for now.
 
-### 2.8 Enhanced CPF Housing Grant (EHG)
-**Agency:** HDB
-**Amount:** Up to $120,000 for first-time buyers
-**Eligibility:** Income ceiling, first-timer, buying from HDB
-**Modelability:** MEDIUM - income-tiered grant amounts
-**Reference:** https://www.hdb.gov.sg/residential/buying-a-flat/flat-booking/cpf-housing-grants
+### 2.8 ~~Enhanced CPF Housing Grant (EHG)~~ IMPLEMENTED
+Up to $120,000 for first-time buyers by GHI bracket. 4 tests.
 
-### 2.9 FDW (Foreign Domestic Worker) Levy Concession
-**Agency:** MOM
-**Amount:** $60/mo vs $300/mo standard levy
-**Eligibility:** Household with child < 16 or elderly >= 67
-or disabled member
-**Modelability:** HIGH - simple eligibility check + fixed amounts
-**Reference:** https://www.mom.gov.sg/passes-and-permits/work-permit-for-foreign-domestic-worker/foreign-domestic-worker-levy
+### 2.9 ~~FDW Levy Concession~~ IMPLEMENTED
+$300/mo standard, $60/mo concessionary. Concession if child < 16,
+elderly >= 67, or disabled member. 4 tests.
 
-### 2.10 Seller's Stamp Duty (SSD)
-**Agency:** IRAS
-**Rates:** 12%/8%/4% based on holding period (1/2/3 years)
-**Modelability:** HIGH - similar to BSD, needs holding_period input
-**Reference:** https://www.iras.gov.sg/taxes/stamp-duty/for-property/selling-or-disposing-of-property/seller's-stamp-duty-(ssd)
+### 2.10 ~~Seller's Stamp Duty (SSD)~~ IMPLEMENTED
+12%/8%/4% by holding period (1/2/3 years). 4 tests.
 
 ---
 
 ## 3. Missing Programs - Medium Priority
 
-### 3.1 Assurance Package Cash
-**Agency:** MOF
-**Amount:** $200-$400 cash (GST offset, income-tiered)
-**Modelability:** MEDIUM - similar to GSTV Cash
+### 3.1 ~~Assurance Package Cash~~ IMPLEMENTED
+$600 (low income <= $34k), $350 (mid <= $100k), $200 (higher).
+Multi-property owners get $200. 5 tests.
 
-### 3.2 Higher Education Bursaries (MOE/University)
-**Agency:** MOE
-**Amount:** Varies by institution and income tier
-**Modelability:** LOW - many institution-specific schemes
+### 3.2 Higher Education Bursaries (MOE/University) (DEFERRED)
+Varies by institution and income tier. Too many institution-specific
+schemes to model comprehensively.
 
-### 3.3 CareShield Life Premium Subsidies
-**Agency:** MOH
-**Modelability:** LOW - requires income tier + premium schedule
+### 3.3 CareShield Life Premium Subsidies (DEFERRED)
+Requires income tier + premium schedule. Complex and data-limited.
 
-### 3.4 Student Care Fee Assistance (SCFA)
-**Agency:** MSF
-**Modelability:** MEDIUM - means-tested subsidy for after-school
-care
+### 3.4 ~~Student Care Fee Assistance (SCFA)~~ IMPLEMENTED
+$290-$0/mo by GHI bracket. Requires citizen. 4 tests.
 
-### 3.5 SkillsFuture Credit
-**Agency:** SSG
-**Amount:** $500 one-time (age 25+), periodic top-ups
-**Modelability:** LOW - balance tracking not possible
+### 3.5 SkillsFuture Credit (NOT MODELABLE)
+Balance tracking not possible in single-period architecture.
 
-### 3.6 Edusave Merit Bursary
-**Agency:** MOE
-**Amount:** $200-$350 by school level
-**Eligibility:** Citizen, income <= $6,900/mo
-**Modelability:** MEDIUM
+### 3.6 ~~Edusave Contribution~~ IMPLEMENTED
+$230 (primary), $290 (secondary). Requires citizen + school level.
+4 tests.
 
 ---
 
@@ -213,27 +149,40 @@ care
 | PTR birth-order tracking | Multi-year carry-forward needed |
 | Progressive wage model | Sector-specific, employer-side |
 | SkillsFuture balance | Balance tracking across periods |
+| MediShield Life subsidies | Complex age+income premium matrix |
+| CareShield Life subsidies | Complex premium/subsidy schedule |
 
 ---
 
 ## 5. Implementation Summary
 
-### Currently Implemented (82 variables)
+### Currently Implemented (~105 variables)
 
 | Area | Variables | Tests |
 |------|-----------|-------|
 | Personal Income Tax | 20 (13 reliefs + rates + rebates + PTR) | 27 |
 | CPF Contributions | 3 (employee + employer + total) | 6 |
 | Property Tax | 1 (owner/non-owner occupied) | 3 |
-| Stamp Duty | 3 (BSD + ABSD + total) | 7 |
+| Stamp Duty | 4 (BSD + ABSD + SSD + total) | 11 |
 | GST | 1 | 1 |
 | SDL | 1 | 2 |
 | GSTV | 4 (cash + U-Save + MediSave + S&CC) | 17 |
 | CDC Vouchers | 1 | 2 |
-| WIS | 3 (eligible + amount + cash) | 3 |
+| Assurance Package | 1 | 5 |
+| WIS | 3 (eligible + amount + cash) | 7 |
 | Silver Support | 2 (eligible + amount) | 3 |
 | ComCare LTA | 2 (eligible + LTA) | 2 |
-| Input variables | ~40 | - |
+| Baby Bonus | 1 (cash gift) | 4 |
+| CDA First Step | 1 | 3 |
+| Childcare Subsidy | 1 | 4 |
+| KiFAS | 1 | 4 |
+| MOE FAS | 1 (eligibility) | 4 |
+| Edusave | 1 | 4 |
+| CHAS | 1 (tier) | 4 |
+| EHG | 1 | 4 |
+| FDW Levy | 1 | 4 |
+| SCFA | 1 | 4 |
+| Input variables | ~59 | - |
 
-### Parameter Files: ~123
-### Total Tests: 71 (all passing)
+### Parameter Files: ~155
+### Total Tests: 122 (all passing)

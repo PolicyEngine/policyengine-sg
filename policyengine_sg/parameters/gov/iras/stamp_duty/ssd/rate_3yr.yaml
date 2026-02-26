@@ -1,0 +1,10 @@
+description: Singapore applies this Seller's Stamp Duty rate for properties sold after 2 years but within 3 years.
+values:
+  2017-03-11: 0.04
+metadata:
+  unit: /1
+  period: year
+  label: SSD rate within 3 years
+  reference:
+    - title: IRAS - Seller's Stamp Duty
+      href: https://www.iras.gov.sg/taxes/stamp-duty/for-property/selling-or-disposing-property/seller's-stamp-duty-(ssd)-for-residential-property

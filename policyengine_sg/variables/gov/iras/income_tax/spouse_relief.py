@@ -16,15 +16,17 @@ class spouse_relief(Variable):
     )
 
     def formula(person, period, parameters):
-        p = parameters(period).gov.iras.income_tax.reliefs.spouse
+        p = parameters(period).gov.iras.income_tax.reliefs
         married = person("is_married", period)
         spouse_disabled = person("spouse_is_disabled", period)
+        spouse_inc = person("spouse_income", period)
+        qualifies = married & (spouse_inc <= p.dependant_income_threshold)
         return where(
-            ~married,
+            ~qualifies,
             0,
             where(
                 spouse_disabled,
-                p.disability_amount,
-                p.amount,
+                p.spouse.disability_amount,
+                p.spouse.amount,
             ),
         )

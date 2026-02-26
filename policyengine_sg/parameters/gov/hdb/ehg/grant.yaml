@@ -1,0 +1,79 @@
+description: Singapore provides this Enhanced CPF Housing Grant based on average monthly household income.
+brackets:
+  - threshold:
+      2024-08-20: 0
+    amount:
+      2024-08-20: 120_000
+  - threshold:
+      2024-08-20: 1_501
+    amount:
+      2024-08-20: 110_000
+  - threshold:
+      2024-08-20: 2_001
+    amount:
+      2024-08-20: 105_000
+  - threshold:
+      2024-08-20: 2_501
+    amount:
+      2024-08-20: 95_000
+  - threshold:
+      2024-08-20: 3_001
+    amount:
+      2024-08-20: 90_000
+  - threshold:
+      2024-08-20: 3_501
+    amount:
+      2024-08-20: 80_000
+  - threshold:
+      2024-08-20: 4_001
+    amount:
+      2024-08-20: 70_000
+  - threshold:
+      2024-08-20: 4_501
+    amount:
+      2024-08-20: 65_000
+  - threshold:
+      2024-08-20: 5_001
+    amount:
+      2024-08-20: 55_000
+  - threshold:
+      2024-08-20: 5_501
+    amount:
+      2024-08-20: 50_000
+  - threshold:
+      2024-08-20: 6_001
+    amount:
+      2024-08-20: 40_000
+  - threshold:
+      2024-08-20: 6_501
+    amount:
+      2024-08-20: 30_000
+  - threshold:
+      2024-08-20: 7_001
+    amount:
+      2024-08-20: 25_000
+  - threshold:
+      2024-08-20: 7_501
+    amount:
+      2024-08-20: 20_000
+  - threshold:
+      2024-08-20: 8_001
+    amount:
+      2024-08-20: 10_000
+  - threshold:
+      2024-08-20: 8_501
+    amount:
+      2024-08-20: 5_000
+  - threshold:
+      2024-08-20: 9_001
+    amount:
+      2024-08-20: 0
+metadata:
+  type: single_amount
+  threshold_unit: currency-SGD
+  amount_unit: currency-SGD
+  period: year
+  label: Enhanced CPF Housing Grant
+  reference:
+    - title: HDB - Enhanced CPF Housing Grant
+      href: https://www.hdb.gov.sg/residential/buying-a-flat/understanding-your-eligibility-and-housing-loan-options/flat-and-grant-eligibility/couples-and-families/enhanced-cpf-housing-grant-families

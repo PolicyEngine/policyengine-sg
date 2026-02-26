@@ -1,0 +1,10 @@
+description: Singapore provides MOE Financial Assistance to families with per capita income at or below this amount.
+values:
+  2024-01-01: 750
+metadata:
+  unit: currency-SGD
+  period: month
+  label: MOE FAS per capita income ceiling
+  reference:
+    - title: MOE Financial Assistance
+      href: https://www.moe.gov.sg/financial-matters/financial-assistance

@@ -1,0 +1,10 @@
+description: Singapore awards this Edusave Merit Bursary amount to primary 1-3 students.
+values:
+  2025-01-01: 200
+metadata:
+  unit: currency-SGD
+  period: year
+  label: Edusave Merit Bursary primary lower
+  reference:
+    - title: MOE - Edusave Awards
+      href: https://www.moe.gov.sg/financial-matters/awards-scholarships/edusave-awards

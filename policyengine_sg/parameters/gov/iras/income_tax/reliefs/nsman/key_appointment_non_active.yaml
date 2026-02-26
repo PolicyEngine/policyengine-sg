@@ -1,0 +1,10 @@
+description: Singapore provides this NSman relief amount to NSmen holding key appointments who did not perform NS activities.
+values:
+  2024-01-01: 3_500
+metadata:
+  unit: currency-SGD
+  period: year
+  label: NSman relief key appointment non-active
+  reference:
+    - title: IRAS NSman Relief
+      href: https://www.iras.gov.sg/taxes/individual-income-tax/basics-of-individual-income-tax/tax-reliefs-rebates-and-deductions/tax-reliefs/nsman-relief-(self-wife-and-parent)

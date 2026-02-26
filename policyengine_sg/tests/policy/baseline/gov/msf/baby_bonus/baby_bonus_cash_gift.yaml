@@ -1,0 +1,53 @@
+- name: Case 1, married citizen with 2 children.
+  absolute_error_margin: 0.1
+  period: 2024
+  input:
+    people:
+      person1:
+        age: 35
+        is_married: true
+        is_citizen: true
+        number_of_children: 2
+  output:
+    # 2 children * $11,000 each = $22,000
+    baby_bonus_cash_gift: 22_000
+
+- name: Case 2, married citizen with 4 children.
+  absolute_error_margin: 0.1
+  period: 2024
+  input:
+    people:
+      person1:
+        age: 35
+        is_married: true
+        is_citizen: true
+        number_of_children: 4
+  output:
+    # 2 * $11,000 + 2 * $13,000 = $22,000 + $26,000 = $48,000
+    baby_bonus_cash_gift: 48_000
+
+- name: Case 3, unmarried citizen gets nothing.
+  absolute_error_margin: 0.1
+  period: 2024
+  input:
+    people:
+      person1:
+        age: 35
+        is_married: false
+        is_citizen: true
+        number_of_children: 2
+  output:
+    baby_bonus_cash_gift: 0
+
+- name: Case 4, non-citizen gets nothing.
+  absolute_error_margin: 0.1
+  period: 2024
+  input:
+    people:
+      person1:
+        age: 35
+        is_married: true
+        is_citizen: false
+        number_of_children: 2
+  output:
+    baby_bonus_cash_gift: 0

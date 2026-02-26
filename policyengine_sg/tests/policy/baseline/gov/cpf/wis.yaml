@@ -1,5 +1,5 @@
-- name: Case 1, eligible worker age 40 low income.
-  absolute_error_margin: 0.1
+- name: Case 1, eligible worker age 40 in plateau.
+  absolute_error_margin: 1
   period: 2025
   input:
     people:
@@ -14,21 +14,21 @@
           - person1
         property_annual_value: 10_000
   output:
-    # Monthly income: 24,000 / 12 = 2,000
-    # Age 40 => age_35_to_44 bracket: 3,500/year
-    # Cash: 3,500 * 40% = 1,400
+    # GMI: 24,000 / 12 = 2,000
+    # Age 35-44, GMI in 1,700-2,300 plateau
+    # Monthly: 291.67, Annual: 3,500
     wis_eligible: true
     wis_amount: 3_500
     wis_cash: 1_400
 
-- name: Case 2, eligible worker age 60+.
-  absolute_error_margin: 0.1
+- name: Case 2, eligible worker age 60+ in plateau.
+  absolute_error_margin: 1
   period: 2025
   input:
     people:
       person1:
         age: 62
-        employment_income: 18_000
+        employment_income: 24_000
         is_citizen: true
         number_of_properties: 1
     households:
@@ -37,8 +37,9 @@
           - person1
         property_annual_value: 8_000
   output:
-    # Monthly: 1,500, age 60+ => 4,900/year
-    # Cash: 4,900 * 40% = 1,960
+    # GMI: 24,000 / 12 = 2,000
+    # Age 60+, GMI in 1,700-2,300 plateau
+    # Monthly: 408.33, Annual: 4,900
     wis_eligible: true
     wis_amount: 4_900
     wis_cash: 1_960
@@ -59,7 +60,7 @@
           - person1
         property_annual_value: 10_000
   output:
-    # Monthly: 4,000 > 3,000 ceiling
+    # GMI: 4,000 > 3,000 ceiling
     wis_eligible: false
     wis_amount: 0
 
@@ -79,5 +80,73 @@
           - person1
         property_annual_value: 10_000
   output:
+    wis_eligible: false
+    wis_amount: 0
+
+- name: Case 5, age 30-34 ramp-up zone.
+  absolute_error_margin: 1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 32
+        employment_income: 12_000
+        is_citizen: true
+        number_of_properties: 1
+    households:
+      hh:
+        members:
+          - person1
+        property_annual_value: 8_000
+  output:
+    # GMI: 12,000 / 12 = 1,000
+    # Age 30-34, GMI in 500-1,400 segment
+    # Monthly: 1000/8 + 19/6 = 125 + 3.17 = 128.17
+    # Annual: 128.17 * 12 = 1,538
+    wis_eligible: true
+    wis_amount: 1_538
+
+- name: Case 6, age 45-59 ramp-down zone.
+  absolute_error_margin: 1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 50
+        employment_income: 30_000
+        is_citizen: true
+        number_of_properties: 1
+    households:
+      hh:
+        members:
+          - person1
+        property_annual_value: 8_000
+  output:
+    # GMI: 30,000 / 12 = 2,500
+    # Age 45-59, GMI in 2,300-3,000 segment
+    # Monthly: 34847/28 - 2500*1089/2800
+    #        = 1244.54 - 972.32 = 272.22
+    # Annual: 272.22 * 12 = 3,267
+    wis_eligible: true
+    wis_amount: 3_267
+
+- name: Case 7, income at floor boundary.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 40
+        employment_income: 5_988
+        is_citizen: true
+        number_of_properties: 1
+    households:
+      hh:
+        members:
+          - person1
+        property_annual_value: 8_000
+  output:
+    # GMI: 5,988 / 12 = 499 < 500
+    # Below income floor => ineligible
     wis_eligible: false
     wis_amount: 0

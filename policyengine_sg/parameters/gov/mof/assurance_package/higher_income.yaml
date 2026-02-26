@@ -1,0 +1,10 @@
+description: Singapore provides this Assurance Package cash amount to higher-income citizens or those with multiple properties.
+values:
+  2025-01-01: 200
+metadata:
+  unit: currency-SGD
+  period: year
+  label: Assurance Package cash higher income
+  reference:
+    - title: Assurance Package - GovBenefits
+      href: https://www.govbenefits.gov.sg/about-us/assurance-package/am-i-eligible/

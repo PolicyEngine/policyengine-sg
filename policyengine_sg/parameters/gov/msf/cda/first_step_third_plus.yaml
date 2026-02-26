@@ -1,0 +1,13 @@
+description: Singapore provides this CDA First Step Grant amount for the third and subsequent children.
+values:
+  2016-03-24: 5_000
+  2025-02-18: 10_000
+metadata:
+  unit: currency-SGD
+  period: year
+  label: CDA First Step Grant 3rd+ child
+  reference:
+    - title: CDA - LifeSG
+      href: https://www.life.gov.sg/family-parenting/benefits-support/baby-bonus-scheme/cda
+    - title: Large Families Scheme - Strategy Group
+      href: https://www.strategygroup.gov.sg/strengthening-support-for-large-families/

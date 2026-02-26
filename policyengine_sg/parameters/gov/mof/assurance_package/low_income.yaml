@@ -1,0 +1,10 @@
+description: Singapore provides this Assurance Package cash amount to lower-income citizens.
+values:
+  2025-01-01: 600
+metadata:
+  unit: currency-SGD
+  period: year
+  label: Assurance Package cash low income
+  reference:
+    - title: Assurance Package - GovBenefits
+      href: https://www.govbenefits.gov.sg/about-us/assurance-package/am-i-eligible/
