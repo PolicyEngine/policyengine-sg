@@ -3,26 +3,36 @@
     added:
     - Implement Singapore personal income tax with 13 progressive brackets (0-24%) and 13 relief types
     - Add CPF contribution calculations with 5 age bands and 2024-2025 rate updates
-    - Add Workfare Income Supplement (WIS) eligibility with disability age exemption
+    - Add Workfare Income Supplement (WIS) with exact piecewise linear tapering for 4 age bands
     - Add Silver Support Scheme with HDB flat-type tiering, income tiers, and income ceiling eligibility
-    - Add GST Voucher cash benefit calculations
-    - Add GST Voucher U-Save rebates with HDB flat-type tiering
-    - Add GST Voucher MediSave top-up with age bands and AV tiering
-    - Add GST Voucher S&CC rebate with HDB flat-type-based months
+    - Add GST Voucher cash, U-Save, MediSave, and S&CC rebate calculations
     - Add CDC vouchers benefit calculation
     - Add owner-occupied and non-owner-occupied property tax calculations
     - Add Skills Development Levy (SDL) calculation
     - Add buyer's stamp duty (BSD) with 6 progressive brackets
     - Add additional buyer's stamp duty (ABSD) with 7 buyer profile categories
+    - Add seller's stamp duty (SSD) with holding period tiers
     - Add GST calculation on taxable consumption
     - Add ComCare Long-Term Assistance with household-size-based amounts
-    - Add immigration status and buyer profile enums
-    - Add working mother's child relief (WMCR) with fixed amounts
-    - Add grandparent caregiver relief and sibling disability relief
-    - Add parenthood tax rebate (PTR) with carry-forward balance
+    - Add ComCare SMTA eligibility based on $800 monthly PCI benchmark
+    - Add Baby Bonus Cash Gift ($11k for 1st-2nd child, $13k for 3rd+)
+    - Add CDA First Step Grant ($5k-$10k by birth order and date)
+    - Add childcare and infant care subsidies (basic + additional by GHI)
+    - Add KiFAS kindergarten fee assistance by GHI bracket
+    - Add MOE Financial Assistance Scheme eligibility
+    - Add CHAS tier classification (Blue, Orange, Green by PCI)
+    - Add Enhanced CPF Housing Grant up to $120k by GHI bracket
+    - Add FDW levy with concessionary rates for families with children, elderly, or disabled
+    - Add Student Care Fee Assistance (SCFA) by GHI bracket
+    - Add Edusave contributions ($230 primary, $290 secondary)
+    - Add Assurance Package cash ($200-$600 by income tier)
+    - Add NSman relief with 5 categories and wife/parent variants
+    - Add working mother's child relief (WMCR) with pre/post-2024 split
+    - Add parenthood tax rebate (PTR) with carry-forward balance input
     - Add CPF cash top-up relief for family members
-    - Add 82 variables and ~123 parameter files with primary .gov.sg sources
-    - Add 71 YAML tests covering all calculation chains and edge cases
+    - Add grandparent caregiver relief and sibling disability relief
+    - Add ~113 variables, ~155 parameter files, and 122 tests
     fixed:
     - Fix CPF above-55-to-60 employee/employer rate values for 2024-2025
     - Fix CPF above-60-to-65 employee/employer rate values for 2025
+    - Fix NSman key_appointment_non_active parameter ($3,000 to $3,500)
