@@ -14,6 +14,9 @@ class silver_support_eligible(Variable):
     )
 
     def formula(person, period, parameters):
+        # NOTE: Real Silver Support also requires low lifetime
+        # CPF savings. PolicyEngine cannot track CPF balances,
+        # so this check is omitted.
         p = parameters(period).gov.cpf.silver_support
         age = person("age", period)
         citizen = person("is_citizen", period)

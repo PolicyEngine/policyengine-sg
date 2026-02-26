@@ -18,6 +18,7 @@
   output:
     # Monthly per capita: 6,000 / 12 = 500 <= 800
     comcare_eligible: true
+    comcare_smta_eligible: true
     # 1-person household, rate at 2025-01 = $640/month
     # Annual: 640 * 12 = 7,680
     comcare_lta: 7_680
@@ -49,6 +50,7 @@
   output:
     # Monthly per capita: 9,000 / 12 = 750 <= 800
     comcare_eligible: [true, true]
+    comcare_smta_eligible: [true, true]
     # 2-person household, rate at 2025-01 = $1,080/month
     # Annual: 1,080 * 12 = 12,960
     comcare_lta: 12_960
@@ -73,4 +75,5 @@
   output:
     # Monthly per capita: 15,000 / 12 = 1,250 > 800
     comcare_eligible: false
+    comcare_smta_eligible: false
     comcare_lta: 0

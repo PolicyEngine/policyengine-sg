@@ -1,6 +1,6 @@
 # PolicyEngine Singapore - Gaps & Adjustments Tracker
 
-Status: ~105 variables, ~155 parameter files, 122 tests (all passing)
+Status: ~113 variables, ~155 parameter files, 122 tests (all passing)
 Branch: `implement-sg-tax-benefit-system` (PR #5)
 
 ---
@@ -31,43 +31,31 @@ Added number_of_children_born_before_2024 input. Formula now
 splits: pre-2024 children use rate-based (15%/20%/25% of earned
 income), post-2024 children use fixed ($8k/$10k/$12k).
 
-### 1.5 GSTV MediSave Missing Income Ceiling Check (LOW)
-**File:** `variables/gov/mof/gstv/gstv_medisave.py`
-**Issue:** GSTV Cash checks `income <= p.income_ceiling` ($34k)
-but MediSave implementation does not. GSTV MediSave may have a
-separate assessable income ceiling. Need to verify from MOF source
-whether MediSave has its own income test (official MOF page
-returned 403 during research).
-**Fix:** If income ceiling applies, add parameter + check.
+### 1.5 ~~GSTV MediSave Income Ceiling~~ RESOLVED
+Verified: GSTV MediSave has NO assessable income ceiling (unlike
+GSTV Cash which has $39,000). The existing implementation is
+correct - it checks only citizenship, age >= 65, AV ceiling, and
+property count. Source: MOF press releases and GovBenefits.gov.sg.
 
-### 1.6 PTR Parameters Unused (LOW / BY DESIGN)
-**Files:** `parameters/gov/iras/income_tax/rebates/parenthood_*.yaml`
-**Issue:** Three parameters exist (first_child=$5k, second=$10k,
-third+=$20k) but the PTR variable uses only `ptr_balance` input.
-This is BY DESIGN because PTR is a one-time grant per child birth
-with carry-forward, which PolicyEngine's single-period architecture
-cannot track. The parameters serve as documentation.
-**Fix:** No fix needed, but consider adding a comment in the
-variable or removing the unused parameters to avoid confusion.
+### 1.6 ~~PTR Parameters Unused~~ RESOLVED (BY DESIGN)
+Added clarifying comment to parenthood_tax_rebate.py explaining
+that per-child parameters (parenthood_first_child=$5k, etc.) exist
+as reference documentation only. PTR uses ptr_balance input because
+PolicyEngine cannot track multi-year carry-forward balances.
 
-### 1.7 ComCare SMTA Not Modeled (LOW)
-**File:** `variables/gov/msf/comcare/`
-**Issue:** Only LTA (Long-Term Assistance) is modeled. SMTA
-(Short-to-Medium-Term Assistance) has different eligibility
-criteria (temporarily unable to work, not permanently). Both fall
-under ComCare but have distinct rules.
-**Fix:** Add `comcare_smta.py` if sufficient documentation exists.
-SMTA amounts are determined by holistic assessment so may not be
-fully modelable.
+### 1.7 ~~ComCare SMTA~~ RESOLVED (ELIGIBILITY ONLY)
+Added comcare_smta_eligible variable using the $800 monthly PCI
+benchmark. SMTA benefit amounts are determined by caseworker
+assessment (shortfall between income and basic living expenses),
+not a fixed formula, so only eligibility is modeled. The $800 PCI
+benchmark is officially described as "not a hard threshold" but
+is used as a proxy. Tests added to existing ComCare test file.
 
-### 1.8 Silver Support CPF Savings Check Missing (LOW)
-**File:** `variables/gov/cpf/silver_support/silver_support_eligible.py`
-**Issue:** Eligibility checks age, citizenship, and per-capita
-income. Real Silver Support also checks lifetime CPF savings
-(payout amounts only available for those with low lifetime CPF
-contributions). PolicyEngine cannot model CPF lifetime savings.
-**Fix:** Document as a known limitation. No fix possible without
-CPF balance data.
+### 1.8 ~~Silver Support CPF Savings Check~~ RESOLVED (DOCUMENTED)
+Added NOTE comment to silver_support_eligible.py documenting that
+real Silver Support also checks lifetime CPF savings. PolicyEngine
+cannot model CPF balances, so this check is omitted as a known
+limitation.
 
 ---
 
@@ -171,7 +159,7 @@ $230 (primary), $290 (secondary). Requires citizen + school level.
 | Assurance Package | 1 | 5 |
 | WIS | 3 (eligible + amount + cash) | 7 |
 | Silver Support | 2 (eligible + amount) | 3 |
-| ComCare LTA | 2 (eligible + LTA) | 2 |
+| ComCare | 3 (eligible + LTA + SMTA eligible) | 3 |
 | Baby Bonus | 1 (cash gift) | 4 |
 | CDA First Step | 1 | 3 |
 | Childcare Subsidy | 1 | 4 |

@@ -20,7 +20,9 @@ class parenthood_tax_rebate(Variable):
         # ($5k 1st, $10k 2nd, $20k 3rd+) with indefinite
         # carry-forward. PolicyEngine cannot track multi-year
         # balances, so we model the remaining balance as an
-        # input variable.
+        # input variable. The per-child parameters under
+        # gov.iras.income_tax.rebates.parenthood_* exist
+        # as reference documentation only.
         tax = person("income_tax_before_rebate", period)
         pit = person("pit_rebate", period)
         tax_after_pit = max_(tax - pit, 0)
