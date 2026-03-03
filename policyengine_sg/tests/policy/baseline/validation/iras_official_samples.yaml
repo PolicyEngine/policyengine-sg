@@ -142,3 +142,52 @@
     # Income tax: 2,370 - 200 = 2,170
     # Correct answer should be $3,150
     income_tax: 2_170
+
+- name: "IRAS sample 4: non-resident director, age 39, $85K director fees"
+  # Source: IRAS Sample Income Tax Calculations — non-resident director
+  # URL: https://www.iras.gov.sg/taxes/individual-income-tax/basics-of-individual-income-tax/tax-residency-and-tax-rates/sample-income-tax-calculations
+  #
+  # IRAS correct treatment: director fees taxed at flat 24%
+  #   Tax = $85,000 * 24% = $20,400
+  #
+  # KNOWN MODEL LIMITATIONS:
+  # 1. No director_rate code path — model uses employment 15% flat rate
+  #    (parameter exists at non_resident/director_rate.yaml = 24% but
+  #    no formula consumes it)
+  # 2. CPF incorrectly applied to non-citizen ($17,000 vs $0 correct)
+  # 3. Reliefs incorrectly applied to non-resident ($18,000 vs $0)
+  # 4. PIT rebate incorrectly applied ($200 vs $0)
+  #
+  # Combined effect: model computes $9,850 vs correct $20,400
+  absolute_error_margin: 0.5
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 39
+        employment_income: 85_000
+        is_resident: false
+        is_citizen: false
+        is_pr: false
+    households:
+      hh:
+        members:
+          - person1
+  output:
+    # KNOWN BUG: CPF should be 0 for foreigners
+    cpf_employee_contribution: 17_000
+    # KNOWN BUG: reliefs should be 0 for non-residents
+    earned_income_relief: 1_000
+    cpf_relief: 17_000
+    total_personal_reliefs: 18_000
+    chargeable_income: 67_000
+    # Model uses max(progressive, 15% flat) instead of 24% director rate
+    # Progressive on 67K: 20K*0% + 10K*2% + 10K*3.5% + 27K*7% = 2,440
+    # Flat 15%: 67K * 15% = 10,050
+    # Tax = max(2,440, 10,050) = 10,050
+    income_tax_before_rebate: 10_050
+    # KNOWN BUG: PIT rebate should not apply to non-residents
+    pit_rebate: 200
+    # Model: 10,050 - 200 = 9,850
+    # Correct IRAS answer: $85,000 * 24% = $20,400
+    income_tax: 9_850

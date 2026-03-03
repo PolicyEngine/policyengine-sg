@@ -347,3 +347,91 @@
           - person1
   output:
     ehg: 65_000
+
+# ------------------------------------------------------------------
+# GSTV S&CC Rebate — MOF Budget / govbenefits.gov.sg
+# Source: https://www.mof.gov.sg/news-publications/press-releases/more-than-950-000-singaporean-hdb-households-to-benefit-from-u-save-and-s-cc-rebates-in-april-2025
+# Access date: March 2025
+# FY2025 S&CC rebate months by flat type:
+#   1-2 room: 3.5 months
+#   3-room:   2.5 months
+#   4-room:   2.5 months
+#   5-room:   2.0 months
+#   Executive: 1.5 months
+#
+# S&CC rebate = months * monthly_scc_charge
+# Monthly S&CC charges vary by town council; tests use representative
+# values to verify the formula multiplies correctly.
+# ------------------------------------------------------------------
+
+- name: "S&CC Rebate 1: 2-room HDB, charge $25.50/month — 3.5 months"
+  # 3.5 * 25.50 = $89.25
+  absolute_error_margin: 0.5
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 40
+        is_citizen: true
+    households:
+      hh:
+        members:
+          - person1
+        hdb_flat_type: TWO_ROOM
+        monthly_scc_charge: 25.50
+  output:
+    gstv_scc_rebate: 89.25
+
+- name: "S&CC Rebate 2: 3-room HDB, charge $60/month — 2.5 months"
+  # 2.5 * 60 = $150
+  absolute_error_margin: 0.5
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 40
+        is_citizen: true
+    households:
+      hh:
+        members:
+          - person1
+        hdb_flat_type: THREE_ROOM
+        monthly_scc_charge: 60
+  output:
+    gstv_scc_rebate: 150
+
+- name: "S&CC Rebate 3: 4-room HDB, charge $80/month — 2.5 months"
+  # 2.5 * 80 = $200
+  absolute_error_margin: 0.5
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 40
+        is_citizen: true
+    households:
+      hh:
+        members:
+          - person1
+        hdb_flat_type: FOUR_ROOM
+        monthly_scc_charge: 80
+  output:
+    gstv_scc_rebate: 200
+
+- name: "S&CC Rebate 4: executive HDB, charge $93.50/month — 1.5 months"
+  # 1.5 * 93.50 = $140.25
+  absolute_error_margin: 0.5
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 40
+        is_citizen: true
+    households:
+      hh:
+        members:
+          - person1
+        hdb_flat_type: EXECUTIVE
+        monthly_scc_charge: 93.50
+  output:
+    gstv_scc_rebate: 140.25
