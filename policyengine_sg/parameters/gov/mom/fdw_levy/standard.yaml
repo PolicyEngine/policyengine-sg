@@ -1,0 +1,10 @@
+description: Singapore sets this standard monthly levy for a foreign domestic worker.
+values:
+  2024-01-01: 300
+metadata:
+  unit: currency-SGD
+  period: month
+  label: FDW standard levy
+  reference:
+    - title: MOM - FDW Levy Payment
+      href: https://www.mom.gov.sg/passes-and-permits/work-permit-for-foreign-domestic-worker/foreign-domestic-worker-levy/paying-levy

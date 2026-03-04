@@ -20,9 +20,6 @@ from policyengine_sg.entities import (
 # Currency unit
 SGD = "currency-SGD"
 
-# Import commonly used functions from core
-from policyengine_core.model_api import *
-
 
 # Common functions for Singapore calculations
 def add(entity, period, variables, options=None):

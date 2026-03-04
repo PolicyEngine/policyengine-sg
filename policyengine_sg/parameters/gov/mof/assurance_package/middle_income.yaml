@@ -1,0 +1,10 @@
+description: Singapore provides this Assurance Package cash amount to middle-income citizens.
+values:
+  2025-01-01: 350
+metadata:
+  unit: currency-SGD
+  period: year
+  label: Assurance Package cash middle income
+  reference:
+    - title: Assurance Package - GovBenefits
+      href: https://www.govbenefits.gov.sg/about-us/assurance-package/am-i-eligible/

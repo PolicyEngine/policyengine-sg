@@ -1,0 +1,10 @@
+description: Singapore credits this annual Edusave contribution for each secondary school student.
+values:
+  2024-01-01: 290
+metadata:
+  unit: currency-SGD
+  period: year
+  label: Edusave contribution secondary
+  reference:
+    - title: MOE - Edusave Account
+      href: https://www.moe.gov.sg/financial-matters/edusave-account/overview

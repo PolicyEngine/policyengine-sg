@@ -1,0 +1,13 @@
+description: Singapore caps total annual wages subject to CPF contributions at this amount.
+values:
+  2024-01-01: 102_000
+  2025-01-01: 102_000
+metadata:
+  unit: currency-SGD
+  period: year
+  label: CPF annual wage ceiling
+  reference:
+    - title: CPF Act 1953, Section 7
+      href: https://sso.agc.gov.sg/Act/CPFA1953
+    - title: CPF Board - What Payments Attract CPF Contributions
+      href: https://www.cpf.gov.sg/employer/employer-obligations/what-payments-attract-cpf-contributions

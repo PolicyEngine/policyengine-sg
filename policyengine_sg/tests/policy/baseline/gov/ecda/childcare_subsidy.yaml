@@ -1,0 +1,61 @@
+- name: Case 1, working mother low income with 1 childcare child.
+  absolute_error_margin: 0.1
+  period: 2024
+  input:
+    people:
+      person1:
+        age: 30
+        is_citizen: true
+        is_working_mother: true
+        number_of_children_in_childcare: 1
+        gross_monthly_household_income: 2_000
+  output:
+    # Basic: $300/mo (working) + Additional: $467/mo (GHI <= $3,000)
+    # Total: $767/mo * 12 = $9,204
+    childcare_subsidy: 9_204
+
+- name: Case 2, working mother mid income with infant care.
+  absolute_error_margin: 0.1
+  period: 2024
+  input:
+    people:
+      person1:
+        age: 30
+        is_citizen: true
+        is_working_mother: true
+        number_of_children_in_infant_care: 1
+        gross_monthly_household_income: 5_000
+  output:
+    # Basic infant: $600/mo + Additional: $340/mo (GHI $4,501-$6,000)
+    # Total: $940/mo * 12 = $11,280
+    childcare_subsidy: 11_280
+
+- name: Case 3, non-working mother gets only additional.
+  absolute_error_margin: 0.1
+  period: 2024
+  input:
+    people:
+      person1:
+        age: 30
+        is_citizen: true
+        is_working_mother: false
+        number_of_children_in_childcare: 1
+        gross_monthly_household_income: 2_000
+  output:
+    # Basic: $0 (not working) + Additional: $467/mo
+    # Total: $467/mo * 12 = $5,604
+    childcare_subsidy: 5_604
+
+- name: Case 4, non-citizen gets nothing.
+  absolute_error_margin: 0.1
+  period: 2024
+  input:
+    people:
+      person1:
+        age: 30
+        is_citizen: false
+        is_working_mother: true
+        number_of_children_in_childcare: 1
+        gross_monthly_household_income: 2_000
+  output:
+    childcare_subsidy: 0

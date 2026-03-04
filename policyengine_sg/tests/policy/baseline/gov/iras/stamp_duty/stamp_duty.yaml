@@ -1,0 +1,101 @@
+- name: Case 1, citizen first property at $500,000.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 35
+    households:
+      hh:
+        members:
+          - person1
+        property_purchase_price: 500_000
+        buyer_profile: CITIZEN_FIRST
+  output:
+    # BSD marginal brackets:
+    # 180k * 1% = 1,800
+    # (360k - 180k) * 2% = 3,600
+    # (500k - 360k) * 3% = 4,200
+    # Total BSD = 9,600
+    buyers_stamp_duty: 9_600
+    # ABSD citizen first = 0%
+    additional_buyers_stamp_duty: 0
+    total_stamp_duty: 9_600
+
+- name: Case 2, PR first property at $1,200,000.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 40
+    households:
+      hh:
+        members:
+          - person1
+        property_purchase_price: 1_200_000
+        buyer_profile: PR_FIRST
+  output:
+    # BSD marginal brackets:
+    # 180k * 1% = 1,800
+    # (360k - 180k) * 2% = 3,600
+    # (1,000k - 360k) * 3% = 19,200
+    # (1,200k - 1,000k) * 4% = 8,000
+    # Total BSD = 32,600
+    buyers_stamp_duty: 32_600
+    # ABSD PR first = 5%
+    # 1,200,000 * 5% = 60,000
+    additional_buyers_stamp_duty: 60_000
+    total_stamp_duty: 92_600
+
+- name: Case 3, foreigner at $2,000,000.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 45
+    households:
+      hh:
+        members:
+          - person1
+        property_purchase_price: 2_000_000
+        buyer_profile: FOREIGNER
+  output:
+    # BSD marginal brackets:
+    # 180k * 1% = 1,800
+    # (360k - 180k) * 2% = 3,600
+    # (1,000k - 360k) * 3% = 19,200
+    # (1,500k - 1,000k) * 4% = 20,000
+    # (2,000k - 1,500k) * 5% = 25,000
+    # Total BSD = 69,600
+    buyers_stamp_duty: 69_600
+    # ABSD foreigner = 60%
+    # 2,000,000 * 60% = 1,200,000
+    additional_buyers_stamp_duty: 1_200_000
+    total_stamp_duty: 1_269_600
+
+- name: Case 4, citizen second property at $800,000.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 50
+    households:
+      hh:
+        members:
+          - person1
+        property_purchase_price: 800_000
+        buyer_profile: CITIZEN_SECOND
+  output:
+    # BSD marginal brackets:
+    # 180k * 1% = 1,800
+    # (360k - 180k) * 2% = 3,600
+    # (800k - 360k) * 3% = 13,200
+    # Total BSD = 18,600
+    buyers_stamp_duty: 18_600
+    # ABSD citizen second = 20%
+    # 800,000 * 20% = 160,000
+    additional_buyers_stamp_duty: 160_000
+    total_stamp_duty: 178_600

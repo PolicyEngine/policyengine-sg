@@ -1,0 +1,69 @@
+# PWC Tax Summaries — Singapore YA2025 Sample Calculation
+#
+# Source: PWC Tax Summaries — Singapore Individual Sample Calculation
+# URL: https://taxsummaries.pwc.com/singapore/individual/sample-personal-income-tax-calculation
+# Access date: March 2025
+#
+# PWC's published scenario uses employment income of $120K gross with
+# $2K deductible expenses (net $118K). Since our model does not support
+# employment expense deductions, we use $118K as employment_income.
+#
+# PWC's scenario includes SRS relief ($15,300) in the summary table, but
+# the published chargeable income ($133,600) and tax ($9,990) are
+# consistent with total reliefs of $40,400 (i.e., without SRS). We match
+# the bottom-line figures by omitting SRS from this test.
+
+- name: "PWC Tax Summary — comprehensive multi-income with full relief breakdown"
+  absolute_error_margin: 0.5
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 40
+        # Employment income $118K (net of $2K expenses — model limitation)
+        employment_income: 118_000
+        self_employment_income: 50_000
+        interest_income: 5_000
+        rental_income: 2_000
+        is_resident: true
+        is_citizen: true
+        is_married: true
+        number_of_children: 2
+        # 1 dependant parent living together ($9,000 relief)
+        number_of_dependant_parents: 1
+        # Donation amount $400 — multiplied by 2.5x = $1,000 deduction
+        donation_amount: 400
+    households:
+      hh:
+        members:
+          - person1
+  output:
+    # Total income: 118K + 50K + 5K + 2K = 175,000
+    total_income: 175_000
+    # CPF: min(118,000, 102,000) * 20% = 20,400
+    cpf_employee_contribution: 20_400
+    # Relief breakdown:
+    #   Earned income (below 55): 1,000
+    #   CPF relief: 20,400
+    #   Spouse relief: 2,000
+    #   Child relief: 2 * 4,000 = 8,000
+    #   Parent relief: 1 * 9,000 = 9,000
+    #   Total: 40,400
+    earned_income_relief: 1_000
+    cpf_relief: 20_400
+    spouse_relief: 2_000
+    child_relief: 8_000
+    parent_relief: 9_000
+    total_personal_reliefs: 40_400
+    # Donation deduction: 400 * 2.5 = 1,000
+    donation_deduction: 1_000
+    # Chargeable: 175,000 - 40,400 - 1,000 = 133,600
+    chargeable_income: 133_600
+    # Tax on 133,600 (progressive):
+    #   20K*0% + 10K*2% + 10K*3.5% + 40K*7% + 40K*11.5% + 13.6K*15%
+    #   = 0 + 200 + 350 + 2,800 + 4,600 + 2,040 = 9,990
+    income_tax_before_rebate: 9_990
+    # PIT rebate: min(9,990 * 60%, 200) = 200
+    pit_rebate: 200
+    # Income tax: 9,990 - 200 = 9,790
+    income_tax: 9_790

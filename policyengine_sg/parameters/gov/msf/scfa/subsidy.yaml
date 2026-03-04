@@ -1,0 +1,59 @@
+description: Singapore provides this maximum monthly Student Care Fee Assistance based on gross monthly household income.
+brackets:
+  - threshold:
+      2024-01-01: 0
+    amount:
+      2024-01-01: 290
+  - threshold:
+      2024-01-01: 1_501
+    amount:
+      2024-01-01: 280
+  - threshold:
+      2024-01-01: 2_001
+    amount:
+      2024-01-01: 266
+  - threshold:
+      2024-01-01: 2_201
+    amount:
+      2024-01-01: 251
+  - threshold:
+      2024-01-01: 2_401
+    amount:
+      2024-01-01: 236
+  - threshold:
+      2024-01-01: 2_601
+    amount:
+      2024-01-01: 207
+  - threshold:
+      2024-01-01: 2_801
+    amount:
+      2024-01-01: 177
+  - threshold:
+      2024-01-01: 3_001
+    amount:
+      2024-01-01: 148
+  - threshold:
+      2024-01-01: 3_201
+    amount:
+      2024-01-01: 118
+  - threshold:
+      2024-01-01: 3_501
+    amount:
+      2024-01-01: 89
+  - threshold:
+      2024-01-01: 4_001
+    amount:
+      2024-01-01: 59
+  - threshold:
+      2024-01-01: 4_501
+    amount:
+      2024-01-01: 0
+metadata:
+  type: single_amount
+  threshold_unit: currency-SGD
+  amount_unit: currency-SGD
+  period: month
+  label: Student Care Fee Assistance
+  reference:
+    - title: MSF - SCFA
+      href: https://www.msf.gov.sg/what-we-do/student-care/for-parents/student-care-fee-assistance

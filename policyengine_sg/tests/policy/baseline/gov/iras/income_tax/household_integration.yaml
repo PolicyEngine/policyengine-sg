@@ -1,0 +1,41 @@
+- name: Full household scenario with income tax, CPF, GST, and benefits.
+  absolute_error_margin: 1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 40
+        employment_income: 60_000
+        is_resident: true
+        is_citizen: true
+        is_married: true
+        number_of_children: 2
+        number_of_properties: 1
+    households:
+      hh:
+        members:
+          - person1
+        property_annual_value: 15_000
+        hdb_flat_type: FOUR_ROOM
+        property_purchase_price: 0
+        taxable_consumption: 20_000
+  output:
+    # CPF: 60,000 * 20% = 12,000 (employee)
+    cpf_employee_contribution: 12_000
+    cpf_employer_contribution: 10_200
+    # Income tax:
+    # Reliefs: earned 1,000 + spouse 2,000 + child 8,000 + CPF 12,000 = 23,000
+    # Chargeable: 60,000 - 23,000 = 37,000
+    # Tax: 20k*0% + 10k*2% + 7k*3.5% = 200 + 245 = 445
+    # PIT rebate: min(445*60%, 200) = 200
+    # Income tax: 445 - 200 = 245
+    total_personal_reliefs: 23_000
+    chargeable_income: 37_000
+    income_tax_before_rebate: 445
+    income_tax: 245
+    # GSTV Cash: income 60k > 39k ceiling => 0
+    gstv_cash: 0
+    # AP: income 60k > 34k, <= 100k => middle = 350
+    assurance_package_cash: 350
+    # GST: 20,000 * 9% = 1,800
+    gst: 1_800

@@ -1,0 +1,53 @@
+- name: Citizen third and subsequent property.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 45
+    households:
+      hh:
+        members:
+          - person1
+        property_purchase_price: 1_000_000
+        buyer_profile: CITIZEN_THIRD_AND_SUBSEQUENT
+  output:
+    # ABSD citizen 3rd+ = 30%
+    # 1,000,000 * 30% = 300,000
+    additional_buyers_stamp_duty: 300_000
+
+- name: PR second property.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 40
+    households:
+      hh:
+        members:
+          - person1
+        property_purchase_price: 1_000_000
+        buyer_profile: PR_SECOND
+  output:
+    # ABSD PR 2nd = 30%
+    # 1,000,000 * 30% = 300,000
+    additional_buyers_stamp_duty: 300_000
+
+- name: PR third and subsequent property.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 40
+    households:
+      hh:
+        members:
+          - person1
+        property_purchase_price: 1_000_000
+        buyer_profile: PR_THIRD_AND_SUBSEQUENT
+  output:
+    # ABSD PR 3rd+ = 35%
+    # 1,000,000 * 35% = 350,000
+    additional_buyers_stamp_duty: 350_000

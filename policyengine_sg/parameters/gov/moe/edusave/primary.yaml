@@ -1,0 +1,10 @@
+description: Singapore credits this annual Edusave contribution for each primary school student.
+values:
+  2024-01-01: 230
+metadata:
+  unit: currency-SGD
+  period: year
+  label: Edusave contribution primary
+  reference:
+    - title: MOE - Edusave Account
+      href: https://www.moe.gov.sg/financial-matters/edusave-account/overview

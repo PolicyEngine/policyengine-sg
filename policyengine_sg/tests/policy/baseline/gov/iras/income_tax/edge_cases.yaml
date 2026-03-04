@@ -1,0 +1,101 @@
+- name: Case 1, non-resident flat rate higher than progressive.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 40
+        employment_income: 100_000
+        is_resident: false
+        is_citizen: false
+  output:
+    # CPF employee: 100,000 * 20% = 20,000
+    # CPF relief: 20,000
+    # Earned income relief: 1,000
+    # Total reliefs: 21,000
+    # Chargeable: 79,000
+    # Progressive: 20k*0% + 10k*2% + 10k*3.5% + 39k*7%
+    # = 0 + 200 + 350 + 2,730 = 3,280
+    # Non-resident flat: 79,000 * 15% = 11,850
+    # Higher = 11,850
+    # Rebate: 200
+    income_tax_before_rebate: 11_850
+    income_tax: 11_650
+
+- name: Case 2, non-resident low income progressive higher.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 30
+        employment_income: 30_000
+        is_resident: false
+        is_citizen: false
+  output:
+    # CPF employee: 30,000 * 20% = 6,000
+    # CPF relief: 6,000
+    # Earned income relief: 1,000
+    # Chargeable: 23,000
+    # Progressive: 20k*0% + 3k*2% = 60
+    # Non-resident flat: 23,000 * 15% = 3,450
+    # Higher = 3,450
+    # Rebate: 200
+    income_tax_before_rebate: 3_450
+    income_tax: 3_250
+
+- name: Case 3, exactly at first bracket boundary.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 30
+        employment_income: 20_000
+  output:
+    # CPF employee: 20,000 * 20% = 4,000
+    # CPF relief: 4,000
+    # Earned income relief: 1,000
+    # Chargeable: 15,000
+    # All in 0% bracket
+    chargeable_income: 15_000
+    income_tax: 0
+
+- name: Case 4, multiple reliefs below cap.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 40
+        employment_income: 200_000
+        srs_contribution: 15_300
+        cpf_cash_top_up: 16_000
+        course_fees: 5_500
+        life_insurance_premium: 5_000
+        donation_amount: 10_000
+        number_of_children: 3
+  output:
+    # Reliefs:
+    # Earned income: 1,000
+    # CPF: min(200k, 102k ceiling) * 20% = 20,400
+    # SRS: min(15,300, 15,300) = 15,300
+    # CPF top-up: min(16,000, 8,000 self cap) = 8,000
+    # Course fees: min(5,500, 5,500) = 5,500
+    # Life insurance: max(5,000 cap - 20,400 CPF, 0) = 0
+    # Child: 3 * 4,000 = 12,000
+    # Total: 62,200 (cap 80,000 not binding)
+    total_personal_reliefs: 62_200
+
+- name: Case 5, zero income gets zero tax.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 25
+        employment_income: 0
+  output:
+    total_income: 0
+    chargeable_income: 0
+    income_tax: 0

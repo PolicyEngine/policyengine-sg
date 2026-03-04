@@ -1,0 +1,437 @@
+# Government-Published Schedule Validations
+#
+# Each test cites a specific government agency and published table.
+# These test individual programs against their authoritative source
+# rather than testing program interactions.
+
+# ------------------------------------------------------------------
+# Silver Support Scheme — CPF Board
+# Source: https://www.cpf.gov.sg/member/faq/retirement-income/silver-support-scheme
+# Access date: March 2025
+# Quarterly payouts (4 per year):
+#   1-2 room: $1,080/quarter (lower PCI) / $730/quarter (higher PCI)
+#   3-room:   $860/quarter / $540/quarter
+#   4-room:   $650/quarter / $360/quarter
+#   5-room+:  not eligible
+# ------------------------------------------------------------------
+
+- name: "Silver Support 1: age 70, 1-room HDB, low PCI — $4,320/year"
+  # Source: CPF Board Silver Support payout table
+  # 1-room, lower PCI tier: $1,080/quarter * 4 = $4,320
+  absolute_error_margin: 0.5
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 70
+        is_citizen: true
+        employment_income: 0
+        number_of_properties: 1
+    households:
+      hh:
+        members:
+          - person1
+        hdb_flat_type: ONE_ROOM
+        property_annual_value: 3_000
+  output:
+    silver_support_eligible: true
+    silver_support_amount: 4_320
+
+- name: "Silver Support 2: age 70, 4-room HDB — $2,600/year"
+  # Source: CPF Board Silver Support payout table
+  # 4-room, standard tier: $650/quarter * 4 = $2,600
+  absolute_error_margin: 0.5
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 70
+        is_citizen: true
+        employment_income: 0
+        number_of_properties: 1
+    households:
+      hh:
+        members:
+          - person1
+        hdb_flat_type: FOUR_ROOM
+        property_annual_value: 10_000
+  output:
+    silver_support_eligible: true
+    silver_support_amount: 2_600
+
+# ------------------------------------------------------------------
+# GSTV MediSave — MOF Budget Statement / gstvoucher.gov.sg
+# Source: https://www.gstvoucher.gov.sg/Pages/MediSave.aspx
+# Access date: March 2025
+# Annual amounts by age band for AV <= $21,000:
+#   65-74: $250, 75-84: $350, 85+: $450
+# ------------------------------------------------------------------
+
+- name: "GSTV MediSave 1: age 65, lower AV — $250"
+  # Source: gstvoucher.gov.sg MediSave table
+  absolute_error_margin: 0.5
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 65
+        is_citizen: true
+        employment_income: 18_000
+        number_of_properties: 1
+    households:
+      hh:
+        members:
+          - person1
+        property_annual_value: 6_000
+  output:
+    gstv_medisave: 250
+
+- name: "GSTV MediSave 2: age 75, lower AV — $350"
+  absolute_error_margin: 0.5
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 75
+        is_citizen: true
+        employment_income: 0
+        number_of_properties: 1
+    households:
+      hh:
+        members:
+          - person1
+        property_annual_value: 6_000
+  output:
+    gstv_medisave: 350
+
+- name: "GSTV MediSave 3: age 85, lower AV — $450"
+  absolute_error_margin: 0.5
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 85
+        is_citizen: true
+        employment_income: 0
+        number_of_properties: 1
+    households:
+      hh:
+        members:
+          - person1
+        property_annual_value: 6_000
+  output:
+    gstv_medisave: 450
+
+# ------------------------------------------------------------------
+# GSTV U-Save — MOF Budget / SP Group
+# Source: https://www.gstvoucher.gov.sg/Pages/U-Save.aspx
+# Access date: March 2025
+# Annual amounts (4 quarterly disbursements):
+#   1-2 room: $760, 3-room: $680, 4-room: $600,
+#   5-room: $520, Executive: $440
+# ------------------------------------------------------------------
+
+- name: "GSTV U-Save 1: 1-room HDB — $760/year"
+  absolute_error_margin: 0.5
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 40
+        is_citizen: true
+    households:
+      hh:
+        members:
+          - person1
+        hdb_flat_type: ONE_ROOM
+  output:
+    gstv_u_save: 760
+
+- name: "GSTV U-Save 2: 3-room HDB — $680/year"
+  absolute_error_margin: 0.5
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 40
+        is_citizen: true
+    households:
+      hh:
+        members:
+          - person1
+        hdb_flat_type: THREE_ROOM
+  output:
+    gstv_u_save: 680
+
+- name: "GSTV U-Save 3: 5-room HDB — $520/year"
+  absolute_error_margin: 0.5
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 40
+        is_citizen: true
+    households:
+      hh:
+        members:
+          - person1
+        hdb_flat_type: FIVE_ROOM
+  output:
+    gstv_u_save: 520
+
+# ------------------------------------------------------------------
+# Baby Bonus Cash Gift — MSF
+# Source: https://www.babybonus.msf.gov.sg/
+# Access date: March 2025
+# Cash gift per child:
+#   1st-2nd child: $11,000 each
+#   3rd and subsequent: $13,000 each
+# ------------------------------------------------------------------
+
+- name: "Baby Bonus 1: married citizen, 1 child — $11,000"
+  # Source: MSF Baby Bonus Cash Gift table
+  absolute_error_margin: 0.5
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 30
+        is_citizen: true
+        is_married: true
+        number_of_children: 1
+    households:
+      hh:
+        members:
+          - person1
+  output:
+    baby_bonus_cash_gift: 11_000
+
+- name: "Baby Bonus 2: married citizen, 3 children — $35,000"
+  # 2 * $11,000 + 1 * $13,000 = $35,000
+  absolute_error_margin: 0.5
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 30
+        is_citizen: true
+        is_married: true
+        number_of_children: 3
+    households:
+      hh:
+        members:
+          - person1
+  output:
+    baby_bonus_cash_gift: 35_000
+
+# ------------------------------------------------------------------
+# CDA First Step Grant — MSF
+# Source: https://www.babybonus.msf.gov.sg/
+# Access date: March 2025
+# First Step Grant:
+#   1st-2nd child: $5,000 each
+#   3rd and subsequent: $5,000 each (same amount)
+# ------------------------------------------------------------------
+
+- name: "CDA First Step Grant 1: citizen, 1 child — $5,000"
+  absolute_error_margin: 0.5
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 30
+        is_citizen: true
+        number_of_children: 1
+    households:
+      hh:
+        members:
+          - person1
+  output:
+    cda_first_step_grant: 5_000
+
+- name: "CDA First Step Grant 2: citizen, 3 children — $15,000"
+  # $5,000 * 3 = $15,000
+  absolute_error_margin: 0.5
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 30
+        is_citizen: true
+        number_of_children: 3
+    households:
+      hh:
+        members:
+          - person1
+  output:
+    cda_first_step_grant: 15_000
+
+# ------------------------------------------------------------------
+# EduSave Contributions — MOE
+# Source: https://www.moe.gov.sg/financial-matters/edusave-account
+# Access date: March 2025
+# Annual Edusave contributions (2024):
+#   Primary: $230, Secondary: $290
+# ------------------------------------------------------------------
+
+- name: "EduSave 1: citizen, primary school — $230"
+  absolute_error_margin: 0.5
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 10
+        is_citizen: true
+        school_level: PRIMARY
+    households:
+      hh:
+        members:
+          - person1
+  output:
+    edusave_contribution: 230
+
+- name: "EduSave 2: citizen, secondary school — $290"
+  absolute_error_margin: 0.5
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 14
+        is_citizen: true
+        school_level: SECONDARY
+    households:
+      hh:
+        members:
+          - person1
+  output:
+    edusave_contribution: 290
+
+# ------------------------------------------------------------------
+# Enhanced CPF Housing Grant (EHG) — HDB
+# Source: https://www.hdb.gov.sg/residential/buying-a-flat/understanding-your-eligibility-and-housing-loan-options/flat-and-grant-eligibility/couples-and-families/cpf-housing-grants-for-resale-flats/enhanced-cpf-housing-grant
+# Access date: March 2025
+# Grant amount by average monthly household income:
+#   $1,500: $120,000  |  $5,000: $65,000
+# ------------------------------------------------------------------
+
+- name: "EHG 1: citizen first-timer, GHI $1,500 — $120,000 grant"
+  absolute_error_margin: 0.5
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 30
+        is_citizen: true
+        is_first_time_homebuyer: true
+        gross_monthly_household_income: 1_500
+    households:
+      hh:
+        members:
+          - person1
+  output:
+    ehg: 120_000
+
+- name: "EHG 2: citizen first-timer, GHI $5,000 — $65,000 grant"
+  absolute_error_margin: 0.5
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 30
+        is_citizen: true
+        is_first_time_homebuyer: true
+        gross_monthly_household_income: 5_000
+    households:
+      hh:
+        members:
+          - person1
+  output:
+    ehg: 65_000
+
+# ------------------------------------------------------------------
+# GSTV S&CC Rebate — MOF Budget / govbenefits.gov.sg
+# Source: https://www.mof.gov.sg/news-publications/press-releases/more-than-950-000-singaporean-hdb-households-to-benefit-from-u-save-and-s-cc-rebates-in-april-2025
+# Access date: March 2025
+# FY2025 S&CC rebate months by flat type:
+#   1-2 room: 3.5 months
+#   3-room:   2.5 months
+#   4-room:   2.5 months
+#   5-room:   2.0 months
+#   Executive: 1.5 months
+#
+# S&CC rebate = months * monthly_scc_charge
+# Monthly S&CC charges vary by town council; tests use representative
+# values to verify the formula multiplies correctly.
+# ------------------------------------------------------------------
+
+- name: "S&CC Rebate 1: 2-room HDB, charge $25.50/month — 3.5 months"
+  # 3.5 * 25.50 = $89.25
+  absolute_error_margin: 0.5
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 40
+        is_citizen: true
+    households:
+      hh:
+        members:
+          - person1
+        hdb_flat_type: TWO_ROOM
+        monthly_scc_charge: 25.50
+  output:
+    gstv_scc_rebate: 89.25
+
+- name: "S&CC Rebate 2: 3-room HDB, charge $60/month — 2.5 months"
+  # 2.5 * 60 = $150
+  absolute_error_margin: 0.5
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 40
+        is_citizen: true
+    households:
+      hh:
+        members:
+          - person1
+        hdb_flat_type: THREE_ROOM
+        monthly_scc_charge: 60
+  output:
+    gstv_scc_rebate: 150
+
+- name: "S&CC Rebate 3: 4-room HDB, charge $80/month — 2.5 months"
+  # 2.5 * 80 = $200
+  absolute_error_margin: 0.5
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 40
+        is_citizen: true
+    households:
+      hh:
+        members:
+          - person1
+        hdb_flat_type: FOUR_ROOM
+        monthly_scc_charge: 80
+  output:
+    gstv_scc_rebate: 200
+
+- name: "S&CC Rebate 4: executive HDB, charge $93.50/month — 1.5 months"
+  # 1.5 * 93.50 = $140.25
+  absolute_error_margin: 0.5
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 40
+        is_citizen: true
+    households:
+      hh:
+        members:
+          - person1
+        hdb_flat_type: EXECUTIVE
+        monthly_scc_charge: 93.50
+  output:
+    gstv_scc_rebate: 140.25

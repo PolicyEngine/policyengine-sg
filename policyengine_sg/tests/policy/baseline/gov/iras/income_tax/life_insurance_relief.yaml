@@ -1,0 +1,62 @@
+- name: Case 1, premium below available cap.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        employment_income: 24_000
+        life_insurance_premium: 1_000
+    benefit_units:
+      bu:
+        adults:
+          - person1
+    households:
+      hh:
+        members:
+          - person1
+  output:
+    # CPF employee: 24,000 * 0.20 = 4,800
+    # Available: max(5,000 - 4,800, 0) = 200
+    # Relief: min(1,000, 200) = 200
+    life_insurance_relief: 200
+
+- name: Case 2, CPF exceeds cap so no relief available.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        employment_income: 60_000
+        life_insurance_premium: 5_000
+    benefit_units:
+      bu:
+        adults:
+          - person1
+    households:
+      hh:
+        members:
+          - person1
+  output:
+    # CPF employee: 60,000 * 0.20 = 12,000
+    # Available: max(5,000 - 12,000, 0) = 0
+    # Relief: min(5,000, 0) = 0
+    life_insurance_relief: 0
+
+- name: Case 3, no premium paid.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        employment_income: 20_000
+        life_insurance_premium: 0
+    benefit_units:
+      bu:
+        adults:
+          - person1
+    households:
+      hh:
+        members:
+          - person1
+  output:
+    life_insurance_relief: 0

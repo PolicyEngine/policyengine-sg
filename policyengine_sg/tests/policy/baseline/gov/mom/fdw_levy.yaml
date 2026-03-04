@@ -1,0 +1,54 @@
+- name: Case 1, standard levy with FDW.
+  absolute_error_margin: 0.1
+  period: 2024
+  input:
+    people:
+      person1:
+        age: 40
+        has_fdw: true
+        has_child_under_16: false
+        has_elderly_67_plus: false
+        is_disabled: false
+  output:
+    # Standard: $300/month * 12 = $3,600
+    fdw_levy: 3_600
+
+- name: Case 2, concessionary levy with young child.
+  absolute_error_margin: 0.1
+  period: 2024
+  input:
+    people:
+      person1:
+        age: 40
+        has_fdw: true
+        has_child_under_16: true
+        has_elderly_67_plus: false
+        is_disabled: false
+  output:
+    # Concessionary: $60/month * 12 = $720
+    fdw_levy: 720
+
+- name: Case 3, concessionary levy with elderly member.
+  absolute_error_margin: 0.1
+  period: 2024
+  input:
+    people:
+      person1:
+        age: 40
+        has_fdw: true
+        has_child_under_16: false
+        has_elderly_67_plus: true
+  output:
+    # Concessionary: $60/month * 12 = $720
+    fdw_levy: 720
+
+- name: Case 4, no FDW means no levy.
+  absolute_error_margin: 0.1
+  period: 2024
+  input:
+    people:
+      person1:
+        age: 40
+        has_fdw: false
+  output:
+    fdw_levy: 0

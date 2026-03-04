@@ -1,0 +1,10 @@
+description: Singapore provides this child relief amount per child with disability.
+values:
+  2024-01-01: 7_500
+metadata:
+  unit: currency-SGD
+  period: year
+  label: Child relief disability amount
+  reference:
+    - title: IRAS Child Relief (Disability)
+      href: https://www.iras.gov.sg/taxes/individual-income-tax/basics-of-individual-income-tax/tax-reliefs-rebates-and-deductions/tax-reliefs/qualifying-child-relief-(qcr)-child-relief-(disability)

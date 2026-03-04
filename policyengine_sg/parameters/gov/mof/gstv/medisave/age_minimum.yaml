@@ -1,0 +1,10 @@
+description: Singapore provides GSTV MediSave to citizens aged at least this threshold.
+values:
+  2025-01-01: 65
+metadata:
+  unit: year
+  period: year
+  label: GSTV MediSave minimum age
+  reference:
+    - title: GSTV MediSave Eligibility
+      href: https://www.govbenefits.gov.sg/about-us/gst-voucher/am-i-eligible/

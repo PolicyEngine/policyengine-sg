@@ -1,0 +1,92 @@
+- name: Income exactly at 20,000 bracket boundary.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 25
+        employment_income: 27_000
+        is_resident: true
+  output:
+    # CPF: 27,000 * 20% = 5,400
+    # Earned income relief: 1,000
+    # Chargeable: 27,000 - 5,400 - 1,000 = 20,600
+    # Tax: 20,000 * 0% + 600 * 2% = 12
+    # PIT rebate: min(12 * 60%, 200) = 7.2
+    # Net tax: 12 - 7.2 = 4.8
+    chargeable_income: 20_600
+    income_tax_before_rebate: 12
+    income_tax: 4.8
+
+- name: Income exactly at 30,000 bracket boundary.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 25
+        employment_income: 40_000
+        is_resident: true
+  output:
+    # CPF: 40,000 * 20% = 8,000
+    # Earned income: 1,000
+    # Chargeable: 40,000 - 8,000 - 1,000 = 31,000
+    # Tax: 20k*0% + 10k*2% + 1k*3.5% = 200 + 35 = 235
+    # PIT rebate: min(235 * 60%, 200) = 141
+    # Net tax: 235 - 141 = 94
+    chargeable_income: 31_000
+    income_tax_before_rebate: 235
+    income_tax: 94
+
+- name: Chargeable income exactly 500,000.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 25
+        employment_income: 500_000
+        is_resident: true
+        is_citizen: true
+  output:
+    # CPF: 102,000 * 20% = 20,400
+    # Earned income: 1,000
+    # Total reliefs: 21,400
+    # Chargeable: 500,000 - 21,400 = 478,600
+    # Tax up to 320k = 20k*0+10k*0.02+10k*0.035+40k*0.07+40k*0.115
+    #   +40k*0.15+40k*0.18+40k*0.19+40k*0.195+40k*0.20
+    #   = 0+200+350+2800+4600+6000+7200+7600+7800+8000 = 44,550
+    # 320k to 478.6k = 158,600 * 0.22 = 34,892
+    # Total: 44,550 + 34,892 = 79,442
+    # PIT rebate: min(79,442*60%, 200) = 200
+    # Income tax: 79,442 - 200 = 79,242
+    income_tax_before_rebate: 79_442
+    income_tax: 79_242
+
+- name: Earned income relief 55-59 age band.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 57
+        employment_income: 50_000
+        is_resident: true
+        is_citizen: true
+  output:
+    # Earned income relief for age 55-59: 6,000
+    earned_income_relief: 6_000
+
+- name: Spouse relief with qualifying spouse.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 35
+        employment_income: 80_000
+        is_resident: true
+        is_citizen: true
+        is_married: true
+  output:
+    spouse_relief: 2_000

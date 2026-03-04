@@ -1,0 +1,54 @@
+- name: Case 1, citizen low income with 1 kindergarten child.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 35
+        is_citizen: true
+        number_of_children_in_kindergarten: 1
+        gross_monthly_household_income: 2_000
+  output:
+    # GHI $2,000 <= $3,000 => $163/mo * 12 = $1,956
+    kifas: 1_956
+
+- name: Case 2, citizen mid income with 2 kindergarten children.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 35
+        is_citizen: true
+        number_of_children_in_kindergarten: 2
+        gross_monthly_household_income: 7_000
+  output:
+    # GHI $7,000 in $6,001-$7,500 => $87/mo * 2 * 12 = $2,088
+    kifas: 2_088
+
+- name: Case 3, income above ceiling.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 35
+        is_citizen: true
+        number_of_children_in_kindergarten: 1
+        gross_monthly_household_income: 13_000
+  output:
+    # GHI > $12,000 => $0
+    kifas: 0
+
+- name: Case 4, non-citizen gets nothing.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 35
+        is_citizen: false
+        number_of_children_in_kindergarten: 1
+        gross_monthly_household_income: 2_000
+  output:
+    kifas: 0

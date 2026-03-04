@@ -1,0 +1,10 @@
+description: Singapore provides this monthly basic infant care subsidy for working mothers with Singapore Citizen children.
+values:
+  2024-01-01: 600
+metadata:
+  unit: currency-SGD
+  period: month
+  label: Basic infant care subsidy working mother
+  reference:
+    - title: ECDA - Childcare Subsidy
+      href: https://www.ecda.gov.sg/parents/preschool-subsidies/infant-and-childcare-subsidy-scheme/overview

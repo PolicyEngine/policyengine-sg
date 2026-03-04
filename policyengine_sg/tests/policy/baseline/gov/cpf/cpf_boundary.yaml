@@ -1,0 +1,127 @@
+- name: CPF at exact age boundary 55 (still in below-55 band).
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 55
+        employment_income: 60_000
+        is_citizen: true
+  output:
+    # Age 55 => age_55_and_below band
+    # Employee: 60,000 * 20% = 12,000
+    # Employer: 60,000 * 17% = 10,200
+    cpf_employee_contribution: 12_000
+    cpf_employer_contribution: 10_200
+
+- name: CPF at age 56 (above-55-to-60 band).
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 56
+        employment_income: 60_000
+        is_citizen: true
+  output:
+    # Age 56 => above_55_to_60 band
+    # Employee: 60,000 * 17% = 10,200
+    # Employer: 60,000 * 15.5% = 9,300
+    cpf_employee_contribution: 10_200
+    cpf_employer_contribution: 9_300
+
+- name: CPF at exact age boundary 60.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 60
+        employment_income: 60_000
+        is_citizen: true
+  output:
+    # Age 60 => still above_55_to_60 band
+    # Employee: 60,000 * 17% = 10,200
+    # Employer: 60,000 * 15.5% = 9,300
+    cpf_employee_contribution: 10_200
+    cpf_employer_contribution: 9_300
+
+- name: CPF at age 61 (above-60-to-65 band).
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 61
+        employment_income: 60_000
+        is_citizen: true
+  output:
+    # Age 61 => above_60_to_65 band
+    # Employee: 60,000 * 11.5% = 6,900
+    # Employer: 60,000 * 12% = 7,200
+    cpf_employee_contribution: 6_900
+    cpf_employer_contribution: 7_200
+
+- name: CPF at exact age boundary 65.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 65
+        employment_income: 60_000
+        is_citizen: true
+  output:
+    # Age 65 => still above_60_to_65 band
+    # Employee: 60,000 * 11.5% = 6,900
+    # Employer: 60,000 * 12% = 7,200
+    cpf_employee_contribution: 6_900
+    cpf_employer_contribution: 7_200
+
+- name: CPF at age 66 (above-65-to-70 band).
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 66
+        employment_income: 60_000
+        is_citizen: true
+  output:
+    # Age 66 => above_65_to_70 band
+    # Employee: 60,000 * 7.5% = 4,500
+    # Employer: 60,000 * 9% = 5,400
+    cpf_employee_contribution: 4_500
+    cpf_employer_contribution: 5_400
+
+- name: CPF at exact age boundary 70.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 70
+        employment_income: 60_000
+        is_citizen: true
+  output:
+    # Age 70 => still above_65_to_70 band
+    # Employee: 60,000 * 7.5% = 4,500
+    # Employer: 60,000 * 9% = 5,400
+    cpf_employee_contribution: 4_500
+    cpf_employer_contribution: 5_400
+
+- name: CPF at age 71 (above-70 band).
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 71
+        employment_income: 60_000
+        is_citizen: true
+  output:
+    # Age 71 => above_70 band
+    # Employee: 60,000 * 5% = 3,000
+    # Employer: 60,000 * 7.5% = 4,500
+    cpf_employee_contribution: 3_000
+    cpf_employer_contribution: 4_500

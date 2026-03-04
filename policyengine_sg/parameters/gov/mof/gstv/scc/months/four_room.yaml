@@ -1,0 +1,10 @@
+description: Singapore provides this many months of S&CC rebate to 4-room HDB households.
+values:
+  2025-01-01: 2.5
+metadata:
+  unit: month
+  period: year
+  label: GSTV S&CC rebate months 4-room
+  reference:
+    - title: MOF S&CC Rebates April 2025
+      href: https://www.mof.gov.sg/news-resources/newsroom/more-than-950-000-singaporean-hdb-households-to-benefit-from-u-save-and-s-cc-rebates-in-april-2025/

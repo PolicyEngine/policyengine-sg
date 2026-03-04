@@ -1,0 +1,10 @@
+description: Singapore taxes non-resident directors' fees at this flat rate.
+values:
+  2024-01-01: 0.24
+metadata:
+  unit: /1
+  period: year
+  label: Non-resident director tax rate
+  reference:
+    - title: IRAS Non-Resident Director Tax
+      href: https://www.iras.gov.sg/taxes/withholding-tax/payments-to-non-resident-director/tax-obligations-for-non-resident-director

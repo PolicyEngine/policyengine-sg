@@ -1,0 +1,10 @@
+description: Singapore provides this GST Voucher cash amount to eligible citizens with property annual value between $21,001 and $31,000.
+values:
+  2025-01-01: 450
+metadata:
+  unit: currency-SGD
+  period: year
+  label: GSTV cash higher AV
+  reference:
+    - title: GST Voucher - Eligibility and Amounts
+      href: https://www.govbenefits.gov.sg/about-us/gst-voucher/am-i-eligible/

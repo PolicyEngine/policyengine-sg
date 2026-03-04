@@ -1,0 +1,59 @@
+- name: Case 1, citizen household receives vouchers.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        is_citizen: true
+    benefit_units:
+      bu:
+        adults:
+          - person1
+    households:
+      hh:
+        members:
+          - person1
+  output:
+    cdc_vouchers: 500
+
+- name: Case 2, mixed household with one citizen.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        is_citizen: false
+        is_pr: true
+      person2:
+        is_citizen: true
+    benefit_units:
+      bu:
+        adults:
+          - person1
+          - person2
+    households:
+      hh:
+        members:
+          - person1
+          - person2
+  output:
+    # At least one citizen -> household gets vouchers
+    cdc_vouchers: 500
+
+- name: Case 3, non-citizen household.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        is_citizen: false
+    benefit_units:
+      bu:
+        adults:
+          - person1
+    households:
+      hh:
+        members:
+          - person1
+  output:
+    cdc_vouchers: 0

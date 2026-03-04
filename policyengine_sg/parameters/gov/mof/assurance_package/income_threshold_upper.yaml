@@ -1,0 +1,10 @@
+description: Singapore uses this upper assessable income threshold for the Assurance Package cash tier.
+values:
+  2025-01-01: 100_000
+metadata:
+  unit: currency-SGD
+  period: year
+  label: Assurance Package upper income threshold
+  reference:
+    - title: Assurance Package - GovBenefits
+      href: https://www.govbenefits.gov.sg/about-us/assurance-package/am-i-eligible/

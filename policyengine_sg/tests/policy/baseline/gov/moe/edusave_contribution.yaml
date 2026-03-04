@@ -1,0 +1,49 @@
+- name: Case 1, citizen primary student.
+  absolute_error_margin: 0.1
+  period: 2024
+  input:
+    people:
+      person1:
+        age: 10
+        is_citizen: true
+        school_level: PRIMARY
+  output:
+    # Primary student: $230
+    edusave_contribution: 230
+
+- name: Case 2, citizen secondary student.
+  absolute_error_margin: 0.1
+  period: 2024
+  input:
+    people:
+      person1:
+        age: 14
+        is_citizen: true
+        school_level: SECONDARY
+  output:
+    # Secondary student: $290
+    edusave_contribution: 290
+
+- name: Case 3, citizen not in school.
+  absolute_error_margin: 0.1
+  period: 2024
+  input:
+    people:
+      person1:
+        age: 25
+        is_citizen: true
+        school_level: NOT_IN_SCHOOL
+  output:
+    edusave_contribution: 0
+
+- name: Case 4, non-citizen student gets nothing.
+  absolute_error_margin: 0.1
+  period: 2024
+  input:
+    people:
+      person1:
+        age: 10
+        is_citizen: false
+        school_level: PRIMARY
+  output:
+    edusave_contribution: 0

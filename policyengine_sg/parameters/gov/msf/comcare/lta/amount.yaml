@@ -1,0 +1,35 @@
+description: Singapore provides this monthly ComCare Long-Term Assistance amount by household size.
+
+metadata:
+  type: single_amount
+  threshold_unit: person
+  amount_unit: currency-SGD
+  period: month
+  label: ComCare LTA monthly amount by household size
+  reference:
+    - title: Higher Assistance Rates For ComCare Households
+      href: https://www.msf.gov.sg/media-room/article/Higher-Assistance-Rates-For-ComCare-Households
+    - title: MSF ComCare
+      href: https://www.msf.gov.sg/what-we-do/comcare
+
+brackets:
+  - threshold:
+      2023-07-01: 1
+    amount:
+      2023-07-01: 640
+      2025-04-01: 760
+  - threshold:
+      2023-07-01: 2
+    amount:
+      2023-07-01: 1_080
+      2025-04-01: 1_280
+  - threshold:
+      2023-07-01: 3
+    amount:
+      2023-07-01: 1_510
+      2025-04-01: 1_790
+  - threshold:
+      2023-07-01: 4
+    amount:
+      2023-07-01: 1_930
+      2025-04-01: 2_290

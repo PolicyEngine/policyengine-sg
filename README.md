@@ -6,54 +6,53 @@
 
 PolicyEngine Singapore is a free, open-source microsimulation model of Singapore's tax and benefit system. It enables users to calculate taxes and benefits for individual households and analyze the distributional impacts of policy reforms.
 
-## Features
+## What's Included
 
-### Comprehensive Tax Modeling
-- Personal income tax with progressive brackets
-- Central Provident Fund (CPF) contributions
-- Goods and Services Tax (GST)
-- Foreign Worker Levy (coming soon)
-- Property tax (coming soon)
-- Motor vehicle taxes (coming soon)
+### Taxes
+- **Personal income tax** — 13 progressive brackets (0-24%), 13 relief types, PIT and PTR rebates
+- **CPF contributions** — Employee and employer rates across 5 age bands (2024-2025)
+- **Property tax** — Owner-occupied and non-owner-occupied rates
+- **Stamp duties** — BSD (6 brackets), ABSD (7 buyer profiles), SSD (3 holding periods)
+- **GST** — 9% on taxable consumption
+- **Skills Development Levy** — Employer payroll levy
 
-### Social Benefits and Programs
-- ComCare social assistance programs
-- WorkFare Income Supplement (WIS)
-- CPF schemes (Healthcare, Housing, etc.)
-- Senior citizen benefits (coming soon)
-- Education subsidies (coming soon)
+### Benefits and Transfers
+- **GSTV** — Cash, U-Save, MediSave, and S&CC rebates
+- **CDC Vouchers** — Household vouchers for citizens
+- **Assurance Package** — Cash transfers by income tier
+- **Workfare Income Supplement (WIS)** — Piecewise linear tapering across 4 age bands
+- **Silver Support** — Quarterly payouts by HDB flat type and income tier
+- **ComCare** — Long-Term Assistance (LTA) and SMTA eligibility
+- **Baby Bonus** — Cash gift by birth order
+- **CDA First Step Grant** — By birth order and date
+- **Childcare and infant care subsidies** — Basic + additional by GHI bracket
+- **KiFAS** — Kindergarten fee assistance by GHI bracket
+- **MOE FAS** — Financial assistance eligibility
+- **CHAS** — Blue/Orange/Green tier classification by PCI
+- **Enhanced CPF Housing Grant** — Up to $120k by GHI bracket
+- **FDW levy concession** — Concessionary rates for families with children, elderly, or disabled
+- **Student Care Fee Assistance (SCFA)** — By GHI bracket
+- **Edusave contributions** — $230 (primary), $290 (secondary)
 
-### Key Capabilities
-- **Up-to-date parameters**: Latest tax rates and benefit amounts
-- **Government sources**: All parameters referenced to official Singapore sources
-- **Test-driven development**: Comprehensive test coverage
-- **Reform analysis**: Model policy changes and impacts
-- **Open source**: Transparent and auditable
+### Tax Reliefs
+Earned income, spouse, child (QCR), working mother's child (WMCR), parent, handicapped parent, grandparent caregiver, sibling disability, CPF cash top-up, course fees, NSman (5 categories), and life insurance.
 
 ## Installation
 
 ### Requirements
 - Python 3.10 or higher (3.13 recommended)
-- pip or uv package manager
 
 ### Install from source
 
 ```bash
-# Clone the repository
 git clone https://github.com/PolicyEngine/policyengine-sg.git
 cd policyengine-sg
 
 # Install with uv (recommended)
-uv pip install --system -e .
+uv pip install -e .
 
 # Or with pip
 pip install -e .
-```
-
-### Install from PyPI (coming soon)
-
-```bash
-pip install policyengine-sg
 ```
 
 ## Quick Start
@@ -62,100 +61,87 @@ pip install policyengine-sg
 from policyengine_sg import SingaporeTaxBenefitSystem
 from policyengine_core.simulations import Simulation
 
-# Create the tax-benefit system
 system = SingaporeTaxBenefitSystem()
 
-# Define a household
 situation = {
     "people": {
         "person1": {
-            "age": {"2024": 35},
-            "employment_income": {"2024": 60000}
+            "age": {"2025": 35},
+            "is_citizen": {"2025": True},
+            "employment_income": {"2025": 60_000},
+        }
+    },
+    "benefit_units": {
+        "bu": {
+            "adults": ["person1"],
         }
     },
     "households": {
         "household": {
-            "members": ["person1"]
+            "members": ["person1"],
         }
-    }
+    },
 }
 
-# Run simulation
 simulation = Simulation(
     tax_benefit_system=system,
-    situation=situation
+    situation=situation,
 )
 
-# Calculate values
-income_tax = simulation.calculate("income_tax", "2024")
-cpf_contributions = simulation.calculate("cpf_contributions", "2024")
+income_tax = simulation.calculate("income_tax", "2025")
+cpf = simulation.calculate("cpf_total_contribution", "2025")
 
 print(f"Income tax: S${income_tax[0]:,.2f}")
-print(f"CPF contributions: S${cpf_contributions[0]:,.2f}")
+print(f"CPF total contribution: S${cpf[0]:,.2f}")
 ```
-
-## Documentation
-
-Full documentation is available at: [https://policyengine.github.io/policyengine-sg](https://policyengine.github.io/policyengine-sg)
-
-- [Tax Programs](docs/tax-programs.md) - Detailed tax calculations
-- [Benefit Programs](docs/benefit-programs.md) - Social assistance programs
-- [Developer Guide](docs/developer-guide.md) - Contributing guide
-- [API Reference](docs/api-reference.md) - Technical documentation
 
 ## Development
 
-### Setting up development environment
-
 ```bash
 # Install development dependencies
-uv pip install --system -e .[dev]
+uv pip install -e .[dev]
 
-# Run tests
-uv run pytest
+# Run tests (122 tests)
+make test
 
 # Format code
 make format
 
-# Build documentation
-myst build docs
+# Check vectorization
+make check-vectorization
 ```
 
-### Running tests
+## Project Stats
 
-```bash
-# Run all tests with coverage
-uv run pytest --cov=policyengine_sg
-
-# Run specific test file
-uv run pytest policyengine_sg/tests/policy/baseline/test_income_tax.yaml
-
-# Run only unit tests
-uv run pytest policyengine_sg/tests -k "not yaml"
-```
-
-## Contributing
-
-We welcome contributions! Please see our [Developer Guide](docs/developer-guide.md) for:
-- Setting up your development environment
-- Adding new parameters and variables
-- Writing tests
-- Submitting pull requests
-
-### Key principles
-1. **Test-driven development**: Write tests first
-2. **Government sources**: Reference all parameters to official sources
-3. **Code quality**: Format with Black (79 chars)
-4. **Documentation**: Update docs with changes
+- ~113 variables
+- ~155 parameter files with official .gov.sg sources
+- 122 tests (all passing)
 
 ## Data and Validation
 
-PolicyEngine Singapore is validated against:
-- IRAS tax calculators
-- CPF contribution calculators
-- MSF benefit calculators
-- Published government rate tables
-- Official Singapore statistics
+Parameters are sourced from and validated against:
+- [IRAS](https://www.iras.gov.sg/) tax calculators and rate tables
+- [CPF Board](https://www.cpf.gov.sg/) contribution tables and WIS calculator
+- [MSF](https://www.msf.gov.sg/) ComCare and social assistance guidelines
+- [MOF](https://www.mof.gov.sg/) Budget announcements and GSTV schedules
+- [HDB](https://www.hdb.gov.sg/) housing grant information
+- [ECDA](https://www.ecda.gov.sg/) childcare subsidy schedules
+
+## Known Limitations
+
+Some programs cannot be fully modeled due to PolicyEngine's single-period architecture:
+
+| Program | Limitation |
+|---------|-----------|
+| CPF LIFE payouts | Needs CPF balance history |
+| MediFund | Discretionary case-by-case assessment |
+| ComCare SMTA amounts | Caseworker assessment (eligibility modeled) |
+| PTR birth-order tracking | Multi-year carry-forward (balance input used) |
+| SkillsFuture Credit | Balance tracking across periods |
+| MediShield Life subsidies | Complex age+income premium matrix |
+| CareShield Life subsidies | Complex premium/subsidy schedule |
+
+See [GAPS.md](GAPS.md) for the full tracker.
 
 ## License
 
@@ -163,13 +149,11 @@ PolicyEngine Singapore is licensed under the [GNU Affero General Public License 
 
 ## Citation
 
-If you use PolicyEngine Singapore in your research, please cite:
-
 ```bibtex
 @software{policyengine_singapore,
   title = {PolicyEngine Singapore},
   author = {PolicyEngine},
-  year = {2024},
+  year = {2025},
   url = {https://github.com/PolicyEngine/policyengine-sg}
 }
 ```
@@ -177,37 +161,5 @@ If you use PolicyEngine Singapore in your research, please cite:
 ## Support
 
 - **Issues**: [GitHub Issues](https://github.com/PolicyEngine/policyengine-sg/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/PolicyEngine/policyengine-sg/discussions)
 - **Email**: hello@policyengine.org
 - **Website**: [policyengine.org](https://policyengine.org)
-
-## Acknowledgments
-
-PolicyEngine Singapore builds on:
-- [OpenFisca](https://openfisca.org/) framework via PolicyEngine Core
-- Singapore government data and documentation
-- Open source tax-benefit modeling community
-
-## Roadmap
-
-### Near-term (Q1 2025)
-- Complete personal income tax implementation
-- Add CPF contribution calculations
-- Implement GST framework
-- Add ComCare social assistance
-
-### Medium-term (Q2-Q3 2025)
-- WorkFare Income Supplement
-- CPF housing and healthcare schemes
-- Foreign Worker Levy
-- Property tax calculations
-
-### Long-term
-- Full integration with PolicyEngine web app
-- Motor vehicle taxes and COE system
-- Education subsidies and schemes
-- Behavioral responses and dynamic scoring
-
----
-
-**Note**: This model is under active development. Parameters are updated regularly to reflect policy changes. Always verify calculations against official IRAS, CPF, and MSF sources for critical applications.

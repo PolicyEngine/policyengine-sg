@@ -1,0 +1,37 @@
+- name: Case 1, citizen with 2 children.
+  absolute_error_margin: 0.1
+  period: 2024
+  input:
+    people:
+      person1:
+        age: 35
+        is_citizen: true
+        number_of_children: 2
+  output:
+    # 2 * $5,000 = $10,000
+    cda_first_step_grant: 10_000
+
+- name: Case 2, citizen with 4 children pre-2025.
+  absolute_error_margin: 0.1
+  period: 2024
+  input:
+    people:
+      person1:
+        age: 35
+        is_citizen: true
+        number_of_children: 4
+  output:
+    # 2 * $5,000 + 2 * $5,000 = $20,000 (pre-Feb 2025 rate)
+    cda_first_step_grant: 20_000
+
+- name: Case 3, non-citizen gets nothing.
+  absolute_error_margin: 0.1
+  period: 2024
+  input:
+    people:
+      person1:
+        age: 35
+        is_citizen: false
+        number_of_children: 3
+  output:
+    cda_first_step_grant: 0

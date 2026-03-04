@@ -1,0 +1,12 @@
+description: Singapore limits ComCare assistance eligibility to those with monthly household income per capita up to this amount.
+values:
+  2023-07-17: 800
+metadata:
+  unit: currency-SGD
+  period: month
+  label: ComCare per capita income ceiling
+  reference:
+    - title: Raising of per capita Income Benchmark for ComCare Assistance
+      href: https://www.msf.gov.sg/media-room/article/raising-of-per-capita-income-benchmark-for-comcare-assistance
+    - title: MSF ComCare
+      href: https://www.msf.gov.sg/what-we-do/comcare

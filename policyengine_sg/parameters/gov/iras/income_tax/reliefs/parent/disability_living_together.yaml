@@ -1,0 +1,10 @@
+description: Singapore provides this parent relief amount for a dependant with disability living with the taxpayer.
+values:
+  2024-01-01: 14_000
+metadata:
+  unit: currency-SGD
+  period: year
+  label: Parent relief disability living together
+  reference:
+    - title: IRAS Parent Relief (Disability)
+      href: https://www.iras.gov.sg/taxes/individual-income-tax/basics-of-individual-income-tax/tax-reliefs-rebates-and-deductions/tax-reliefs/parent-relief-parent-relief-(disability)

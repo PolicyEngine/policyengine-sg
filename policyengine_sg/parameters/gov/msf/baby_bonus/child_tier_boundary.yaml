@@ -1,0 +1,10 @@
+description: Singapore sets this child count boundary between the lower and higher Baby Bonus Cash Gift tiers.
+values:
+  2023-02-14: 2
+metadata:
+  unit: /1
+  period: year
+  label: Baby Bonus child tier boundary
+  reference:
+    - title: Baby Bonus Scheme - LifeSG
+      href: https://www.life.gov.sg/family-parenting/benefits-support/baby-bonus-scheme

@@ -1,0 +1,52 @@
+- name: Case 1, citizen with low GHI qualifies.
+  absolute_error_margin: 0.1
+  period: 2024
+  input:
+    people:
+      person1:
+        age: 10
+        is_citizen: true
+        gross_monthly_household_income: 2_500
+  output:
+    # GHI $2,500 <= $3,000 ceiling => eligible
+    moe_fas_eligible: true
+
+- name: Case 2, citizen with low PCI qualifies.
+  absolute_error_margin: 0.1
+  period: 2024
+  input:
+    people:
+      person1:
+        age: 10
+        is_citizen: true
+        gross_monthly_household_income: 4_000
+        household_income_per_capita: 700
+  output:
+    # GHI $4,000 > $3,000 but PCI $700 <= $750 => eligible
+    moe_fas_eligible: true
+
+- name: Case 3, citizen with high income ineligible.
+  absolute_error_margin: 0.1
+  period: 2024
+  input:
+    people:
+      person1:
+        age: 10
+        is_citizen: true
+        gross_monthly_household_income: 4_000
+        household_income_per_capita: 1_000
+  output:
+    # GHI > $3,000 AND PCI > $750 => not eligible
+    moe_fas_eligible: false
+
+- name: Case 4, non-citizen ineligible.
+  absolute_error_margin: 0.1
+  period: 2024
+  input:
+    people:
+      person1:
+        age: 10
+        is_citizen: false
+        gross_monthly_household_income: 2_000
+  output:
+    moe_fas_eligible: false

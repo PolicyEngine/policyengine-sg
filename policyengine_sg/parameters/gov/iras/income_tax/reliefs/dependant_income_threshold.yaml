@@ -1,0 +1,11 @@
+description: Singapore limits dependant income to this amount for personal relief claims.
+values:
+  2024-01-01: 4_000
+  2025-01-01: 8_000
+metadata:
+  unit: currency-SGD
+  period: year
+  label: Dependant income threshold for reliefs
+  reference:
+    - title: IRAS Tax Reliefs
+      href: https://www.iras.gov.sg/taxes/individual-income-tax/basics-of-individual-income-tax/tax-reliefs-rebates-and-deductions/tax-reliefs

@@ -1,0 +1,30 @@
+- name: SRS relief capped at foreigner limit.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 40
+        employment_income: 100_000
+        srs_contribution: 40_000
+        is_resident: true
+        is_citizen: false
+        is_pr: false
+  output:
+    # Foreigner SRS cap: $35,700
+    srs_relief: 35_700
+
+- name: SRS relief for citizen within cap.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 40
+        employment_income: 100_000
+        srs_contribution: 10_000
+        is_resident: true
+        is_citizen: true
+  output:
+    # Citizen SRS cap: $15,300, contribution $10,000 < cap
+    srs_relief: 10_000

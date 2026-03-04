@@ -1,0 +1,55 @@
+- name: Case 1, citizen low income with 1 student care child.
+  absolute_error_margin: 0.1
+  period: 2024
+  input:
+    people:
+      person1:
+        age: 35
+        is_citizen: true
+        number_of_children_in_student_care: 1
+        gross_monthly_household_income: 1_000
+  output:
+    # GHI $1,000 <= $1,500 => $290/mo * 12 = $3,480
+    scfa: 3_480
+
+- name: Case 2, citizen mid income with 2 student care children.
+  absolute_error_margin: 0.1
+  period: 2024
+  input:
+    people:
+      person1:
+        age: 35
+        is_citizen: true
+        number_of_children_in_student_care: 2
+        gross_monthly_household_income: 3_000
+  output:
+    # GHI $3,000 in $2,801-$3,000 band => $177/mo
+    # 2 * $177 * 12 = $4,248
+    scfa: 4_248
+
+- name: Case 3, income above ceiling.
+  absolute_error_margin: 0.1
+  period: 2024
+  input:
+    people:
+      person1:
+        age: 35
+        is_citizen: true
+        number_of_children_in_student_care: 1
+        gross_monthly_household_income: 5_000
+  output:
+    # GHI >= $4,501 => $0
+    scfa: 0
+
+- name: Case 4, non-citizen gets nothing.
+  absolute_error_margin: 0.1
+  period: 2024
+  input:
+    people:
+      person1:
+        age: 35
+        is_citizen: false
+        number_of_children_in_student_care: 1
+        gross_monthly_household_income: 1_000
+  output:
+    scfa: 0

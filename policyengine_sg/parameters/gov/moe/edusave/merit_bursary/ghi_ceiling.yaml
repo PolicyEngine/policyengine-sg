@@ -1,0 +1,10 @@
+description: Singapore provides the Edusave Merit Bursary to students with gross monthly household income at or below this amount.
+values:
+  2025-01-01: 9_000
+metadata:
+  unit: currency-SGD
+  period: month
+  label: Edusave Merit Bursary GHI ceiling
+  reference:
+    - title: MOE - Edusave Awards
+      href: https://www.moe.gov.sg/financial-matters/awards-scholarships/edusave-awards

@@ -1,0 +1,10 @@
+description: Singapore provides this quarterly GST Voucher U-Save rebate to executive HDB households (includes Assurance Package doubling for FY2025).
+values:
+  2025-01-01: 110
+metadata:
+  unit: currency-SGD
+  period: quarter
+  label: GSTV U-Save quarterly executive
+  reference:
+    - title: GST Voucher - Eligibility and Amounts
+      href: https://www.govbenefits.gov.sg/about-us/gst-voucher/am-i-eligible/

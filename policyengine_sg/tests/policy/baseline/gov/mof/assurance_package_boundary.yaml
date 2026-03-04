@@ -1,0 +1,55 @@
+- name: AP at exact income threshold boundary.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 35
+        employment_income: 34_000
+        is_citizen: true
+        number_of_properties: 1
+  output:
+    # Income $34,000 = threshold => low-income tier
+    assurance_package_cash: 600
+
+- name: AP one dollar above lower threshold.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 35
+        employment_income: 34_001
+        is_citizen: true
+        number_of_properties: 1
+  output:
+    # Income $34,001 > $34,000 => middle-income tier
+    assurance_package_cash: 350
+
+- name: AP at exact upper threshold.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 35
+        employment_income: 100_000
+        is_citizen: true
+        number_of_properties: 1
+  output:
+    # Income $100,000 = upper threshold => middle tier
+    assurance_package_cash: 350
+
+- name: AP under age minimum.
+  absolute_error_margin: 0.1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 20
+        employment_income: 20_000
+        is_citizen: true
+        number_of_properties: 1
+  output:
+    # Age 20 < 21 minimum
+    assurance_package_cash: 0

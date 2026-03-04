@@ -1,0 +1,103 @@
+# Cross-Program Validation Tests
+#
+# Realistic multi-program household scenarios that exercise income tax
+# and benefit programs simultaneously. These catch systemic errors where
+# individual-program unit tests pass but interactions break (e.g., an
+# income definition used by both tax and benefits is wrong).
+
+- name: "Low-income elderly citizen — taxes zero, multiple benefits active"
+  # Exercises simultaneously: income tax (zero bracket), CPF (age 65-70),
+  # WIS (age 60+ schedule), GSTV Cash, Assurance Package
+  #
+  # Profile: age 70, $18K employment income, citizen, 1-property HDB
+  # Expected: zero tax, positive WIS + GSTV + Assurance Package
+  absolute_error_margin: 1
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 70
+        employment_income: 18_000
+        is_resident: true
+        is_citizen: true
+        number_of_properties: 1
+    households:
+      hh:
+        members:
+          - person1
+        # 2-room HDB typical AV
+        property_annual_value: 6_000
+  output:
+    # CPF (age 65-70): min(18,000, 102,000) * 7.5% = 1,350
+    cpf_employee_contribution: 1_350
+    # CPF employer (age 65-70): 18,000 * 9% = 1,620
+    cpf_employer_contribution: 1_620
+    # Reliefs: earned income (60+) 8,000 + CPF 1,350 = 9,350
+    earned_income_relief: 8_000
+    total_personal_reliefs: 9_350
+    # Chargeable: 18,000 - 9,350 = 8,650 (under 20K = zero tax)
+    chargeable_income: 8_650
+    income_tax: 0
+    # WIS: citizen, age 70 >= 30, monthly $1,500 (within $500-$3,000)
+    # Age 60+ schedule interpolation at $1,500/month ~ $387.67/month
+    # Annual: ~$4,652
+    wis_eligible: true
+    wis_amount: 4_652
+    # WIS cash: 4,652 * 40% = 1,860.80
+    wis_cash: 1_861
+    # GSTV: citizen, age >= 21, income $18K <= $39K ceiling,
+    # AV $6,000 <= $21,000 lower threshold → $850
+    gstv_cash: 850
+    # Assurance Package: citizen, age >= 21,
+    # income $18K <= $34K lower threshold → low income tier $600
+    assurance_package_cash: 600
+
+- name: "Young family — income tax with reliefs, mixed benefit eligibility"
+  # Exercises simultaneously: income tax (with spouse/child reliefs),
+  # CPF (under 55), WIS (ineligible — income too high),
+  # GSTV (ineligible — income over ceiling), Assurance Package (middle tier)
+  #
+  # Profile: age 32, $72K income, married, 1 child, citizen, 4-room HDB
+  absolute_error_margin: 0.5
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 32
+        employment_income: 72_000
+        is_resident: true
+        is_citizen: true
+        is_married: true
+        number_of_children: 1
+        number_of_properties: 1
+    households:
+      hh:
+        members:
+          - person1
+        # 4-room HDB typical AV
+        property_annual_value: 10_000
+  output:
+    # CPF (under 55): 72,000 * 20% = 14,400
+    cpf_employee_contribution: 14_400
+    cpf_employer_contribution: 12_240
+    # Reliefs: earned 1,000 + CPF 14,400 + spouse 2,000 + child 4,000
+    earned_income_relief: 1_000
+    cpf_relief: 14_400
+    spouse_relief: 2_000
+    child_relief: 4_000
+    total_personal_reliefs: 21_400
+    # Chargeable: 72,000 - 21,400 = 50,600
+    chargeable_income: 50_600
+    # Tax: 20K*0% + 10K*2% + 10K*3.5% + 10.6K*7%
+    #   = 0 + 200 + 350 + 742 = 1,292
+    income_tax_before_rebate: 1_292
+    pit_rebate: 200
+    # Income tax: 1,292 - 200 = 1,092
+    income_tax: 1_092
+    # WIS: monthly $6,000 > $3,000 ceiling → ineligible
+    wis_eligible: false
+    # GSTV: income $72,000 > $39,000 ceiling → $0
+    gstv_cash: 0
+    # Assurance Package: income $72,000 is between $34K and $100K
+    # → middle income tier $350
+    assurance_package_cash: 350

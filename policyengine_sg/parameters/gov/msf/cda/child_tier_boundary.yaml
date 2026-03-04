@@ -1,0 +1,10 @@
+description: Singapore sets this child count boundary between the lower and higher CDA First Step Grant tiers.
+values:
+  2023-02-14: 2
+metadata:
+  unit: /1
+  period: year
+  label: CDA First Step Grant child tier boundary
+  reference:
+    - title: CDA First Step Grant - LifeSG
+      href: https://www.life.gov.sg/family-parenting/benefits-support/baby-bonus-scheme/cda

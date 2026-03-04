@@ -1,0 +1,50 @@
+- name: Case 1, citizen with low PCI gets Blue.
+  absolute_error_margin: 0.1
+  period: 2024
+  input:
+    people:
+      person1:
+        age: 35
+        is_citizen: true
+        household_income_per_capita: 1_200
+  output:
+    # PCI $1,200 <= $1,500 => Blue
+    chas_tier: BLUE
+
+- name: Case 2, citizen with moderate PCI gets Orange.
+  absolute_error_margin: 0.1
+  period: 2024
+  input:
+    people:
+      person1:
+        age: 35
+        is_citizen: true
+        household_income_per_capita: 2_000
+  output:
+    # PCI $2,000 > $1,500 but <= $2,300 => Orange
+    chas_tier: ORANGE
+
+- name: Case 3, citizen above Orange threshold gets Green.
+  absolute_error_margin: 0.1
+  period: 2024
+  input:
+    people:
+      person1:
+        age: 35
+        is_citizen: true
+        household_income_per_capita: 3_000
+  output:
+    # PCI $3,000 > $2,300 => Green (all citizens get at least Green)
+    chas_tier: GREEN
+
+- name: Case 4, non-citizen not eligible.
+  absolute_error_margin: 0.1
+  period: 2024
+  input:
+    people:
+      person1:
+        age: 35
+        is_citizen: false
+        household_income_per_capita: 1_000
+  output:
+    chas_tier: NOT_ELIGIBLE

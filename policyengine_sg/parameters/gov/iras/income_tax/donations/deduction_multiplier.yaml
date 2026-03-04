@@ -1,0 +1,10 @@
+description: Singapore provides this multiplier on qualifying donations as a tax deduction.
+values:
+  2024-01-01: 2.5
+metadata:
+  unit: /1
+  period: year
+  label: Donations tax deduction multiplier
+  reference:
+    - title: IRAS Donations Tax Deductions
+      href: https://www.iras.gov.sg/taxes/other-taxes/charities/donations-tax-deductions

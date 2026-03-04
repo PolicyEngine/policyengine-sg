@@ -1,0 +1,15 @@
+description: Singapore caps monthly ordinary wages subject to CPF contributions at this amount.
+values:
+  2023-09-01: 6_300
+  2024-01-01: 6_800
+  2025-01-01: 7_400
+  2026-01-01: 8_000
+metadata:
+  unit: currency-SGD
+  period: month
+  label: CPF ordinary wage ceiling
+  reference:
+    - title: CPF Act 1953, Section 7
+      href: https://sso.agc.gov.sg/Act/CPFA1953
+    - title: CPF Board - What Payments Attract CPF Contributions
+      href: https://www.cpf.gov.sg/employer/employer-obligations/what-payments-attract-cpf-contributions

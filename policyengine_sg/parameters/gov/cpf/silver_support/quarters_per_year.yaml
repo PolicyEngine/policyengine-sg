@@ -1,0 +1,10 @@
+description: Singapore pays Silver Support quarterly, with this many payments per year.
+values:
+  2024-01-01: 4
+metadata:
+  unit: /1
+  period: year
+  label: Silver Support payments per year
+  reference:
+    - title: CPF Board - Silver Support Scheme
+      href: https://www.cpf.gov.sg/member/retirement-income/government-support/silver-support-scheme

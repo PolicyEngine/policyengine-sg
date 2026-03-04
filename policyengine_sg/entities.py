@@ -10,7 +10,6 @@ References:
 
 from policyengine_core.entities import build_entity
 
-
 Person = build_entity(
     key="person",
     plural="people",
