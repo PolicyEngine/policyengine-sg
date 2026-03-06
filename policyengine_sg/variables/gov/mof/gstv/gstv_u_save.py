@@ -10,7 +10,7 @@ class gstv_u_save(Variable):
     label = "GST Voucher U-Save annual rebate"
     unit = SGD
     definition_period = YEAR
-    reference = "https://www.govbenefits.gov.sg/" "about-us/gst-voucher/"
+    reference = "https://www.govbenefits.gov.sg/about-us/gst-voucher/"
 
     def formula(household, period, parameters):
         p = parameters(period).gov.mof.gstv.u_save

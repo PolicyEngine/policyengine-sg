@@ -20,6 +20,4 @@ class SingaporeTaxBenefitSystem(TaxBenefitSystem):
         self.load_parameters(os.path.join(COUNTRY_DIR, "parameters"))
 
         # Load variables
-        self.add_variables_from_directory(
-            os.path.join(COUNTRY_DIR, "variables")
-        )
+        self.add_variables_from_directory(os.path.join(COUNTRY_DIR, "variables"))

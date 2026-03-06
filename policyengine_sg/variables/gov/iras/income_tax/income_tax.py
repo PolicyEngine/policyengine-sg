@@ -7,7 +7,7 @@ class income_tax(Variable):
     label = "Income tax"
     unit = SGD
     definition_period = YEAR
-    reference = "https://www.iras.gov.sg/taxes/" "individual-income-tax"
+    reference = "https://www.iras.gov.sg/taxes/individual-income-tax"
 
     def formula(person, period, parameters):
         before_rebate = person("income_tax_before_rebate", period)

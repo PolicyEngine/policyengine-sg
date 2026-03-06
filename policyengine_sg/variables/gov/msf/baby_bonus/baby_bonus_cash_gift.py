@@ -8,8 +8,7 @@ class baby_bonus_cash_gift(Variable):
     unit = SGD
     definition_period = YEAR
     reference = (
-        "https://www.life.gov.sg/family-parenting/"
-        "benefits-support/baby-bonus-scheme"
+        "https://www.life.gov.sg/family-parenting/benefits-support/baby-bonus-scheme"
     )
 
     def formula(person, period, parameters):

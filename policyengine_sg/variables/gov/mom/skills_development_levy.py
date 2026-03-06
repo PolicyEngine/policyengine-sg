@@ -8,9 +8,7 @@ class skills_development_levy(Variable):
     unit = SGD
     definition_period = YEAR
     reference = (
-        "https://www.cpf.gov.sg/employer/"
-        "employer-obligations/"
-        "skills-development-levy"
+        "https://www.cpf.gov.sg/employer/employer-obligations/skills-development-levy"
     )
 
     def formula(person, period, parameters):

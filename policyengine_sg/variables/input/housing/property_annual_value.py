@@ -9,7 +9,5 @@ class property_annual_value(Variable):
     definition_period = YEAR
     default_value = 0
     reference = (
-        "https://www.iras.gov.sg/taxes/"
-        "property-tax/property-owners/"
-        "property-tax-rates"
+        "https://www.iras.gov.sg/taxes/property-tax/property-owners/property-tax-rates"
     )

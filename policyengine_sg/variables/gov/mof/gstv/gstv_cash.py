@@ -7,7 +7,7 @@ class gstv_cash(Variable):
     label = "GST Voucher cash"
     unit = SGD
     definition_period = YEAR
-    reference = "https://www.govbenefits.gov.sg/" "about-us/gst-voucher/"
+    reference = "https://www.govbenefits.gov.sg/about-us/gst-voucher/"
 
     def formula(person, period, parameters):
         p = parameters(period).gov.mof.gstv.cash

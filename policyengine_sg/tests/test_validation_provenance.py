@@ -72,9 +72,7 @@ class TestCPFContributionRates:
         """Income above $102K annual wage ceiling is not subject to CPF."""
         sim = _build({"age": 35, "employment_income": 200_000})
         # Capped at 102,000 * 20% = 20,400
-        assert _calc(sim, "cpf_employee_contribution") == pytest.approx(
-            20_400, abs=0.5
-        )
+        assert _calc(sim, "cpf_employee_contribution") == pytest.approx(20_400, abs=0.5)
 
 
 # ------------------------------------------------------------------ #
@@ -112,9 +110,7 @@ class TestPWCSample:
         assert _calc(sim, "total_income") == pytest.approx(175_000, abs=0.5)
 
     def test_cpf(self, sim):
-        assert _calc(sim, "cpf_employee_contribution") == pytest.approx(
-            20_400, abs=0.5
-        )
+        assert _calc(sim, "cpf_employee_contribution") == pytest.approx(20_400, abs=0.5)
 
     def test_reliefs(self, sim):
         assert _calc(sim, "earned_income_relief") == pytest.approx(1_000, abs=0.5)
@@ -122,9 +118,7 @@ class TestPWCSample:
         assert _calc(sim, "spouse_relief") == pytest.approx(2_000, abs=0.5)
         assert _calc(sim, "child_relief") == pytest.approx(8_000, abs=0.5)
         assert _calc(sim, "parent_relief") == pytest.approx(9_000, abs=0.5)
-        assert _calc(sim, "total_personal_reliefs") == pytest.approx(
-            40_400, abs=0.5
-        )
+        assert _calc(sim, "total_personal_reliefs") == pytest.approx(40_400, abs=0.5)
 
     def test_deductions(self, sim):
         assert _calc(sim, "donation_deduction") == pytest.approx(1_000, abs=0.5)
@@ -133,9 +127,7 @@ class TestPWCSample:
         assert _calc(sim, "chargeable_income") == pytest.approx(133_600, abs=0.5)
 
     def test_tax(self, sim):
-        assert _calc(sim, "income_tax_before_rebate") == pytest.approx(
-            9_990, abs=0.5
-        )
+        assert _calc(sim, "income_tax_before_rebate") == pytest.approx(9_990, abs=0.5)
         assert _calc(sim, "pit_rebate") == pytest.approx(200, abs=0.5)
         assert _calc(sim, "income_tax") == pytest.approx(9_790, abs=0.5)
 
@@ -175,9 +167,7 @@ class TestBuyersStampDuty:
             {"age": 35},
             {"property_purchase_price": price, "buyer_profile": "CITIZEN_FIRST"},
         )
-        assert _calc(sim, "buyers_stamp_duty") == pytest.approx(
-            expected_bsd, abs=0.5
-        )
+        assert _calc(sim, "buyers_stamp_duty") == pytest.approx(expected_bsd, abs=0.5)
 
     def test_absd_citizen_first_is_zero(self):
         """Singapore citizens buying their first property pay 0% ABSD."""

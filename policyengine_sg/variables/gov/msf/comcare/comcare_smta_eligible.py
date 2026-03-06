@@ -4,7 +4,7 @@ from policyengine_sg.model_api import *
 class comcare_smta_eligible(Variable):
     value_type = bool
     entity = Person
-    label = "Eligible for ComCare Short-to-Medium-Term" " Assistance"
+    label = "Eligible for ComCare Short-to-Medium-Term Assistance"
     definition_period = YEAR
     reference = (
         "https://www.msf.gov.sg/what-we-do/comcare",

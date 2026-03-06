@@ -14,7 +14,5 @@ class comcare_lta(Variable):
         n_members = benefit_unit.nb_persons()
         capped_size = min_(n_members, p.max_household_size)
         monthly = p.amount.calc(capped_size)
-        eligible = benefit_unit.any(
-            benefit_unit.members("comcare_eligible", period)
-        )
+        eligible = benefit_unit.any(benefit_unit.members("comcare_eligible", period))
         return where(eligible, monthly * 12, 0)

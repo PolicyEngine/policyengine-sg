@@ -9,6 +9,5 @@ class donation_amount(Variable):
     definition_period = YEAR
     default_value = 0
     reference = (
-        "https://www.iras.gov.sg/taxes/"
-        "other-taxes/charities/donations-tax-deductions"
+        "https://www.iras.gov.sg/taxes/other-taxes/charities/donations-tax-deductions"
     )

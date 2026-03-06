@@ -7,9 +7,7 @@ class gstv_medisave(Variable):
     label = "GST Voucher MediSave top-up"
     unit = SGD
     definition_period = YEAR
-    reference = (
-        "https://www.govbenefits.gov.sg/" "about-us/gst-voucher/am-i-eligible/"
-    )
+    reference = "https://www.govbenefits.gov.sg/about-us/gst-voucher/am-i-eligible/"
 
     def formula(person, period, parameters):
         p = parameters(period).gov.mof.gstv.medisave

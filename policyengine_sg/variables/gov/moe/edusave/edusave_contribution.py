@@ -10,9 +10,7 @@ class edusave_contribution(Variable):
     label = "Annual Edusave account contribution"
     unit = SGD
     definition_period = YEAR
-    reference = (
-        "https://www.moe.gov.sg/" "financial-matters/edusave-account/overview"
-    )
+    reference = "https://www.moe.gov.sg/financial-matters/edusave-account/overview"
 
     def formula(person, period, parameters):
         p = parameters(period).gov.moe.edusave

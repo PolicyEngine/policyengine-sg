@@ -8,9 +8,7 @@ class donation_deduction(Variable):
     unit = SGD
     definition_period = YEAR
     reference = (
-        "https://www.iras.gov.sg/taxes/"
-        "other-taxes/charities/"
-        "donations-tax-deductions"
+        "https://www.iras.gov.sg/taxes/other-taxes/charities/donations-tax-deductions"
     )
 
     def formula(person, period, parameters):
