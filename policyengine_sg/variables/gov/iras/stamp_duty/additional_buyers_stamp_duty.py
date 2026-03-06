@@ -7,7 +7,7 @@ from policyengine_sg.variables.input.housing.buyer_profile import (
 class additional_buyers_stamp_duty(Variable):
     value_type = float
     entity = Household
-    label = "Additional buyer's stamp duty" " on property purchase"
+    label = "Additional buyer's stamp duty on property purchase"
     unit = SGD
     definition_period = YEAR
     reference = (

@@ -8,9 +8,7 @@ class property_tax(Variable):
     unit = SGD
     definition_period = YEAR
     reference = (
-        "https://www.iras.gov.sg/taxes/"
-        "property-tax/property-owners/"
-        "property-tax-rates"
+        "https://www.iras.gov.sg/taxes/property-tax/property-owners/property-tax-rates"
     )
 
     def formula(household, period, parameters):

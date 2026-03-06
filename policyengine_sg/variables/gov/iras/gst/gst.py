@@ -7,7 +7,7 @@ class gst(Variable):
     label = "Goods and Services Tax payable"
     unit = SGD
     definition_period = YEAR
-    reference = "https://www.iras.gov.sg/taxes/" "goods-services-tax-(gst)"
+    reference = "https://www.iras.gov.sg/taxes/goods-services-tax-(gst)"
 
     def formula(household, period, parameters):
         p = parameters(period).gov.iras.gst

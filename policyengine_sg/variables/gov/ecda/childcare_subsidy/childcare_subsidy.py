@@ -23,7 +23,5 @@ class childcare_subsidy(Variable):
         basic_cc = where(working, p.basic_childcare, 0)
         basic_ic = where(working, p.basic_infant_care, 0)
         additional = p.additional.calc(ghi)
-        monthly = n_cc * (basic_cc + additional) + n_ic * (
-            basic_ic + additional
-        )
+        monthly = n_cc * (basic_cc + additional) + n_ic * (basic_ic + additional)
         return where(citizen, monthly * 12, 0)

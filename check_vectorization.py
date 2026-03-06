@@ -51,9 +51,7 @@ class VectorizationChecker(ast.NodeVisitor):
         if self.in_formula_method:
             # Check if this is a simple if without elif/else (might be acceptable)
             has_elif = bool(node.orelse and isinstance(node.orelse[0], ast.If))
-            has_else = bool(
-                node.orelse and not isinstance(node.orelse[0], ast.If)
-            )
+            has_else = bool(node.orelse and not isinstance(node.orelse[0], ast.If))
 
             if has_elif:
                 self.violations.append(
@@ -135,14 +133,12 @@ def main():
                 if "CRITICAL" in message:
                     critical_violations += 1
 
-    print(f"\n{'='*50}")
+    print(f"\n{'=' * 50}")
     print(f"Total violations found: {total_violations}")
     print(f"Critical violations (auto-fail): {critical_violations}")
 
     if critical_violations > 0:
-        print(
-            "\n❌ REVIEW FAILURE: Critical vectorization violations detected!"
-        )
+        print("\n❌ REVIEW FAILURE: Critical vectorization violations detected!")
         print("\nTo fix these violations:")
         print("- Replace if-elif-else with select() using default parameter")
         print("- Replace if-else with where() or boolean multiplication")

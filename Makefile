@@ -4,8 +4,7 @@ documentation:
 	myst build docs -o docs/_build
 
 format:
-	black . -l 79
-	linecheck . --fix
+	ruff format .
 
 check-vectorization:
 	uv run python check_vectorization.py policyengine_sg/variables

@@ -8,8 +8,7 @@ class assurance_package_cash(Variable):
     unit = SGD
     definition_period = YEAR
     reference = (
-        "https://www.govbenefits.gov.sg/"
-        "about-us/assurance-package/am-i-eligible/"
+        "https://www.govbenefits.gov.sg/about-us/assurance-package/am-i-eligible/"
     )
 
     def formula(person, period, parameters):

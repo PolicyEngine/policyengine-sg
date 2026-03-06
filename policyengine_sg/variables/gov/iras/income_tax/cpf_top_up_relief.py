@@ -19,6 +19,4 @@ class cpf_top_up_relief(Variable):
         p = parameters(period).gov.iras.income_tax.reliefs.cpf_cash_top_up
         self_top_up = person("cpf_cash_top_up", period)
         family_top_up = person("cpf_cash_top_up_family", period)
-        return min_(self_top_up, p.self_amount) + min_(
-            family_top_up, p.family_amount
-        )
+        return min_(self_top_up, p.self_amount) + min_(family_top_up, p.family_amount)

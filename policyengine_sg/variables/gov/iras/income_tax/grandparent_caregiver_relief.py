@@ -16,8 +16,6 @@ class grandparent_caregiver_relief(Variable):
     )
 
     def formula(person, period, parameters):
-        p = parameters(
-            period
-        ).gov.iras.income_tax.reliefs.grandparent_caregiver
+        p = parameters(period).gov.iras.income_tax.reliefs.grandparent_caregiver
         eligible = person("is_grandparent_caregiver", period)
         return where(eligible, p.amount, 0)

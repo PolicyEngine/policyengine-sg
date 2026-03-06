@@ -6,9 +6,7 @@ class moe_fas_eligible(Variable):
     entity = Person
     label = "Eligible for MOE Financial Assistance Scheme"
     definition_period = YEAR
-    reference = (
-        "https://www.moe.gov.sg/" "financial-matters/financial-assistance"
-    )
+    reference = "https://www.moe.gov.sg/financial-matters/financial-assistance"
 
     def formula(person, period, parameters):
         p = parameters(period).gov.moe.fas
